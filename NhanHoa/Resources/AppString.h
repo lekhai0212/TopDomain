@@ -277,6 +277,7 @@
 
 
 
+
 #define search_domain   @"Search domain..."
 #define balance_text    @"Balance"
 
