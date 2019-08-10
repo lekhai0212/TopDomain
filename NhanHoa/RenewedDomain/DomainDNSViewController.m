@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Quản lý DNS Records";
+    self.title = text_manage_dns_records;
     
     [self setupUIForView];
 }
@@ -87,7 +87,7 @@
     
     scvContent.contentSize = CGSizeMake(wContent, hContent);
     
-    lbNoData.text = @"Không có dữ liệu";
+    lbNoData.text = text_no_data;
     lbNoData.textColor = TITLE_COLOR;
     lbNoData.font = [AppDelegate sharedInstance].fontBTN;
     lbNoData.hidden = TRUE;
@@ -263,7 +263,7 @@
     }
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang tải danh sách..." Interaction:NO];
+    [ProgressHUD show:text_loading Interaction:NO];
     
     [WebServiceUtils getInstance].delegate = self;
     [[WebServiceUtils getInstance] getDNSRecordListOfDomain: domainName];
@@ -392,20 +392,20 @@
             if (![AppUtils isNullOrEmpty: record_id]) {
                 UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
                 
-                NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"Bạn chắc chắn muốn xoá record này?"];
+                NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:text_confirm_delete_record];
                 [attrTitle addAttribute:NSFontAttributeName value:[UIFont fontWithName:RobotoRegular size:16.0] range:NSMakeRange(0, attrTitle.string.length)];
                 [alertVC setValue:attrTitle forKey:@"attributedTitle"];
                 
-                UIAlertAction *btnClose = [UIAlertAction actionWithTitle:@"Đóng" style:UIAlertActionStyleDefault
+                UIAlertAction *btnClose = [UIAlertAction actionWithTitle:text_close style:UIAlertActionStyleDefault
                                                                  handler:^(UIAlertAction *action){
-                                                                     NSLog(@"Đóng");
+                                                                     
                                                                  }];
                 [btnClose setValue:BLUE_COLOR forKey:@"titleTextColor"];
                 
-                UIAlertAction *btnDelete = [UIAlertAction actionWithTitle:@"Xóa" style:UIAlertActionStyleDefault
+                UIAlertAction *btnDelete = [UIAlertAction actionWithTitle:text_delete style:UIAlertActionStyleDefault
                                                                   handler:^(UIAlertAction *action){
                                                                       [ProgressHUD backgroundColor: ProgressHUD_BG];
-                                                                      [ProgressHUD show:@"Đang xoá..." Interaction:NO];
+                                                                      [ProgressHUD show:text_please_wait Interaction:NO];
                                                                       
                                                                       [[WebServiceUtils getInstance] deleteDNSRecordForDomain:domainName record_id: record_id];
                                                                   }];
@@ -475,7 +475,7 @@
     float widthValue = 120.0;
     float widthType = 40.0;
     float padding = 5.0;
-    float widthBTN = 40.0;
+    float widthBTN = 45.0;
     
     NSString *deviceMode = [DeviceUtils getModelsOfCurrentDevice];
     if ([deviceMode isEqualToString: Iphone5_1] || [deviceMode isEqualToString: Iphone5_2] || [deviceMode isEqualToString: Iphone5c_1] || [deviceMode isEqualToString: Iphone5c_2] || [deviceMode isEqualToString: Iphone5s_1] || [deviceMode isEqualToString: Iphone5s_2] || [deviceMode isEqualToString: IphoneSE])
@@ -484,7 +484,6 @@
         widthTTL = 40.0;
         widthMX = 25.0;
         widthType = 75.0;
-        widthBTN = 25.0;
         
     }else if ([deviceMode isEqualToString: Iphone6] || [deviceMode isEqualToString: Iphone6s] || [deviceMode isEqualToString: Iphone7_1] || [deviceMode isEqualToString: Iphone7_2] || [deviceMode isEqualToString: Iphone8_1] || [deviceMode isEqualToString: Iphone8_2])
     {
@@ -492,7 +491,6 @@
         widthTTL = 45.0;
         widthMX = 30.0;
         widthType = 90.0;
-        widthBTN = 35.0;
         
     }else if ([deviceMode isEqualToString: Iphone6_Plus] || [deviceMode isEqualToString: Iphone6s_Plus] || [deviceMode isEqualToString: Iphone7_Plus1] || [deviceMode isEqualToString: Iphone7_Plus2] || [deviceMode isEqualToString: Iphone8_Plus1] || [deviceMode isEqualToString: Iphone8_Plus2] || [deviceMode isEqualToString: simulator])
     {
@@ -500,14 +498,11 @@
         widthTTL = 50.0;
         widthMX = 40.0;
         widthType = 95.0;
-        widthBTN = 40.0;
         
     }else if ([deviceMode isEqualToString: IphoneX_1] || [deviceMode isEqualToString: IphoneX_2] || [deviceMode isEqualToString: IphoneXR] || [deviceMode isEqualToString: IphoneXS] || [deviceMode isEqualToString: IphoneXS_Max1] || [deviceMode isEqualToString: IphoneXS_Max2])
     {
         widthMX = widthTTL = 50.0;
         widthType = 120.0;
-        widthBTN = 60.0;
-        
     }
     
     float wContent = UIScreen.mainScreen.bounds.size.height - self.navigationController.navigationBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
@@ -518,7 +513,7 @@
     widthValue = wContent - (padding + wHost + padding + 1.0 + (padding + widthType + padding) + 1.0 + (padding + padding) + 1.0 + (padding + widthMX + padding) + 1.0 + (padding + widthTTL + padding) + 1.0 + (padding + widthBTN + padding) + 1.0 + (padding + widthBTN + padding));
     
     UILabel *lbHost = [[UILabel alloc] init];
-    lbHost.text = @"Tên";
+    lbHost.text = text_name;
     [viewSection addSubview: lbHost];
     [lbHost mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(viewSection).offset(padding);
@@ -535,7 +530,7 @@
     }];
     
     UILabel *lbType = [[UILabel alloc] init];
-    lbType.text = @"Loại";
+    lbType.text = text_type;
     [viewSection addSubview: lbType];
     [lbType mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(viewSection);
@@ -552,7 +547,7 @@
     }];
     
     UILabel *lbValue = [[UILabel alloc] init];
-    lbValue.text = @"Giá trị";
+    lbValue.text = text_value;
     [viewSection addSubview: lbValue];
     [lbValue mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(viewSection);
@@ -603,7 +598,7 @@
     }];
     
     UILabel *lbEdit = [[UILabel alloc] init];
-    lbEdit.text = @"Sửa";
+    lbEdit.text = text_edit;
     [viewSection addSubview: lbEdit];
     [lbEdit mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lbSepa5.mas_right).offset(padding);
@@ -620,7 +615,7 @@
     }];
     
     UILabel *lbRemove = [[UILabel alloc] init];
-    lbRemove.text = @"Xóa";
+    lbRemove.text = text_delete;
     [viewSection addSubview: lbRemove];
     [lbRemove mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lbSepa6.mas_right).offset(padding);
@@ -722,23 +717,23 @@
             if (![AppUtils isNullOrEmpty: record_id]) {
                 UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
                 
-                NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"Bạn chắc chắn muốn xoá record này?"];
+                NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:text_confirm_delete_record];
                 [attrTitle addAttribute:NSFontAttributeName value:[UIFont fontWithName:RobotoRegular size:16.0] range:NSMakeRange(0, attrTitle.string.length)];
                 [alertVC setValue:attrTitle forKey:@"attributedTitle"];
                 
-                UIAlertAction *btnClose = [UIAlertAction actionWithTitle:@"Đóng" style:UIAlertActionStyleDefault
+                UIAlertAction *btnClose = [UIAlertAction actionWithTitle:text_close style:UIAlertActionStyleDefault
                                                                  handler:^(UIAlertAction *action){
-                                                                     NSLog(@"Đóng");
+                                                                     
                                                                  }];
                 [btnClose setValue:BLUE_COLOR forKey:@"titleTextColor"];
                 
-                UIAlertAction *btnDelete = [UIAlertAction actionWithTitle:@"Xóa" style:UIAlertActionStyleDefault
+                UIAlertAction *btnDelete = [UIAlertAction actionWithTitle:text_delete style:UIAlertActionStyleDefault
                                                                   handler:^(UIAlertAction *action){
                                                                       if (popupView != nil) {
                                                                           [popupView closePopupView];
                                                                       }
                                                                       [ProgressHUD backgroundColor: ProgressHUD_BG];
-                                                                      [ProgressHUD show:@"Đang xoá..." Interaction:NO];
+                                                                      [ProgressHUD show:text_please_wait Interaction:NO];
                                                                       
                                                                       [[WebServiceUtils getInstance] deleteDNSRecordForDomain:domainName record_id: record_id];
                                                                   }];

@@ -61,7 +61,7 @@
     tfSearch.delegate = self;
     tfSearch.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10.0, [AppDelegate sharedInstance].hTextfield)];
     tfSearch.leftViewMode = UITextFieldViewModeAlways;
-    tfSearch.placeholder = @"Nhập để tìm kiếm...";
+    tfSearch.placeholder = [NSString stringWithFormat:@"%@...", enter_to_search];
     tfSearch.textColor = TITLE_COLOR;
     tfSearch.font = [AppDelegate sharedInstance].fontRegular;
     tfSearch.layer.cornerRadius = [AppDelegate sharedInstance].hTextfield/2;
@@ -130,7 +130,7 @@
 
 - (void)getListProfilesForAccount {
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang lấy danh sách hồ sơ..." Interaction:NO];
+    [ProgressHUD show:text_loading Interaction:NO];
     
     NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
     [jsonDict setObject:get_profile_mod forKey:@"mod"];
@@ -155,7 +155,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         [self layoutIfNeeded];
     }completion:^(BOOL finished) {
-        self.lbTitle.text = @"Danh sách hồ sơ";
+        self.lbTitle.text = text_profile_list;
         self.icBack.hidden = TRUE;
         self.icClose.hidden = self.icAdd.hidden = FALSE;
     }];
@@ -175,7 +175,7 @@
 - (void)displayInformationWithData: (id)data {
     if ([data isKindOfClass:[NSArray class]]) {
         if (data == nil || [(NSArray *)data count] == 0) {
-            lbNoData.text = @"Không có dữ liệu";
+            lbNoData.text = text_no_data;
             lbNoData.hidden = FALSE;
             tbProfile.hidden = TRUE;
             
@@ -294,10 +294,10 @@
     
     NSString *cusId = [profileInfo objectForKey:@"cus_id"];
     if (cusId != nil && ![AppUtils isNullOrEmpty: cusId] && [cusId isEqualToString: cusIdSelected]) {
-        [cell.btnChoose setTitle:@"Bỏ chọn" forState:UIControlStateNormal];
+        [cell.btnChoose setTitle:text_unselect forState:UIControlStateNormal];
         cell.btnChoose.backgroundColor = ORANGE_COLOR;
     }else{
-        [cell.btnChoose setTitle:@"Chọn" forState:UIControlStateNormal];
+        [cell.btnChoose setTitle:text_select forState:UIControlStateNormal];
         cell.btnChoose.backgroundColor = BLUE_COLOR;
     }
     
@@ -340,7 +340,7 @@
     if (searching) {
         if (sender.tag < listSearch.count && cartIndexItemSelect >= 0 && cartIndexItemSelect < [[CartModel getInstance] countItemInCart])
         {
-            if ([sender.currentTitle isEqualToString:@"Bỏ chọn"]) {
+            if ([sender.currentTitle isEqualToString:text_unselect]) {
                 NSMutableDictionary *domainInfo = [[CartModel getInstance].listDomain objectAtIndex: cartIndexItemSelect];
                 [domainInfo removeObjectForKey:profile_cart];
                 [delegate onSelectedProfileForDomain];
@@ -357,7 +357,7 @@
     }else{
         if (sender.tag < listProfiles.count && cartIndexItemSelect >= 0 && cartIndexItemSelect < [[CartModel getInstance] countItemInCart])
         {
-            if ([sender.currentTitle isEqualToString:@"Bỏ chọn"]) {
+            if ([sender.currentTitle isEqualToString:text_unselect]) {
                 NSMutableDictionary *domainInfo = [[CartModel getInstance].listDomain objectAtIndex: cartIndexItemSelect];
                 [domainInfo removeObjectForKey:profile_cart];
                 [delegate onSelectedProfileForDomain];

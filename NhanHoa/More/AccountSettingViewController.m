@@ -259,12 +259,12 @@
 }
 
 - (IBAction)btnAvatarPress:(UIButton *)sender {
-    UIActionSheet *act = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Đóng" destructiveButtonTitle:nil otherButtonTitles:text_capture, text_gallery, nil];
+    UIActionSheet *act = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:text_close destructiveButtonTitle:nil otherButtonTitles:text_capture, text_gallery, nil];
     [act showInView: self.view];
 }
 
 - (IBAction)btnChoosePhotoPress:(UIButton *)sender {
-    UIActionSheet *act = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Đóng" destructiveButtonTitle:nil otherButtonTitles:text_capture, text_gallery, nil];
+    UIActionSheet *act = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:text_close destructiveButtonTitle:nil otherButtonTitles:text_capture, text_gallery, nil];
     [act showInView: self.view];
 }
 

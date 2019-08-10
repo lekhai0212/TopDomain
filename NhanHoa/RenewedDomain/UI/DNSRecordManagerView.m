@@ -37,9 +37,9 @@
     
     lbHeader.font = [AppDelegate sharedInstance].fontBTN;
     if (type == DNSRecordAddNew) {
-        lbHeader.text = @"Thêm mới record";
+        lbHeader.text = text_create_record;
     }else{
-        lbHeader.text = @"Cập nhật record";
+        lbHeader.text = text_edit_record;
     }
     
     [lbHeader mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,9 +75,11 @@
     tfName.font = tfType.font = tfValue.font = tfMX.font = tfTTL.font = [AppDelegate sharedInstance].fontRegular;
     
     lbWarning.font = [AppDelegate sharedInstance].fontRegular;
-    lbWarning.text = @"Nếu là A record thì sau khi tạo, đợi 1 phút sau hãy truy cập để tránh bị dính cache DNS.";
+    lbWarning.text = @"If it is A record, after creating it, please wait one minute later to access to prevent DNS cache.";
     
-    float leftSize = [AppUtils getSizeWithText:@"Giá trị record" withFont:[AppDelegate sharedInstance].fontRegular andMaxWidth:SCREEN_WIDTH].width + 5.0;
+    float leftSize = [AppUtils getSizeWithText:text_value withFont:[AppDelegate sharedInstance].fontRegular andMaxWidth:SCREEN_WIDTH].width + 10.0;
+    
+    lbName.text = text_name;
     [lbName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lbTitle.mas_bottom).offset(20.0);
         make.left.equalTo(scvContent).offset(padding);
@@ -95,6 +97,7 @@
     }];
     
     //  type value
+    lbType.text = text_type;
     [lbType mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lbName.mas_bottom).offset(margin);
         make.left.right.equalTo(lbName);
@@ -102,7 +105,7 @@
     }];
     
     [AppUtils setBorderForTextfield:tfType borderColor:BORDER_COLOR];
-    tfType.placeholder = @"Chọn loại record";
+    tfType.placeholder = @"Select Record type";
     tfType.returnKeyType = UIReturnKeyNext;
     tfType.delegate = self;
     tfType.enabled = FALSE;
@@ -123,6 +126,7 @@
     }];
     
     //  mx value
+    lbMX.text = @"MX";
     [lbMX mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lbType.mas_bottom).offset(margin);
         make.left.right.equalTo(lbType);
@@ -139,6 +143,7 @@
     }];
     
     //  value
+    lbValue.text = text_value;
     [lbValue mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lbMX.mas_bottom).offset(margin);
         make.left.right.equalTo(lbMX);
@@ -154,6 +159,7 @@
     }];
     
     //  TTL
+    lbTTL.text = @"TTL";
     [lbTTL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lbValue.mas_bottom).offset(margin);
         make.left.right.equalTo(lbValue);
@@ -177,6 +183,7 @@
         make.height.mas_equalTo(45.0);
     }];
     
+    [btnReset setTitle:text_reset forState:UIControlStateNormal];
     [btnReset mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(btnAddRecord);
         make.left.equalTo(tfTTL.mas_centerX).offset(5.0);
@@ -210,14 +217,14 @@
     
     NSString *content;
     if (curType == DNSRecordAddNew) {
-        content = [NSString stringWithFormat:@"Bạn đang thêm record cho tên miền:\n %@", domain];
+        content = [NSString stringWithFormat:@"You are adding record for domain name:\n %@", domain];
         lbWarning.hidden = FALSE;
-        [btnAddRecord setTitle:@"Tạo Record" forState:UIControlStateNormal];
+        [btnAddRecord setTitle:text_create_record forState:UIControlStateNormal];
         
     }else{
-        content = [NSString stringWithFormat:@"Bạn đang cập nhật record cho tên miền:\n %@", domain];
+        content = [NSString stringWithFormat:@"You are updating record for domain name:\n %@", domain];
         lbWarning.hidden = TRUE;
-        [btnAddRecord setTitle:@"Sửa Record" forState:UIControlStateNormal];
+        [btnAddRecord setTitle:text_edit_record forState:UIControlStateNormal];
     }
     
     NSRange range = [content rangeOfString: domain];
@@ -330,28 +337,28 @@
     [self showListTypeRecord: FALSE withSender: nil];
     
     if ([AppUtils isNullOrEmpty: tfName.text]) {
-        [self makeToast:@"Vui lòng nhập Tên record!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:@"Please enter Record name!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: tfType.text]) {
-        [self makeToast:@"Vui lòng chọn Loại record!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:@"Please choose Record type!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([tfType.text isEqualToString: type_MX]) {
         if ([AppUtils isNullOrEmpty: tfMX.text]) {
-            [self makeToast:@"Vui lòng nhập MX" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+            [self makeToast:@"Please enter MX value" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
             return;
         }
         
         if (![AppUtils stringContainsOnlyNumber: tfMX.text]) {
-            [self makeToast:@"Giá trị MX chỉ được là số. Vui lòng kiểm tra lại!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+            [self makeToast:@"MX's value is only number. Please check again!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
             return;
         }
         
         if ([tfMX.text intValue] < MX_MIN || [tfMX.text intValue] > MX_MAX) {
-            [self makeToast:@"Giá trị MX không hợp lệ!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+            [self makeToast:@"MX's value is invalid!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
             return;
         }
     }else{
@@ -359,38 +366,38 @@
     }
     
     if ([AppUtils isNullOrEmpty: tfValue.text]) {
-        [self makeToast:@"Vui lòng nhập Giá trị record!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:@"Please enter Record value!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: tfTTL.text]) {
-        [self makeToast:@"Vui lòng nhập TTL!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:@"Please enter TTL value!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if (![AppUtils stringContainsOnlyNumber: tfTTL.text]) {
-        [self makeToast:@"Giá trị TTL chỉ được là số. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:@"TTL's value is only number. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([tfTTL.text intValue] < TTL_MIN || [tfTTL.text intValue] > TTL_MAX) {
-        [self makeToast:@"Giá trị TTL không hợp lệ!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:@"TTL's value is invalid!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
     if (curType == DNSRecordAddNew) {
-        [ProgressHUD show:@"Đang thêm record..." Interaction:NO];
+        [ProgressHUD show:@"Adding record..." Interaction:NO];
         
         [WebServiceUtils getInstance].delegate = self;
         [[WebServiceUtils getInstance] addDNSRecordForDomain:domain name:tfName.text value:tfValue.text type:tfType.text ttl:tfTTL.text mx:tfMX.text];
     }else{
         NSString *recordId = [curInfo objectForKey:@"record_id"];
         if ([AppUtils isNullOrEmpty: recordId]) {
-            [self makeToast:@"Không tìm thấy giá trị recordId, vui lòng thực hiện lại!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+            [self makeToast:@"recordId not found, please try again!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
             return;
         }
-        [ProgressHUD show:@"Đang cập nhật record..." Interaction:NO];
+        [ProgressHUD show:@"Updating record..." Interaction:NO];
         
         [WebServiceUtils getInstance].delegate = self;
         [[WebServiceUtils getInstance] updateDNSRecordForDomain:domain name:tfName.text value:tfValue.text type:tfType.text ttl:tfTTL.text mx:tfMX.text record_id:recordId];
@@ -567,10 +574,10 @@
         if (![AppUtils isNullOrEmpty: message]) {
             [self makeToast:message duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
         }else{
-            [self makeToast:@"Thêm record thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+            [self makeToast:@"Your record was added successful." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
         }
     }else{
-        [self makeToast:@"Thêm record thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+        [self makeToast:@"Your record was added successful." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     }
     [self performSelector:@selector(dismissView) withObject:nil afterDelay:2.0];
 }
@@ -597,13 +604,11 @@
         if (![AppUtils isNullOrEmpty: message]) {
             [self makeToast:message duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
         }else{
-            [self makeToast:@"Cập nhật thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+            [self makeToast:@"Your record was updated successful." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
         }
     }else{
-        [self makeToast:@"Cập nhật thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+        [self makeToast:@"Your record was updated successful." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     }
-    
-    
     [self performSelector:@selector(dismissView) withObject:nil afterDelay:2.0];
 }
 

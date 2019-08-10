@@ -85,16 +85,16 @@
             lbState.textColor = UIColor.orangeColor;
         }
     }else{
-        lbState.text = @"Chưa xác định";
+        lbState.text = text_undefined;
         lbState.textColor = NEW_PRICE_COLOR;
     }
     
     NSString *endTime = [info objectForKey:@"ord_end_time"];
     if (endTime != nil && ![endTime isEqualToString:@""] && [endTime isKindOfClass:[NSString class]]) {
         NSString *expireDate = [AppUtils getDateStringFromTimerInterval:[endTime longLongValue]];
-        lbDate.text = [NSString stringWithFormat:@"Hết hạn: %@", expireDate];
+        lbDate.text = [NSString stringWithFormat:@"%@: %@", text_expires_on, expireDate];
     }else{
-        lbDate.text = @"Hết hạn ngày: Đang cập nhật";
+        lbDate.text = [NSString stringWithFormat:@"%@: %@", text_expires_on, text_updating];
     }
 }
 

@@ -23,7 +23,7 @@
     float widthTTL = 60.0;
     float widthValue = 120.0;
     float widthType = 40.0;
-    float widthBTN = 40.0;
+    float widthBTN = 45.0;
     
     NSString *deviceMode = [DeviceUtils getModelsOfCurrentDevice];
     if ([deviceMode isEqualToString: Iphone5_1] || [deviceMode isEqualToString: Iphone5_2] || [deviceMode isEqualToString: Iphone5c_1] || [deviceMode isEqualToString: Iphone5c_2] || [deviceMode isEqualToString: Iphone5s_1] || [deviceMode isEqualToString: Iphone5s_2] || [deviceMode isEqualToString: IphoneSE])
@@ -32,7 +32,6 @@
         widthTTL = 40.0;
         widthMX = 25.0;
         widthType = 75.0;
-        widthBTN = 25.0;
         
         lbTTL.font = lbType.font = lbMX.font = lbValue.font = lbHost.font = [UIFont systemFontOfSize:12];
         icEdit.imageEdgeInsets = icDelete.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12);
@@ -43,7 +42,6 @@
         widthTTL = 45.0;
         widthMX = 30.0;
         widthType = 90.0;
-        widthBTN = 35.0;
         
         lbTTL.font = lbType.font = lbMX.font = lbValue.font = lbHost.font = [UIFont systemFontOfSize:14];
         icEdit.imageEdgeInsets = icDelete.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
@@ -54,7 +52,6 @@
         widthTTL = 50.0;
         widthMX = 40.0;
         widthType = 95.0;
-        widthBTN = 40.0;
         
         lbTTL.font = lbType.font = lbMX.font = lbValue.font = lbHost.font = [UIFont systemFontOfSize:15.5];
         
@@ -62,7 +59,6 @@
     {
         widthMX = widthTTL = 50.0;
         widthType = 120.0;
-        widthBTN = 60.0;
         
         lbTTL.font = lbType.font = lbMX.font = lbValue.font = lbHost.font = [UIFont systemFontOfSize:17];
     }

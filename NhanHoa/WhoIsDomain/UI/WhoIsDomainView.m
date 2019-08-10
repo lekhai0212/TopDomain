@@ -15,8 +15,12 @@
 - (void)setupUIForView {
     mTop = 5.0;
     hLabel = 35.0;
+    float more = 20.0;
+    if ([DeviceUtils isScreen320]) {
+        more = 10.0;
+    }
     
-    sizeLeft = [AppUtils getSizeWithText:@"Ngày đăng ký" withFont:[UIFont fontWithName:RobotoRegular size:16.0]].width + 10.0;
+    sizeLeft = [AppUtils getSizeWithText:text_expiration_date withFont:[UIFont fontWithName:RobotoRegular size:16.0]].width + more;
     
     padding = 15.0;
     [viewContent mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -25,6 +29,7 @@
         make.bottom.equalTo(self.lbDNSSECValue.mas_bottom).offset(self.padding);
     }];
     
+    lbDomain.text = [NSString stringWithFormat:@"%@:", text_domain_name];
     [lbDomain mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.viewContent).offset(self.padding);
         make.left.equalTo(self.viewContent).offset(self.padding);
@@ -38,6 +43,7 @@
         make.right.equalTo(self.viewContent).offset(-self.padding);
     }];
     
+    lbIssueDate.text = [NSString stringWithFormat:@"%@:", text_creation_date];
     [lbIssueDate mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.lbDomain);
         make.top.equalTo(self.lbDomain.mas_bottom).offset(self.mTop);
@@ -49,6 +55,7 @@
         make.left.right.equalTo(self.lbDomainValue);
     }];
     
+    lbExpiredDate.text = [NSString stringWithFormat:@"%@:", text_expiration_date];
     [lbExpiredDate mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.lbIssueDate);
         make.top.equalTo(self.lbIssueDate.mas_bottom).offset(self.mTop);
@@ -68,6 +75,7 @@
         make.height.mas_greaterThanOrEqualTo(self.hLabel);
     }];
     
+    lbOwner.text = [NSString stringWithFormat:@"%@:", text_owner];
     [lbOwner mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.lbExpiredDate);
         make.centerY.equalTo(self.lbOwnerValue.mas_centerY);
@@ -82,6 +90,7 @@
         make.height.mas_greaterThanOrEqualTo(self.hLabel);
     }];
     
+    lbStatus.text = [NSString stringWithFormat:@"%@:", text_status];
     [lbStatus mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.lbStatusValue.mas_centerY);
         make.left.right.equalTo(self.lbOwner);
@@ -96,13 +105,12 @@
         make.height.mas_greaterThanOrEqualTo(self.hLabel);
     }];
     
+    lbRegisterName.text = [NSString stringWithFormat:@"%@:", text_registrar];
     [lbRegisterName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.lbRegisterNameValue.mas_centerY);
         make.left.right.equalTo(self.lbStatus);
         make.height.mas_equalTo(self.hLabel);
     }];
-    
-    
     
     lbDNSValue.numberOfLines = 10;
     [lbDNSValue mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -112,6 +120,7 @@
         make.height.mas_greaterThanOrEqualTo(self.hLabel);
     }];
     
+    lbDNS.text = [NSString stringWithFormat:@"%@:", text_name_servers];
     [lbDNS mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.lbDNSValue.mas_centerY);
         make.left.right.equalTo(self.lbRegisterName);

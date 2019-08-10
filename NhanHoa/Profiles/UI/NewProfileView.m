@@ -467,7 +467,7 @@
     }];
     
     UIButton *btnChoose = [[UIButton alloc] init];
-    [btnChoose setTitle:text_choose forState:UIControlStateNormal];
+    [btnChoose setTitle:text_select forState:UIControlStateNormal];
     btnChoose.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     [btnChoose setTitleColor:BLUE_COLOR forState:UIControlStateNormal];
     btnChoose.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

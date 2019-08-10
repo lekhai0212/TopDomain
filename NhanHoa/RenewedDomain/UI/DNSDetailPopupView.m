@@ -31,7 +31,7 @@
         
         lbHeader = [[UILabel alloc] init];
         lbHeader.textAlignment = NSTextAlignmentCenter;
-        lbHeader.text = @"Thông tin Record";
+        lbHeader.text = text_info;
         lbHeader.font = [AppDelegate sharedInstance].fontBTN;
         lbHeader.textColor = UIColor.whiteColor;
         [viewHeader addSubview: lbHeader];
@@ -63,12 +63,12 @@
             SCREEN_WIDTH - 2*paddingSub;
         }
         
-        float leftSize = [AppUtils getSizeWithText:@"Giá trị record" withFont:[AppDelegate sharedInstance].fontRegular andMaxWidth:SCREEN_WIDTH].width + 5.0;
+        float leftSize = [AppUtils getSizeWithText:text_value withFont:[AppDelegate sharedInstance].fontRegular andMaxWidth:SCREEN_WIDTH].width + 10.0;
         float wSize = SCREEN_WIDTH - 2*paddingSub;
         
         
         lbName = [[UILabel alloc] init];
-        lbName.text = @"Tên record";
+        lbName.text = text_name;
         [self addSubview: lbName];
         [lbName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(viewHeader.mas_bottom).offset(20.0);
@@ -90,7 +90,7 @@
         
         //  type value
         lbType = [[UILabel alloc] init];
-        lbType.text = @"Loại record";
+        lbType.text = text_type;
         [self addSubview: lbType];
         [lbType mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(lbName.mas_bottom).offset(margin);
@@ -110,7 +110,7 @@
         //  mx value
         if (hasMX) {
             lbMX = [[UILabel alloc] init];
-            lbMX.text = @"Giá trị MX";
+            lbMX.text = @"MX";
             [self addSubview: lbMX];
             [lbMX mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(lbType.mas_bottom).offset(margin);
@@ -130,7 +130,7 @@
         
         //  value
         lbValue = [[UILabel alloc] init];
-        lbValue.text = @"Giá trị record";
+        lbValue.text = text_value;
         [self addSubview: lbValue];
         
         if (hasMX) {
@@ -158,7 +158,7 @@
         
         //  TTL
         lbTTL = [[UILabel alloc] init];
-        lbTTL.text = @"Giá trị TTL";
+        lbTTL.text = @"TTL";
         [self addSubview: lbTTL];
         [lbTTL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(lbValue.mas_bottom).offset(margin);
@@ -177,7 +177,7 @@
         
         btnEdit = [[UIButton alloc] init];
         [btnEdit setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        [btnEdit setTitle:@"Sửa Record" forState:UIControlStateNormal];
+        [btnEdit setTitle:text_edit_record forState:UIControlStateNormal];
         [btnEdit addTarget:self
                     action:@selector(clickOnEditButton:)
           forControlEvents:UIControlEventTouchUpInside];
@@ -190,7 +190,7 @@
         }];
         
         btnDelete = [[UIButton alloc] init];
-        [btnDelete setTitle:@"Xóa Record" forState:UIControlStateNormal];
+        [btnDelete setTitle:text_delete_record forState:UIControlStateNormal];
         [btnDelete addTarget:self
                       action:@selector(clickOnDeleteButton:)
             forControlEvents:UIControlEventTouchUpInside];

@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Đăng ký tên miền";
+    self.title = text_register_domain_names;
     
     [self createListDomainPrice];
     [self setupUIForView];
@@ -151,6 +151,9 @@
         make.centerY.equalTo(self.viewBanner.mas_bottom);
         make.height.mas_equalTo(hSearch);
     }];
+    tfSearch.placeholder = enter_domain_name;
+    
+    
     tfSearch.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, hSearch)];
     tfSearch.leftViewMode = UITextFieldViewModeAlways;    
     icSearch.layer.cornerRadius = hSearch/2;
@@ -212,7 +215,7 @@
         lbRenew.font = [UIFont fontWithName:RobotoRegular size:13];
     }
     
-    lbRenew.text = @"Kiểm tra nhiều tên miền";
+    lbRenew.text = bulk_domain_search;
     lbRenew.numberOfLines = 5.0;
     [lbRenew mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.viewRenew.mas_centerY);
@@ -241,7 +244,7 @@
     
     lbSearch.textColor = lbRenew.textColor;
     lbSearch.font = lbRenew.font;
-    lbSearch.text = @"Gia hạn tên miền";
+    lbSearch.text = text_renew_domain;
     lbSearch.numberOfLines = 5.0;
     [lbSearch mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.viewSearch.mas_centerY);
@@ -267,7 +270,7 @@
     
     lbTransferDomain.textColor = lbRenew.textColor;
     lbTransferDomain.font = lbRenew.font;
-    lbTransferDomain.text = @"Chuyển tên miền về Nhân Hòa";
+    lbTransferDomain.text = transfer_domain_to_nhanhoa;
     lbTransferDomain.numberOfLines = 5.0;
     [lbTransferDomain mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.viewTransferDomain.mas_centerY);
@@ -295,7 +298,7 @@
     }];
     
     //  many options
-    lbManyOptions.text = @"Nhiều lựa chọn với ưu đãi hấp dẫn";
+    lbManyOptions.text = options_with_attractive_offeres;
     lbManyOptions.font = [UIFont fontWithName:RobotoBold size:16.0];
     lbManyOptions.textColor = [UIColor colorWithRed:(57/255.0) green:(65/255.0) blue:(86/255.0) alpha:1.0];
     [lbManyOptions mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -338,7 +341,7 @@
     [self.view endEditing: TRUE];
     
     if ([AppUtils isNullOrEmpty: tfSearch.text]) {
-        [self.view makeToast:@"Vui lòng nhập tên miền muốn kiểm tra!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
+        [self.view makeToast:please_enter_your_domain_names duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
         return;
     }
     
@@ -377,10 +380,11 @@
     
     NSString *content;
     if ([name hasSuffix:@".vn"]) {
-        content = [NSString stringWithFormat:@"Đăng ký tên miền quốc gia %@", name];
+        content = [NSString stringWithFormat:@"Register Vietnam domain names %@", name];
     }else{
-        content = [NSString stringWithFormat:@"Đăng ký tên miền quốc tế %@", name];
+        content = [NSString stringWithFormat:@"Register international domain names %@", name];
     }
+    
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString: content];
     NSRange range = [content rangeOfString: name];
     [attr addAttribute:NSForegroundColorAttributeName value:ORANGE_COLOR range:range];
@@ -388,10 +392,10 @@
     
     if ([price isKindOfClass:[NSNumber class]]) {
         NSString *strPrice = [NSString stringWithFormat:@"%d", [price intValue]];
-        cell.lbPrice.text = [NSString stringWithFormat:@"%@đ/năm", [AppUtils convertStringToCurrencyFormat: strPrice]];
+        cell.lbPrice.text = [NSString stringWithFormat:@"%@đ/%@", [AppUtils convertStringToCurrencyFormat: strPrice], text_year];
         
     }else if ([price isKindOfClass:[NSString class]]) {
-        cell.lbPrice.text = [NSString stringWithFormat:@"%@đ/năm", [AppUtils convertStringToCurrencyFormat: (NSString *)price]];
+        cell.lbPrice.text = [NSString stringWithFormat:@"%@đ/%@", [AppUtils convertStringToCurrencyFormat: (NSString *)price], text_year];
     }
     
     NSString *image = name;

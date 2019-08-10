@@ -179,7 +179,7 @@
                 <outlet property="tfValue" destination="89R-yB-Abs" id="cVa-qM-8HE"/>
                 <outlet property="viewHeader" destination="Les-Xr-wqw" id="mmY-fr-Rbp"/>
             </connections>
-            <point key="canvasLocation" x="-238" y="131"/>
+            <point key="canvasLocation" x="-83" y="107"/>
         </view>
     </objects>
     <resources>

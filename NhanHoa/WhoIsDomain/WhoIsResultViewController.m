@@ -30,7 +30,7 @@
     }
     
     [self setupUIForView];
-    self.title = @"Kết quả tra cứu";
+    self.title = text_search_result;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
@@ -52,7 +52,7 @@
     [self registerObservers];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang kiểm tra..." Interaction:NO];
+    [ProgressHUD show:text_checking Interaction:NO];
     
     [self checkWhoIsForListDomains];
     
@@ -81,6 +81,7 @@
     btnContinue.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     btnContinue.layer.cornerRadius = 45.0/2;
     [btnContinue setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [btnContinue setTitle:text_continue forState:UIControlStateNormal];
     [btnContinue mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
         make.width.mas_equalTo(SCREEN_WIDTH-2*padding);
@@ -127,11 +128,12 @@
         }
     }
     
-    float textSize = [AppUtils getSizeWithText:whoisView.lbContent.text withFont:[AppDelegate sharedInstance].fontRegular andMaxWidth:(SCREEN_WIDTH-2*padding)].height;
-    float hView = 60 + 35.0 + 10.0 + textSize + 10.0 + 65.0 + padding;
     [scvContent addSubview: whoisView];
     [whoisView setupUIForView];
     [whoisView showContentOfDomainWithInfo: info];
+    
+    float textSize = [AppUtils getSizeWithText:whoisView.lbContent.text withFont:[AppDelegate sharedInstance].fontRegular andMaxWidth:(SCREEN_WIDTH-2*padding)].height;
+    float hView = 60 + 35.0 + 10.0 + textSize + 10.0 + 65.0 + padding;
     
     [whoisView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.scvContent);

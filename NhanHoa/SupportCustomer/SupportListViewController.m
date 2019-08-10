@@ -58,7 +58,7 @@
     
     lbNoData.font = [AppDelegate sharedInstance].fontBTN;
     lbNoData.textColor = TITLE_COLOR;
-    lbNoData.text = @"Không có dữ liệu";
+    lbNoData.text = text_no_data;
     [lbNoData mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.equalTo(self.view);
     }];

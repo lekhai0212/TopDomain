@@ -241,19 +241,15 @@
 #define unknown         @"Chưa xác định"
 #define not_support_yet @"Chưa hỗ trợ"
 
-#define text_personal @"Cá nhân"
-#define text_business @"Doanh nghiệp"
+#define text_personal @"Personal"
+#define text_business @"Business"
 
 #define not_access_camera   @"Không thể truy cập vào camera. Vui lòng kiểm tra lại quyền truy cập của ứng dụng!"
 #define no_internet         @"Không có kết nối internet. Vui lòng kiểm tra lại!"
 
-#define text_close  @"Đóng"
-#define text_choose @"Chọn"
-
 #define text_capture    @"Chụp ảnh"
 #define text_gallery    @"Thư viện ảnh"
 #define text_remove     @"Xóa"
-#define text_no_data    @"Không có dữ liệu"
 #define topup_now       @"Nạp ngay"
 
 #define text_not_support    @"Tính năng đang được phát triển"
@@ -261,8 +257,8 @@
 #define text_today      @"Hôm nay"
 #define text_yesterday  @"Hôm qua"
 
-#define text_signed_contract    @"Hợp đồng đã ký tên"
-#define text_signing_contract   @"Ký tên lên hợp đồng"
+#define text_signed_contract    @"The contract has been signed"
+#define text_signing_contract   @"Sign the contract"
 
 #define notifCallStateChanged       @"notifCallStateChanged"
 #define notifRegStateChanged        @"notifRegStateChanged"
@@ -276,10 +272,102 @@
 #define CALL_INV_STATE_DISCONNECTED @"PJSIP_INV_STATE_DISCONNECTED"
 
 
-
+#define text_no_data    @"No data"
+#define text_home       @"Home"
+#define text_setttings  @"Settings"
 
 #define search_domain   @"Search domain..."
 #define balance_text    @"Balance"
+#define text_year       @"year"
+#define text_select     @"Select"
+#define text_unselect   @"Unselect"
+#define text_continue   @"Continue"
+#define text_add_more   @"Add more"
+#define text_search     @"Search"
+#define text_checking   @"Checking..."
+#define text_contact    @"Contact"
+
+#define text_search_result  @"Search results"
+#define text_more_details   @"More Details"
+
+
+#define text_register_domain_names  @"Register domain names"
+#define text_domain_price_list      @"Domain price list"
+#define text_search_domains         @"Search domains"
+#define text_cash_in                @"Cash in"
+#define text_trans_history          @"Transactions history"
+#define text_manage_domains         @"Manage domains"
+#define text_profiles_list          @"Profiles list"
+#define text_customers_support      @"Customers support"
+#define text_setup_account          @"Setup account"
+
+#define enter_domain_name           @"Enter domain name"
+
+#define please_enter_your_domain_names  @"Please enter your domain names"
+
+#define text_renew_domain       @"Renew domain"
+#define bulk_domain_search      @"Bulk domain search"
+
+#define transfer_domain_to_nhanhoa      @"Transfer domain to NhanHoa"
+#define options_with_attractive_offeres @"Many options with attractive offers"
+#define text_checking_please_wait       @"Checking. Please wait a second..."
+
+#define text_service_name       @"Service name"
+#define text_domain_name        @"Domain name"
+#define text_creation_date      @"Creation Date"
+#define text_expiration_date    @"Expiration Date"
+#define text_owner              @"Owner"
+#define text_status             @"Status"
+#define text_registrar          @"Registrar"
+#define text_name_servers       @"Name Servers"
+
+#define text_all_domains        @"All"
+#define text_about_to_expire    @"About to expire"
+#define enter_to_search         @"Enter to search"
+#define text_loading            @"Loading..."
+#define text_expires_on         @"Expires on"
+#define text_updating           @"Updating"
+#define text_undefined          @"Undefined"
+
+#define text_activated          @"Activated"
+#define text_cancelled          @"Cancelled"
+#define text_processing         @"Processing"
+#define text_waiting            @"Waiting"
+#define text_renewing           @"Renewing"
+#define text_waiting_for_renewal @"Waiting for renewal"
+#define text_expired            @"Expired"
+#define text_suspending         @"Suspending"
+#define text_suspended          @"Suspended"
+
+#define domain_details          @"Domain details"
+#define text_update_passport    @"Update Passport"
+#define text_change_name_server @"Change Name Server"
+#define text_manage_dns_records @"Manage DNS Records"
+
+#define text_front      @"Front"
+#define text_behind     @"Behind"
+#define text_cancel     @"Cancel"
+#define text_update     @"Update"
+#define text_reset      @"Reset"
+
+#define text_name       @"Name"
+#define text_type       @"Type"
+#define text_value      @"Value"
+#define text_edit       @"Edit"
+#define text_delete     @"Delete"
+#define text_close      @"Close"
+#define text_info       @"Information"
+
+#define text_please_wait    @"Please wait..."
+#define text_edit_record    @"Edit Record"
+#define text_delete_record  @"Delete Record"
+#define text_create_record  @"Create Record"
+
+#define text_confirm_delete_record  @"Do you want to delete this record?"
+
+#define text_profile_list   @"Profiles list"
+#define text_profile        @"Profile"
+#define text_representative @"Representative"
 
 
 #endif /* AppString_h */

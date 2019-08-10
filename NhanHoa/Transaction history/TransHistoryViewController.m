@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Lịch sử giao dịch";
+    self.title = text_trans_history;
     [self setupUIForView];
 }
 
@@ -43,7 +43,7 @@
     }
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang tải..." Interaction:NO];
+    [ProgressHUD show:text_loading Interaction:NO];
     
     [WebServiceUtils getInstance].delegate = self;
     [[WebServiceUtils getInstance] getTransactionsHistory];

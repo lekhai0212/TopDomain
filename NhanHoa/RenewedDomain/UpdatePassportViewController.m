@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Cập nhật CMND";
+    self.title = text_update_passport;
     [self setupUIForView];
     [self addRightBarButtonForNavigationBar];
     
@@ -364,6 +364,7 @@
         make.top.left.bottom.right.equalTo(self.btnBanKhai);
     }];
     
+    lbBanKhai.text = @"Birth certificate";
     [lbBanKhai mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.btnBanKhai.mas_bottom);
         make.left.right.equalTo(self.btnBanKhai);
@@ -383,6 +384,7 @@
         make.top.left.bottom.right.equalTo(self.btnCMND_a);
     }];
     
+    lbCMND_a.text = text_front;
     [lbCMND_a mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.btnCMND_a.mas_bottom);
         make.left.right.equalTo(self.btnCMND_a);
@@ -403,6 +405,7 @@
         make.top.left.bottom.right.equalTo(self.btnCMND_b);
     }];
 
+    lbCMND_b.text = text_behind;
     [lbCMND_b mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.btnCMND_b.mas_bottom);
         make.left.right.equalTo(self.btnCMND_b);

@@ -84,14 +84,15 @@
     lbDomain.text = lbName.text = domain;
     BOOL exists = [[CartModel getInstance] checkCurrentDomainExistsInCart: domain];
     if (exists) {
-        [btnChoose setTitle:@"Bỏ chọn" forState:UIControlStateNormal];
+        [btnChoose setTitle:text_unselect forState:UIControlStateNormal];
         btnChoose.backgroundColor = ORANGE_COLOR;
     }else{
-        [btnChoose setTitle:@"Chọn" forState:UIControlStateNormal];
+        [btnChoose setTitle:text_select forState:UIControlStateNormal];
         btnChoose.backgroundColor = BLUE_COLOR;        
     }
     
-    NSString *content = [NSString stringWithFormat:@"Hiện tại tên miền %@ chưa được đăng ký!\nBạn có muốn đăng ký tên miền này không?", domain];
+    NSString *content = [NSString stringWithFormat:@"Currently, domain name %@ have not been registered!\nDo you want to register this domain?", domain];
+
     NSRange range = [content rangeOfString: domain];
     if (range.location != NSNotFound) {
         UIFont *regular = [UIFont fontWithName:RobotoRegular size:16.0];
@@ -113,14 +114,14 @@
     id price_first_year = [info objectForKey:@"price_first_year"];
     if ([price_first_year isKindOfClass:[NSString class]]) {
         NSString *amount = [AppUtils convertStringToCurrencyFormat: price_first_year];
-        lbPrice.text = [NSString stringWithFormat:@"%@ VNĐ/năm", amount];
+        lbPrice.text = [NSString stringWithFormat:@"%@ VNĐ/%@", amount, text_year];
         
     }else if ([price_first_year isKindOfClass:[NSNumber class]]) {
         NSString *amount = [NSString stringWithFormat:@"%ld", [price_first_year longValue]];
         NSString *strAmount = [AppUtils convertStringToCurrencyFormat: amount];
-        lbPrice.text = [NSString stringWithFormat:@"%@ VNĐ/năm", strAmount];
+        lbPrice.text = [NSString stringWithFormat:@"%@ VNĐ/%@", strAmount, text_year];
     }else{
-        lbPrice.text = @"Liên hệ";
+        lbPrice.text = text_contact;
     }
 }
 
@@ -129,12 +130,12 @@
         BOOL exists = [[CartModel getInstance] checkCurrentDomainExistsInCart: domainInfo];
         if (exists) {
             [[CartModel getInstance] removeDomainFromCart: domainInfo];
-            [btnChoose setTitle:@"Chọn" forState:UIControlStateNormal];
+            [btnChoose setTitle:text_select forState:UIControlStateNormal];
             btnChoose.backgroundColor = BLUE_COLOR;
             
         }else{
             [[CartModel getInstance] addDomainToCart: domainInfo];
-            [btnChoose setTitle:@"Bỏ chọn" forState:UIControlStateNormal];
+            [btnChoose setTitle:text_unselect forState:UIControlStateNormal];
             btnChoose.backgroundColor = ORANGE_COLOR;
             
         }

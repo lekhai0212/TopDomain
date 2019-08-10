@@ -36,7 +36,7 @@ typedef enum TypeSelectDomain{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setupUIForView];
-    self.title = @"Tên miền đã đăng ký";
+    self.title = @"Registered domains";
     type = eAllDomain;
     lbNoData.hidden = TRUE;
 }
@@ -175,6 +175,7 @@ typedef enum TypeSelectDomain{
     [btnAllDomain setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     btnAllDomain.backgroundColor = BLUE_COLOR;
     btnAllDomain.layer.cornerRadius = hMenu/2;
+    [btnAllDomain setTitle:text_all_domains forState:UIControlStateNormal];
     [btnAllDomain mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.equalTo(self.viewMenu);
         make.right.equalTo(self.viewMenu.mas_centerX);
@@ -183,6 +184,7 @@ typedef enum TypeSelectDomain{
     [btnExpireDomain setTitleColor:BLUE_COLOR forState:UIControlStateNormal];
     btnExpireDomain.backgroundColor = UIColor.clearColor;
     btnExpireDomain.layer.cornerRadius = hMenu/2;
+    [btnExpireDomain setTitle:text_about_to_expire forState:UIControlStateNormal];
     [btnExpireDomain mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.viewMenu.mas_centerX);
         make.right.top.bottom.equalTo(self.viewMenu);
@@ -192,7 +194,7 @@ typedef enum TypeSelectDomain{
     tfSearch.delegate = self;
     tfSearch.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10.0, [AppDelegate sharedInstance].hTextfield)];
     tfSearch.leftViewMode = UITextFieldViewModeAlways;
-    tfSearch.placeholder = @"Nhập để tìm kiếm...";
+    tfSearch.placeholder = [NSString stringWithFormat:@"%@...", enter_to_search];
     tfSearch.font = [AppDelegate sharedInstance].fontRegular;
     tfSearch.textColor = TITLE_COLOR;
     tfSearch.layer.cornerRadius = [AppDelegate sharedInstance].hTextfield/2;
@@ -223,9 +225,9 @@ typedef enum TypeSelectDomain{
         make.width.mas_equalTo([AppDelegate sharedInstance].hTextfield-6.0);
     }];
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(refreshDomainsList:) forControlEvents:UIControlEventValueChanged];
-    [tbDomain addSubview:refreshControl];
+//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+//    [refreshControl addTarget:self action:@selector(refreshDomainsList:) forControlEvents:UIControlEventValueChanged];
+//    [tbDomain addSubview:refreshControl];
     
     tbDomain.separatorStyle = UITableViewCellSelectionStyleNone;
     tbDomain.delegate = self;
@@ -296,7 +298,7 @@ typedef enum TypeSelectDomain{
     [WriteLogsUtils writeLogContent:SFM(@"[%s] type = %d", __FUNCTION__, type)];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang tải.." Interaction:NO];
+    [ProgressHUD show:text_loading Interaction:NO];
     
     [WebServiceUtils getInstance].delegate = self;
     [[WebServiceUtils getInstance] getDomainsWasRegisteredWithType: type];
@@ -417,14 +419,14 @@ typedef enum TypeSelectDomain{
     NSString *cus_id = [domain objectForKey:@"cus_id"];
     
     if (![AppUtils isNullOrEmpty: ord_id] && ![AppUtils isNullOrEmpty: cus_id]) {
-        [WriteLogsUtils writeLogContent:SFM(@"View domain ưith ordId = %@, cusId = %@", ord_id, cus_id)];
+        [WriteLogsUtils writeLogContent:SFM(@"View domain with ordId = %@, cusId = %@", ord_id, cus_id)];
         
         RenewDomainDetailViewController *domainDetailVC = [[RenewDomainDetailViewController alloc] initWithNibName:@"RenewDomainDetailViewController" bundle:nil];
         domainDetailVC.ordId = ord_id;
         domainDetailVC.cusId = cus_id;
         [self.navigationController pushViewController: domainDetailVC animated:YES];
     }else{
-        [self.view makeToast:[NSString stringWithFormat:@"ord_id không tồn tại"] duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:[NSString stringWithFormat:@"ord_id doesn't exists"] duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
     }
 }
 

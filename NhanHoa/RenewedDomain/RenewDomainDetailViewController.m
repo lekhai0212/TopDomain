@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Chi tiết tên miền";
+    self.title = domain_details;
     [self setupUIForView];
 }
 
@@ -54,7 +54,7 @@
     
     if (![AppUtils isNullOrEmpty: ordId]) {
         [ProgressHUD backgroundColor: ProgressHUD_BG];
-        [ProgressHUD show:@"Đang tải.." Interaction:NO];
+        [ProgressHUD show:text_loading Interaction:NO];
         
         [self getDomainInfoWithOrdId: ordId];
     }else{
@@ -280,7 +280,7 @@
             lbStateValue.textColor = UIColor.orangeColor;
         }
     }else{
-        lbStateValue.text = @"Chưa xác định";
+        lbStateValue.text = text_undefined;
         lbStateValue.textColor = NEW_PRICE_COLOR;
     }
     
@@ -289,7 +289,7 @@
         NSString *endDate = [AppUtils getDateStringFromTimerInterval:(long)[endTime longLongValue]];
         lbExpireDate.text = endDate;
     }else{
-        lbExpireDate.text = @"Đang cập nhật";
+        lbExpireDate.text = text_updating;
     }
     
     //  get size of content
@@ -432,6 +432,7 @@
     }];
     
     //  domain name
+    lbDomain.text = [NSString stringWithFormat:@"%@:", text_domain_name];
     [lbDomain mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbID.mas_bottom);
         make.left.right.equalTo(self.lbID);
@@ -444,6 +445,7 @@
     }];
     
     //  service name
+    lbServiceName.text = [NSString stringWithFormat:@"%@:", text_service_name];
     [lbServiceName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbDomain.mas_bottom);
         make.left.right.equalTo(self.lbDomain);
@@ -458,6 +460,7 @@
     }];
     
     //  registered date
+    lbRegisterDate.text = [NSString stringWithFormat:@"%@:", text_creation_date];
     [lbRegisterDate mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbServiceNameValue.mas_bottom);
         make.left.right.equalTo(self.lbServiceName);
@@ -471,6 +474,7 @@
     }];
     
     //  expire date
+    lbExpire.text = [NSString stringWithFormat:@"%@:", text_expiration_date];
     [lbExpire mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbRegisterDate.mas_bottom);
         make.left.right.equalTo(self.lbRegisterDate);
@@ -484,6 +488,7 @@
     }];
     
     //  state
+    lbState.text = [NSString stringWithFormat:@"%@:", text_status];
     [lbState mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbExpire.mas_bottom);
         make.left.right.equalTo(self.lbExpire);
@@ -517,6 +522,7 @@
     btnChangeDNS.layer.borderColor = btnUpdatePassport.layer.borderColor = btnSigning.layer.borderColor = btnRenewDomain.layer.borderColor = btnManagerDNS.layer.borderColor = BLUE_COLOR.CGColor;
     btnChangeDNS.layer.borderWidth = btnUpdatePassport.layer.borderWidth = btnSigning.layer.borderWidth = btnRenewDomain.layer.borderWidth = btnManagerDNS.layer.borderWidth = 1.0;
 
+    [btnManagerDNS setTitle:text_manage_dns_records forState:UIControlStateNormal];
     [btnManagerDNS mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
         make.right.equalTo(self.view).offset(-padding);
@@ -524,12 +530,14 @@
         make.height.mas_equalTo(hBTN);
     }];
     
+    [btnChangeDNS setTitle:text_change_name_server forState:UIControlStateNormal];
     [btnChangeDNS mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.btnManagerDNS);
         make.bottom.equalTo(self.btnManagerDNS.mas_top).offset(-padding);
         make.height.equalTo(self.btnManagerDNS.mas_height);
     }];
     
+    [btnUpdatePassport setTitle:text_update_passport forState:UIControlStateNormal];
     [btnUpdatePassport mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.btnChangeDNS);
         make.bottom.equalTo(self.btnChangeDNS.mas_top).offset(-padding);
@@ -542,6 +550,7 @@
         make.height.equalTo(self.btnUpdatePassport.mas_height);
     }];
     
+    [btnRenewDomain setTitle:text_renew_domain forState:UIControlStateNormal];
     [btnRenewDomain mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.btnSigning);
         make.bottom.equalTo(self.btnSigning.mas_top).offset(-padding);
@@ -552,7 +561,7 @@
     lbNoData.font = [AppDelegate sharedInstance].fontBTN;
     lbNoData.textAlignment = NSTextAlignmentCenter;
     lbNoData.textColor = TITLE_COLOR;
-    lbNoData.text = @"Không lấy được dữ liệu";
+    lbNoData.text = text_no_data;
     [lbNoData mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.equalTo(self.view);
     }];

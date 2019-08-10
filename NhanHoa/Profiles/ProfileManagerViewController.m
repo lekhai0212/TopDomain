@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Danh sách hồ sơ";
+    self.title = text_profile_list;
     [self setupUIForView];
     
     [AppDelegate sharedInstance].needReloadListProfile = FALSE;
@@ -110,7 +110,7 @@
     tfSearch.delegate = self;
     tfSearch.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10.0, [AppDelegate sharedInstance].hTextfield)];
     tfSearch.leftViewMode = UITextFieldViewModeAlways;
-    tfSearch.placeholder = @"Nhập để tìm kiếm...";
+    tfSearch.placeholder = [NSString stringWithFormat:@"%@...", enter_to_search];
     tfSearch.textColor = TITLE_COLOR;
     tfSearch.font = [AppDelegate sharedInstance].fontRegular;
     tfSearch.layer.cornerRadius = [AppDelegate sharedInstance].hTextfield/2;
@@ -148,6 +148,7 @@
     lbNoData.hidden = TRUE;
     lbNoData.textColor = [UIColor colorWithRed:(100/255.0) green:(100/255.0) blue:(100/255.0) alpha:1.0];
     lbNoData.font = [UIFont fontWithName:RobotoRegular size:20.0];
+    lbNoData.text = text_no_data;
     [lbNoData mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.equalTo(self.tbProfiles);
     }];
@@ -157,7 +158,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang lấy danh sách hồ sơ..." Interaction:NO];
+    [ProgressHUD show:text_loading Interaction:NO];
     
     [WebServiceUtils getInstance].delegate = self;
     [[WebServiceUtils getInstance] getListProfilesForAccount:[AccountModel getCusUsernameOfUser]];
@@ -208,7 +209,7 @@
     
     if ([data isKindOfClass:[NSArray class]]) {
         if (data == nil || [(NSArray *)data count] == 0) {
-            lbNoData.text = @"Không có dữ liệu";
+            lbNoData.text = text_no_data;
             lbNoData.hidden = FALSE;
             tbProfiles.hidden = TRUE;
             
@@ -228,7 +229,7 @@
     
     [ProgressHUD dismiss];
     
-    lbNoData.text = @"Đã có lỗi xảy ra. Vui lòng thử lại!";
+    lbNoData.text = @"Can not get profiles list";
     lbNoData.hidden = FALSE;
     tbProfiles.hidden = TRUE;
 }

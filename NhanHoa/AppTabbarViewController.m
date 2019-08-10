@@ -8,7 +8,6 @@
 
 #import "AppTabbarViewController.h"
 #import "HomeViewController.h"
-#import "NewHomeViewController.h"
 #import "BOViewController.h"
 #import "TransHistoryViewController.h"
 #import "MoreViewController.h"
@@ -38,15 +37,8 @@
     //  HelveticaNeue-Medium
     UIFont *itemFont = [UIFont fontWithName:@"HelveticaNeue" size:12.5];
     
-    UINavigationController *homeNav;
-    if ([AppDelegate sharedInstance].newHomeLayout) {
-        NewHomeViewController *homeVC = [[NewHomeViewController alloc] initWithNibName:@"NewHomeViewController" bundle:nil];
-        homeNav = [[UINavigationController alloc] initWithRootViewController: homeVC];
-        
-    }else{
-        HomeViewController *homeVC = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-        homeNav = [[UINavigationController alloc] initWithRootViewController: homeVC];
-    }
+    HomeViewController *homeVC = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+    UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController: homeVC];
     
     UIImage *imgHome = [UIImage imageNamed:@"tabbar_home_def"];
     imgHome = [imgHome imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -54,7 +46,7 @@
     UIImage *imgHomeAct = [UIImage imageNamed:@"tabbar_home_act"];
     imgHomeAct = [imgHomeAct imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    UITabBarItem *homeItem = [[UITabBarItem alloc] initWithTitle:@"Trang chủ" image:imgHome selectedImage:imgHomeAct];
+    UITabBarItem *homeItem = [[UITabBarItem alloc] initWithTitle:text_home image:imgHome selectedImage:imgHomeAct];
     [homeItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: itemFont, NSFontAttributeName, nil] forState:UIControlStateNormal];
     
     homeNav.tabBarItem = homeItem;
@@ -85,7 +77,7 @@
     UIImage *imgTransHisAct = [UIImage imageNamed:@"tabbar_history_act"];
     imgTransHisAct = [imgTransHisAct imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    UITabBarItem *transHisItem = [[UITabBarItem alloc] initWithTitle:@"Lịch sử giao dịch" image:imgTransHis selectedImage:imgTransHisAct];
+    UITabBarItem *transHisItem = [[UITabBarItem alloc] initWithTitle:text_trans_history image:imgTransHis selectedImage:imgTransHisAct];
     [transHisItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: itemFont, NSFontAttributeName, nil] forState:UIControlStateNormal];
     
     transHisNav.tabBarItem = transHisItem;
@@ -100,7 +92,7 @@
     UIImage *imgAccAct = [UIImage imageNamed:@"tabbar_acc_act"];
     imgAccAct = [imgAccAct imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    UITabBarItem *accItem = [[UITabBarItem alloc] initWithTitle:@"Tài khoản" image:imgAcc selectedImage:imgAccAct];
+    UITabBarItem *accItem = [[UITabBarItem alloc] initWithTitle:text_setttings image:imgAcc selectedImage:imgAccAct];
     [accItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: itemFont, NSFontAttributeName, nil] forState:UIControlStateNormal];
     
     moreNav.tabBarItem = accItem;

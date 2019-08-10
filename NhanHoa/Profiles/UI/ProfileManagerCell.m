@@ -28,11 +28,11 @@
     lbTypeValue.font = lbCompanyValue.font = lbProfileValue.font = [UIFont fontWithName:RobotoMedium size:16.0];
     lbTypeValue.textColor = lbCompanyValue.textColor = lbProfileValue.textColor = TITLE_COLOR;
     
-    lbType.text = @"Hồ sơ:";
-    sizeType = [AppUtils getSizeWithText:@"Hồ sơ:" withFont:textFont].width + 5;
+    lbType.text = [NSString stringWithFormat:@"%@:", text_profile];
+    sizeType = [AppUtils getSizeWithText:lbType.text withFont:textFont].width + 5;
     
-    lbProfile.text = @"Người đại diện:";
-    sizeProfile = [AppUtils getSizeWithText:@"Người đại diện:" withFont:textFont].width + 5;
+    lbProfile.text = [NSString stringWithFormat:@"%@:", text_representative];
+    sizeProfile = [AppUtils getSizeWithText:lbProfile.text withFont:textFont].width + 5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

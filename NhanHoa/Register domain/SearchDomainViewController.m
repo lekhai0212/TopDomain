@@ -43,7 +43,7 @@
     [WriteLogsUtils writeForGoToScreen: @"SearchDomainViewController"];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang kiểm tra. Vui lòng chờ trong giây lát..." Interaction:NO];
+    [ProgressHUD show:text_checking_please_wait Interaction:NO];
     
     tfSearch.text = strSearch;
     [self hideUIForSearch: TRUE];
@@ -77,14 +77,14 @@
     [self.view endEditing: TRUE];
     
     if ([AppUtils isNullOrEmpty: tfSearch.text]) {
-        [self.view makeToast:@"Vui lòng nhập tên miền muốn kiểm tra!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
+        [self.view makeToast:please_enter_your_domain_names duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
         return;
     }
     
     firstDomainInfo = nil;
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang kiểm tra. Vui lòng chờ trong giây lát..." Interaction:NO];
+    [ProgressHUD show:text_checking_please_wait Interaction:NO];
     
     strSearch = tfSearch.text;
     [self hideUIForSearch: TRUE];
@@ -101,7 +101,7 @@
             [[CartModel getInstance] removeDomainFromCart: firstDomainInfo];
             
             //  change button title
-            [sender setTitle:@"Chọn" forState:UIControlStateNormal];
+            [sender setTitle:text_select forState:UIControlStateNormal];
             sender.backgroundColor = BLUE_COLOR;
             
         }else{
@@ -109,7 +109,7 @@
             [[CartModel getInstance] addDomainToCart: firstDomainInfo];
             
             //  change button title
-            [sender setTitle:@"Bỏ chọn" forState:UIControlStateNormal];
+            [sender setTitle:text_unselect forState:UIControlStateNormal];
             sender.backgroundColor = NEW_PRICE_COLOR;
         }
         [[AppDelegate sharedInstance] updateShoppingCartCount];
@@ -197,6 +197,7 @@
         make.height.mas_equalTo(hHeader);
     }];
     
+    lbTitle.text = text_search_result;
     lbTitle.font = [AppDelegate sharedInstance].fontBTN;
     [lbTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.viewHeader.mas_centerX);
@@ -213,6 +214,7 @@
     }];
     
     [self checkToEnableContinueButton];
+    [btnContinue setTitle:text_continue forState:UIControlStateNormal];
     btnContinue.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     btnContinue.layer.cornerRadius = 45.0/2;
     [btnContinue setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
@@ -430,7 +432,7 @@
             [listDomains removeObject: firstDomainInfo];
             
             NSString *firstDomain = [firstDomainInfo objectForKey:@"domain"];
-            NSString *content = [NSString stringWithFormat:@"Chúc mừng!\nBạn có thế sử dụng tên miền:\n %@\nĐăng ký ngay để bảo vệ thương hiệu của bạn.", firstDomain];
+            NSString *content = [NSString stringWithFormat:@"Congrats!\nYou can use this domain:\n %@\nRegister now to protect your brand.", firstDomain];
             NSRange range = [content rangeOfString: firstDomain];
             if (range.location != NSNotFound) {
                 NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString: content];
@@ -451,11 +453,11 @@
             
             if ([[CartModel getInstance] checkCurrentDomainExistsInCart: firstDomainInfo]) {
                 btnChoose.backgroundColor = NEW_PRICE_COLOR;
-                [btnChoose setTitle:@"Bỏ chọn" forState:UIControlStateNormal];
+                [btnChoose setTitle:text_unselect forState:UIControlStateNormal];
                 
             }else{
                 btnChoose.backgroundColor = BLUE_COLOR;
-                [btnChoose setTitle:@"Chọn" forState:UIControlStateNormal];
+                [btnChoose setTitle:text_select forState:UIControlStateNormal];
             }
             viewDomain.hidden = FALSE;
             imgEmoji.image = [UIImage imageNamed:@"search_smile"];
@@ -538,10 +540,10 @@
     if (([available isKindOfClass:[NSNumber class]] && [available intValue] == 1) || [available boolValue] == 1)
     {
         if ([[CartModel getInstance] checkCurrentDomainExistsInCart: info]) {
-            [cell.btnChoose setTitle:@"Bỏ chọn" forState:UIControlStateNormal];
+            [cell.btnChoose setTitle:text_unselect forState:UIControlStateNormal];
             cell.btnChoose.backgroundColor = NEW_PRICE_COLOR;
         }else{
-            [cell.btnChoose setTitle:@"Chọn" forState:UIControlStateNormal];
+            [cell.btnChoose setTitle:text_select forState:UIControlStateNormal];
             cell.btnChoose.backgroundColor = BLUE_COLOR;
         }
         
@@ -550,7 +552,7 @@
             price = [AppUtils convertStringToCurrencyFormat: price];
             cell.lbPrice.text = [NSString stringWithFormat:@"%@VNĐ", price];
         }else{
-            cell.lbPrice.text = @"Liên hệ";
+            cell.lbPrice.text = text_contact;
         }
         [cell showPriceForDomainCell: TRUE];
         cell.btnChoose.enabled = TRUE;
@@ -587,7 +589,7 @@
         [cell showPriceForDomainCell: FALSE];
     }else{
         cell.btnChoose.enabled = TRUE;
-        [cell.btnChoose setTitle:@"Xem thông tin" forState:UIControlStateNormal];
+        [cell.btnChoose setTitle:text_more_details forState:UIControlStateNormal];
         cell.btnChoose.backgroundColor = ORANGE_COLOR;
         cell.lbPrice.text = @"";
         

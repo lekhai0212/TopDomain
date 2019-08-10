@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Hỗ trợ khách hàng";
+    self.title = text_customers_support;
     [self setupUIForView];
 }
 

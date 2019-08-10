@@ -20,6 +20,10 @@
     if ([DeviceUtils isScreen320]) {
         padding = 5.0;
         sizeIcon = 40.0;
+        
+    }else if ([DeviceUtils isScreen375]) {
+        padding = 7.5;
+        sizeIcon = 50.0;
     }
     
     self.backgroundColor = UIColor.clearColor;
@@ -56,7 +60,7 @@
     }];
     
     lbDomain.textColor = [UIColor colorWithRed:(84/255.0) green:(99/255.0) blue:(128/255.0) alpha:1.0];
-    lbDomain.font = [AppDelegate sharedInstance].fontMedium;
+    lbDomain.font = [AppDelegate sharedInstance].fontMediumDesc;
     
     [lbDomain mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.lbPrice);

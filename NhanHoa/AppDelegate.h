@@ -19,21 +19,15 @@
 #import <UserNotificationsUI/UserNotificationsUI.h>
 
 typedef enum TypeHomeMenu{
+    eCashIn,
     eRegisterDomain,
-    ePricingDomain,
     eSearchDomain,
-    eRecharge,
-    eRewardsPoints,
     eManagerDomain,
-    eWithdrawal,
     eProfile,
-    eSupport,
-    eOrdersList,
-    eRegisterHosting,
-    eRegisterSSL,
-    eRegisterEmail,
-    eRegisterVPS,
-    eRegisterCloudServer,
+    ePricingDomain,
+    eTransactionHistory,
+    eSetupAccount,
+    eCustomerSupport,
 }TypeHomeMenu;
 
 typedef enum PaymentMethod{

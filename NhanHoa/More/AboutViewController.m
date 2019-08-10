@@ -64,11 +64,11 @@
     if (![AppUtils isNullOrEmpty: linkToAppStore] && ![AppUtils isNullOrEmpty: appStoreVersion]) {
         NSString *content = [NSString stringWithFormat:@"Phiên bản hiện tại trên AppStore là %@. Bạn có muốn cập nhật ngay không?", appStoreVersion];
         
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:content delegate:self cancelButtonTitle:@"Đóng" otherButtonTitles:@"Cập nhật", nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:content delegate:self cancelButtonTitle:text_close otherButtonTitles:@"Cập nhật", nil];
         alert.tag = 2;
         [alert show];
     }else{
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"Bạn đang sử dụng phiên bản mới nhất" delegate:nil cancelButtonTitle:@"Đóng" otherButtonTitles:nil, nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"Bạn đang sử dụng phiên bản mới nhất" delegate:nil cancelButtonTitle:text_close otherButtonTitles:nil, nil];
         [alert show];
     }
     return;

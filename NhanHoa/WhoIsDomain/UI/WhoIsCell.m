@@ -17,7 +17,7 @@
     float padding = 15.0;
     tfDomain.font = [AppDelegate sharedInstance].fontRegular;
     tfDomain.textColor = TITLE_COLOR;
-    tfDomain.placeholder = @"nhập tên miền";
+    tfDomain.placeholder = enter_domain_name;
     tfDomain.layer.cornerRadius = [AppDelegate sharedInstance].radius;
     tfDomain.layer.borderColor = [UIColor colorWithRed:(172/255.0) green:(185/255.0) blue:(202/255.0) alpha:1.0].CGColor;
     tfDomain.layer.borderWidth = 1.0;

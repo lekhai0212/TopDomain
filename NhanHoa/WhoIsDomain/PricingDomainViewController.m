@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Bảng giá tên miền";
+    self.title = text_domain_price_list;
     [self setupUIForView];
 }
 
@@ -32,7 +32,7 @@
     eTypePrice = eTypePriceVN;
     if ([AppDelegate sharedInstance].listPricingVN == nil) {
         [ProgressHUD backgroundColor: ProgressHUD_BG];
-        [ProgressHUD show:@"Đang tải..." Interaction:NO];
+        [ProgressHUD show:text_loading Interaction:NO];
         
         [WebServiceUtils getInstance].delegate = self;
         [[WebServiceUtils getInstance] getDomainsPricingList];

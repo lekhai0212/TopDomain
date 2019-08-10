@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Nạp tiền vào ví";
+    self.title = text_cash_in;
     [self setupUIForView];
 }
 

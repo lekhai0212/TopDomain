@@ -398,9 +398,9 @@
     [attrTitle addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, attrTitle.string.length)];
     [alertVC setValue:attrTitle forKey:@"attributedTitle"];
     
-    UIAlertAction *btnClose = [UIAlertAction actionWithTitle:@"Đóng" style:UIAlertActionStyleDefault
+    UIAlertAction *btnClose = [UIAlertAction actionWithTitle:text_close style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction *action){
-                                                         NSLog(@"Đóng");
+                                                         
                                                      }];
     [btnClose setValue:UIColor.redColor forKey:@"titleTextColor"];
     
@@ -463,7 +463,7 @@
     if ([error isKindOfClass:[NSDictionary class]]) {
         NSString *errorCode = [(NSDictionary *)error objectForKey:@"errorCode"];
         if ([errorCode isEqualToString:@"005"]) {
-            UIAlertView *alv = [[UIAlertView alloc] initWithTitle:nil message:@"Tài khoản của bạn chưa được kích hoạt?" delegate:self cancelButtonTitle:@"Đóng" otherButtonTitles:@"Kích hoạt", nil];
+            UIAlertView *alv = [[UIAlertView alloc] initWithTitle:nil message:@"Tài khoản của bạn chưa được kích hoạt?" delegate:self cancelButtonTitle:text_close otherButtonTitles:@"Kích hoạt", nil];
             [alv show];
         }else{
             NSString *message = [AppUtils getErrorContentFromData: error];

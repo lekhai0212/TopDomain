@@ -545,7 +545,7 @@
     }];
     
     UIButton *btnChoose = [[UIButton alloc] init];
-    [btnChoose setTitle:@"Chọn" forState:UIControlStateNormal];
+    [btnChoose setTitle:text_select forState:UIControlStateNormal];
     btnChoose.titleLabel.font = [UIFont fontWithName:RobotoRegular size:18.0];
     [btnChoose setTitleColor:BLUE_COLOR forState:UIControlStateNormal];
     btnChoose.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

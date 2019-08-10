@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Đổi DNS";
+    self.title = text_change_name_server;
     
     [self setupUIForView];
     
@@ -40,7 +40,7 @@
     tfDNS1.text = tfDNS2.text = tfDNS3.text = tfDNS4.text = @"";
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang kiểm tra..." Interaction:NO];
+    [ProgressHUD show:text_checking Interaction:NO];
     
     [self getDNSValueForDomain: domain];
 }
@@ -173,6 +173,7 @@
     btnCancel.layer.borderColor = OLD_PRICE_COLOR.CGColor;
     btnCancel.layer.borderWidth = 1.0;
     [btnCancel setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [btnCancel setTitle:text_reset forState:UIControlStateNormal];
     [btnCancel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
         make.bottom.equalTo(self.view).offset(-padding);
@@ -184,6 +185,7 @@
     btnSave.layer.borderColor = BLUE_COLOR.CGColor;
     btnSave.layer.borderWidth = 1.0;
     [btnSave setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [btnSave setTitle:text_update forState:UIControlStateNormal];
     [btnSave mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.btnCancel.mas_right).offset(padding);
         make.top.bottom.equalTo(self.btnCancel);

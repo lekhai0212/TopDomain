@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Tra cứu tên miền";
+    self.title = text_search_domains;
     [self setupUIForView];
 }
 
@@ -73,7 +73,7 @@
     NSMutableArray *result = [[NSMutableArray alloc] initWithArray: listDomain];
     [result removeObject:@""];
     if (result.count == 0) {
-        [self.view makeToast:@"Vui lòng nhập tên miền muốn kiểm tra!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
+        [self.view makeToast:please_enter_your_domain_names duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
         return;
     }
     
@@ -114,6 +114,7 @@
     btnSearch.backgroundColor = BLUE_COLOR;
     btnSearch.layer.borderColor = BLUE_COLOR.CGColor;
     btnSearch.layer.borderWidth = 1.0;
+    [btnSearch setTitle:text_search forState:UIControlStateNormal];
     btnSearch.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     [btnSearch mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(self.padding);
@@ -135,7 +136,7 @@
     UILabel *lbTbHeader = [[UILabel alloc] initWithFrame:CGRectMake(padding, 0, headerView.frame.size.width-2*padding, headerView.frame.size.height)];
     lbTbHeader.numberOfLines = 5;
     lbTbHeader.textAlignment = NSTextAlignmentCenter;
-    lbTbHeader.text = @"Nhập một hay nhiều tên miền bạn muốn tra cứu";
+    lbTbHeader.text = @"Enter one or more domains you want to search";
     lbTbHeader.font = [AppDelegate sharedInstance].fontRegular;
     lbTbHeader.textColor = TITLE_COLOR;
     [headerView addSubview: lbTbHeader];
@@ -146,7 +147,7 @@
     btnTbFooter.frame = CGRectMake(padding, footerView.frame.size.height-45.0, footerView.frame.size.width-2*padding, hBTN);
     btnTbFooter.layer.cornerRadius = [AppDelegate sharedInstance].radius;
     btnTbFooter.backgroundColor = [UIColor colorWithRed:(172/255.0) green:(185/255.0) blue:(202/255.0) alpha:1.0];
-    NSAttributedString *content = [AppUtils generateTextWithContent:@"Thêm tên miền" font:[AppDelegate sharedInstance].fontBTN color:UIColor.whiteColor image:[UIImage imageNamed:@"add"] size:22.0 imageFirst:YES];
+    NSAttributedString *content = [AppUtils generateTextWithContent:text_add_more font:[AppDelegate sharedInstance].fontBTN color:UIColor.whiteColor image:[UIImage imageNamed:@"add"] size:22.0 imageFirst:YES];
     [btnTbFooter setAttributedTitle:content forState:UIControlStateNormal];
     [btnTbFooter addTarget:self
                     action:@selector(addNewRowForDomain)

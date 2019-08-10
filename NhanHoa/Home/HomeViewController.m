@@ -167,7 +167,7 @@
     cell.lbName.text = menu.menuName;
     cell.imgType.image = [UIImage imageNamed: menu.menuIcon];
     
-    if (indexPath.row == eSearchDomain || indexPath.row == eManagerDomain || indexPath.row == eSupport) {
+    if (indexPath.row == eSearchDomain || indexPath.row == ePricingDomain || indexPath.row == eCustomerSupport) {
         cell.lbSepaRight.hidden = YES;
     }else {
         cell.lbSepaRight.hidden = NO;
@@ -181,17 +181,17 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s] selected index = %d", __FUNCTION__, (int)indexPath.row)];
     
     switch (indexPath.row) {
+        case eCashIn:{
+            TopupViewController *topupVC = [[TopupViewController alloc] initWithNibName:@"TopupViewController" bundle:nil];
+            topupVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController: topupVC animated:YES];
+            break;
+        }
         case eRegisterDomain:{
             RegisterDomainViewController *registerDomainVC = [[RegisterDomainViewController alloc] initWithNibName:@"RegisterDomainViewController" bundle:nil];
             registerDomainVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController: registerDomainVC animated:YES];
             
-            break;
-        }
-        case ePricingDomain:{
-            PricingDomainViewController *pricingVC = [[PricingDomainViewController alloc] initWithNibName:@"PricingDomainViewController" bundle:nil];
-            pricingVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController: pricingVC animated:YES];
             break;
         }
         case eSearchDomain:{
@@ -200,26 +200,10 @@
             [self.navigationController pushViewController: whoIsVC animated:YES];
             break;
         }
-        case eRecharge:{
-            TopupViewController *topupVC = [[TopupViewController alloc] initWithNibName:@"TopupViewController" bundle:nil];
-            topupVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController: topupVC animated:YES];
-            break;
-        }
-        case eRewardsPoints:{
-            
-            break;
-        }
         case eManagerDomain:{
             RenewedDomainViewController *renewedVC = [[RenewedDomainViewController alloc] initWithNibName:@"RenewedDomainViewController" bundle:nil];
             renewedVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController: renewedVC animated:YES];
-            break;
-        }
-        case eWithdrawal:{
-            WithdrawalBonusAccountViewController *withdrawVC = [[WithdrawalBonusAccountViewController alloc] initWithNibName:@"WithdrawalBonusAccountViewController" bundle:nil];
-            withdrawVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController: withdrawVC animated:YES];
             break;
         }
         case eProfile:{
@@ -228,7 +212,14 @@
             [self.navigationController pushViewController: profileVC animated:YES];
             break;
         }
-        case eSupport:{
+        case ePricingDomain:{
+            PricingDomainViewController *pricingVC = [[PricingDomainViewController alloc] initWithNibName:@"PricingDomainViewController" bundle:nil];
+            pricingVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController: pricingVC animated:YES];
+            break;
+        }
+        
+        case eCustomerSupport:{
             SupportViewController *supportVC = [[SupportViewController alloc] initWithNibName:@"SupportViewController" bundle:nil];
             supportVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController: supportVC animated:YES];
@@ -258,31 +249,31 @@
 - (void)createDataForMenuView {
     listMenu = [[NSMutableArray alloc] init];
     
-    HomeMenuObject *regDomain = [[HomeMenuObject alloc] initWithName:@"Đăng ký tên miền" icon:@"menu_domain" type:eRegisterDomain];
+    HomeMenuObject *cashIn = [[HomeMenuObject alloc] initWithName:text_cash_in icon:@"menu_recharge" type:eCashIn];
+    [listMenu addObject: cashIn];
+    
+    HomeMenuObject *regDomain = [[HomeMenuObject alloc] initWithName:text_register_domain_names icon:@"menu_domain" type:eRegisterDomain];
     [listMenu addObject: regDomain];
     
-    HomeMenuObject *renewDomain = [[HomeMenuObject alloc] initWithName:@"Bảng giá tên miền" icon:@"menu_reorder_domain" type:ePricingDomain];
-    [listMenu addObject: renewDomain];
-    
-    HomeMenuObject *searchDomain = [[HomeMenuObject alloc] initWithName:@"Kiểm tra tên miền" icon:@"menu_search_domain" type:eSearchDomain];
+    HomeMenuObject *searchDomain = [[HomeMenuObject alloc] initWithName:text_search_domains icon:@"menu_search_domain" type:eSearchDomain];
     [listMenu addObject: searchDomain];
     
-    HomeMenuObject *recharge = [[HomeMenuObject alloc] initWithName:@"Nạp tiền vào tài khoản" icon:@"menu_recharge" type:eRecharge];
-    [listMenu addObject: recharge];
-    
-    HomeMenuObject *rewardsPoints = [[HomeMenuObject alloc] initWithName:@"Tài khoản thưởng" icon:@"menu_bonus" type:eRewardsPoints];
-    [listMenu addObject: rewardsPoints];
-    
-    HomeMenuObject *managerDomains = [[HomeMenuObject alloc] initWithName:@"Quản lý tên miền" icon:@"menu_list_domain" type:eManagerDomain];
+    HomeMenuObject *managerDomains = [[HomeMenuObject alloc] initWithName:text_manage_domains icon:@"menu_list_domain" type:eManagerDomain];
     [listMenu addObject: managerDomains];
     
-    HomeMenuObject *withdrawal = [[HomeMenuObject alloc] initWithName:@"Rút tiền thưởng" icon:@"menu_withdrawal" type:eWithdrawal];
-    [listMenu addObject: withdrawal];
-    
-    HomeMenuObject *profile = [[HomeMenuObject alloc] initWithName:@"Danh sách hồ sơ" icon:@"menu_profile" type:eProfile];
+    HomeMenuObject *profile = [[HomeMenuObject alloc] initWithName:text_profiles_list icon:@"menu_profile" type:eProfile];
     [listMenu addObject: profile];
     
-    HomeMenuObject *support = [[HomeMenuObject alloc] initWithName:@"Hỗ trợ khách hàng" icon:@"menu_support" type:eSupport];
+    HomeMenuObject *priceList = [[HomeMenuObject alloc] initWithName:text_domain_price_list icon:@"menu_reorder_domain" type:ePricingDomain];
+    [listMenu addObject: priceList];
+    
+    HomeMenuObject *transHistory = [[HomeMenuObject alloc] initWithName:text_trans_history icon:@"menu_trans_history" type:eTransactionHistory];
+    [listMenu addObject: transHistory];
+    
+    HomeMenuObject *setupAccount = [[HomeMenuObject alloc] initWithName:text_setup_account icon:@"menu_edit_profile" type:eSetupAccount];
+    [listMenu addObject: setupAccount];
+    
+    HomeMenuObject *support = [[HomeMenuObject alloc] initWithName:text_customers_support icon:@"menu_support" type:eCustomerSupport];
     [listMenu addObject: support];
     
 }
@@ -395,25 +386,23 @@
     [imgMainWallet mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(viewMainWallet).offset(10.0);
         make.centerY.equalTo(viewMainWallet.mas_centerY);
-        make.width.height.mas_equalTo(36.0);
+        make.width.height.mas_equalTo(28.0);
     }];
     
-    
     lbMainWallet.textColor = TITLE_COLOR;
-    lbMainWallet.font = [AppDelegate sharedInstance].fontRegular;
+    lbMainWallet.font = [AppDelegate sharedInstance].fontBTN;
     
-    lbMoney.textColor = ORANGE_COLOR;
-    
-    lbMainWallet.text = balance_text;
-    float maxSize = [AppUtils getSizeWithText:lbMainWallet.text withFont:[AppDelegate sharedInstance].fontRegular].width + 10.0;
+    lbMainWallet.text = [NSString stringWithFormat:@"%@: ", balance_text];
+    float maxSize = [AppUtils getSizeWithText:lbMainWallet.text withFont:[AppDelegate sharedInstance].fontBTN].width + 10.0;
     [lbMainWallet mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(imgMainWallet.mas_right).offset(5.0);
+        make.left.equalTo(imgMainWallet.mas_right).offset(10.0);
         make.bottom.top.equalTo(viewMainWallet);
         make.width.mas_equalTo(maxSize);
     }];
     
     lbMoney.text = @"";
-    lbMoney.font = [UIFont fontWithName:RobotoRegular size:30.0];
+    //  lbMoney.textColor = ORANGE_COLOR;
+    lbMoney.font = [UIFont fontWithName:RobotoRegular size:24.0];
     [lbMoney mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lbMainWallet.mas_right).offset(5.0);
         make.top.bottom.equalTo(viewMainWallet);
