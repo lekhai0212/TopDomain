@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Tạo hồ sơ";
+    self.title = text_create_pforile;
 }
 
 -(void)viewWillAppear:(BOOL)animated {

@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Thông tin ứng dụng";
+    self.title = text_app_info;
     [self setupUIForView];
 }
 
@@ -28,9 +28,9 @@
     [WriteLogsUtils writeForGoToScreen:@"AboutViewController"];
     
     linkToAppStore = @"";
-    [btnCheckUpdate setTitle:@"Kiểm tra cập nhật" forState:UIControlStateNormal];
+    [btnCheckUpdate setTitle:text_check_for_update forState:UIControlStateNormal];
     
-    NSString *str = [NSString stringWithFormat:@"Phiên bản: %@\nNgày phát hành: %@", [AppUtils getAppVersionWithBuildVersion: FALSE], [AppUtils getBuildDate]];
+    NSString *str = [NSString stringWithFormat:@"%@: %@\n%@: %@", text_version, [AppUtils getAppVersionWithBuildVersion: FALSE], text_release_date, [AppUtils getBuildDate]];
     lbVersion.text = str;
 }
 
@@ -62,14 +62,41 @@
     
     linkToAppStore = [self checkNewVersionOnAppStore];
     if (![AppUtils isNullOrEmpty: linkToAppStore] && ![AppUtils isNullOrEmpty: appStoreVersion]) {
-        NSString *content = [NSString stringWithFormat:@"Phiên bản hiện tại trên AppStore là %@. Bạn có muốn cập nhật ngay không?", appStoreVersion];
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:content delegate:self cancelButtonTitle:text_close otherButtonTitles:@"Cập nhật", nil];
-        alert.tag = 2;
-        [alert show];
+        NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"We found new version on AppStore. Do you want to update now?"];
+        [attrTitle addAttribute:NSFontAttributeName value:[AppDelegate sharedInstance].fontBTN range:NSMakeRange(0, attrTitle.string.length)];
+        [alertVC setValue:attrTitle forKey:@"attributedTitle"];
+        
+        UIAlertAction *btnClose = [UIAlertAction actionWithTitle:text_close style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action){
+                                                             
+                                                         }];
+        [btnClose setValue:UIColor.redColor forKey:@"titleTextColor"];
+        
+        UIAlertAction *btnUpdate = [UIAlertAction actionWithTitle:text_update style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action){
+                                                              [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkToAppStore]];
+                                                          }];
+        [btnUpdate setValue:BLUE_COLOR forKey:@"titleTextColor"];
+        
+        [alertVC addAction:btnClose];
+        [alertVC addAction:btnUpdate];
+        [self presentViewController:alertVC animated:YES completion:nil];
     }else{
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"Bạn đang sử dụng phiên bản mới nhất" delegate:nil cancelButtonTitle:text_close otherButtonTitles:nil, nil];
-        [alert show];
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"You are using the newest version."];
+        [attrTitle addAttribute:NSFontAttributeName value:[AppDelegate sharedInstance].fontBTN range:NSMakeRange(0, attrTitle.string.length)];
+        [alertVC setValue:attrTitle forKey:@"attributedTitle"];
+        
+        UIAlertAction *btnClose = [UIAlertAction actionWithTitle:text_close style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action){
+                                                             
+                                                         }];
+        [btnClose setValue:UIColor.redColor forKey:@"titleTextColor"];
+        [alertVC addAction:btnClose];
+        [self presentViewController:alertVC animated:YES completion:nil];
     }
     return;
 }
@@ -143,13 +170,6 @@
         make.left.right.bottom.equalTo(self.view);
         make.height.mas_equalTo(60.0);
     }];
-}
-
-#pragma mark - UIAlertview Delegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == 2 && buttonIndex == 1) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkToAppStore]];
-    }
 }
 
 @end

@@ -127,7 +127,7 @@
     tbHeader.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40.0);
     
     UILabel *lbName = [[UILabel alloc] init];
-    lbName.text = @"Tên miền";
+    lbName.text = text_domains;
     lbName.textAlignment = NSTextAlignmentLeft;
     [tbHeader addSubview: lbName];
     [lbName mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -137,7 +137,7 @@
     }];
     
     UILabel *lbRenew = [[UILabel alloc] init];
-    lbRenew.text = @"Phí khởi tạo";
+    lbRenew.text = text_registration_fee;
     lbRenew.textAlignment = NSTextAlignmentRight;
     [tbHeader addSubview: lbRenew];
     [lbRenew mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -147,7 +147,7 @@
     }];
     
     UILabel *lbSetup = [[UILabel alloc] init];
-    lbSetup.text = @"Phí duy trì";
+    lbSetup.text = text_renewal_fee;
     lbSetup.textAlignment = NSTextAlignmentRight;
     [tbHeader addSubview: lbSetup];
     [lbSetup mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -157,7 +157,7 @@
     }];
     
     UILabel *lbTransfer = [[UILabel alloc] init];
-    lbTransfer.text = @"Chuyển về";
+    lbTransfer.text = text_transfer_to;
     lbTransfer.textAlignment = NSTextAlignmentRight;
     [tbHeader addSubview: lbTransfer];
     [lbTransfer mas_makeConstraints:^(MASConstraintMaker *make) {

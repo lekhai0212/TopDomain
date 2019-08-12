@@ -43,7 +43,7 @@
 
 - (void)setupUIForView {
     float padding = 15.0;
-    if ([DeviceUtils isScreen320]) {
+    if ([DeviceUtils isScreen320] || [DeviceUtils isScreen375]) {
         padding = 5.0;
     }
     
@@ -62,6 +62,7 @@
     btnVietnam.titleLabel.font = btnQT.titleLabel.font = [AppDelegate sharedInstance].fontDesc;
     btnVietnam.backgroundColor = BLUE_COLOR;
     btnVietnam.layer.cornerRadius = hMenu/2;
+    [btnVietnam setTitle:vietnam_domain_names forState:UIControlStateNormal];
     [btnVietnam mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.equalTo(self.viewHeader);
         make.right.equalTo(self.viewHeader.mas_centerX);
@@ -70,6 +71,7 @@
     [btnQT setTitleColor:BLUE_COLOR forState:UIControlStateNormal];
     btnQT.backgroundColor = UIColor.clearColor;
     btnQT.layer.cornerRadius = btnVietnam.layer.cornerRadius;
+    [btnQT setTitle:international_domain_names forState:UIControlStateNormal];
     [btnQT mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.viewHeader.mas_centerX);
         make.right.top.bottom.equalTo(self.viewHeader);
@@ -78,6 +80,7 @@
     //  table content
     tbContent.delegate = self;
     tbContent.dataSource = self;
+    tbContent.showsVerticalScrollIndicator = FALSE;
     [tbContent registerNib:[UINib nibWithNibName:@"PriceDomainInfoCell" bundle:nil] forCellReuseIdentifier:@"PriceDomainInfoCell"];
     tbContent.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tbContent mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,11 +99,12 @@
     float sizeItem = (SCREEN_WIDTH - 2*padding - 3*10.0)/4;
     
     UIView *tbHeader = [[UIView alloc] init];
-    tbHeader.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40.0);
+    tbHeader.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50.0);
     
     UILabel *lbName = [[UILabel alloc] init];
-    lbName.text = @"Tên miền";
-    lbName.textAlignment = NSTextAlignmentLeft;
+    lbName.text = text_domains;
+    lbName.textAlignment = NSTextAlignmentCenter;
+    lbName.numberOfLines = 5;
     [tbHeader addSubview: lbName];
     [lbName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(tbHeader).offset(padding);
@@ -109,8 +113,9 @@
     }];
     
     UILabel *lbRenew = [[UILabel alloc] init];
-    lbRenew.text = @"Phí khởi tạo";
-    lbRenew.textAlignment = NSTextAlignmentRight;
+    lbRenew.text = text_registration_fee;
+    lbRenew.textAlignment = NSTextAlignmentCenter;
+    lbRenew.numberOfLines = 5;
     [tbHeader addSubview: lbRenew];
     [lbRenew mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lbName.mas_right).offset(10.0);
@@ -119,8 +124,9 @@
     }];
     
     UILabel *lbSetup = [[UILabel alloc] init];
-    lbSetup.text = @"Phí duy trì";
-    lbSetup.textAlignment = NSTextAlignmentRight;
+    lbSetup.text = text_renewal_fee;
+    lbSetup.textAlignment = NSTextAlignmentCenter;
+    lbSetup.numberOfLines = 5;
     [tbHeader addSubview: lbSetup];
     [lbSetup mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lbRenew.mas_right).offset(10.0);
@@ -129,8 +135,9 @@
     }];
     
     UILabel *lbTransfer = [[UILabel alloc] init];
-    lbTransfer.text = @"Chuyển về";
-    lbTransfer.textAlignment = NSTextAlignmentRight;
+    lbTransfer.text = text_transfer_to;
+    lbTransfer.textAlignment = NSTextAlignmentCenter;
+    lbTransfer.numberOfLines = 5;
     [tbHeader addSubview: lbTransfer];
     [lbTransfer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lbSetup.mas_right).offset(10.0);

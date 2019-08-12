@@ -116,7 +116,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập địa chỉ email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hQZ-Da-7fR">
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hQZ-Da-7fR">
                             <rect key="frame" x="8" y="74" width="304" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
@@ -130,7 +130,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập mật khẩu từ 8 ký tự" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3rj-CR-Z4E">
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="At least 8 characters" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3rj-CR-Z4E">
                             <rect key="frame" x="8" y="143" width="304" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
@@ -144,7 +144,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập mật khẩu từ 8 ký tự" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j1F-eC-Scp">
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="At least 8 characters" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j1F-eC-Scp">
                             <rect key="frame" x="8" y="215" width="304" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>

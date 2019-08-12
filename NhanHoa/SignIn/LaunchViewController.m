@@ -101,6 +101,7 @@
     btnSignIn.layer.borderWidth = 1.0;
     btnSignIn.layer.borderColor = signInColor.CGColor;
     btnSignIn.backgroundColor = signInColor;
+    [btnSignIn setTitle:text_sign_in forState:UIControlStateNormal];
     [btnSignIn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.viewBottom).offset(self.padding);
         make.right.equalTo(self.viewBottom).offset(-self.padding);
@@ -114,6 +115,7 @@
     btnRegister.layer.borderWidth = 1.0;
     btnRegister.layer.borderColor = UIColor.whiteColor.CGColor;
     [btnRegister setTitleColor:registerColor forState:UIControlStateNormal];
+    [btnRegister setTitle:text_sign_up forState:UIControlStateNormal];
     [btnRegister mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.viewBottom).offset(self.padding);
         make.right.equalTo(self.viewBottom).offset(-self.padding);
@@ -122,6 +124,8 @@
     }];
     
     lbCompany.font = [UIFont fontWithName:RobotoRegular size:15.0];
+    lbCompany.numberOfLines = 5;
+    lbCompany.text = @"Copyright ® 2002 – 2019 Top Domain Software Company. All Rights Reserved.";
     [lbCompany mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.viewBottom);
         make.height.mas_equalTo(38.0);

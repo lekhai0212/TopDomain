@@ -17,7 +17,7 @@
 #import "SettingMenuCell.h"
 #import "AccountModel.h"
 
-@interface MoreViewController ()<UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, WebServiceUtilsDelegate>
+@interface MoreViewController ()<UITableViewDelegate, UITableViewDataSource, WebServiceUtilsDelegate>
 @end
 
 @implementation MoreViewController
@@ -127,7 +127,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang đang xuất. Vui lòng chờ trong giây lát" Interaction:NO];
+    [ProgressHUD show:[NSString stringWithFormat:@"%@...", text_waiting] Interaction:NO];
     
     [WebServiceUtils getInstance].delegate = self;
     [[WebServiceUtils getInstance] updateTokenWithValue:@""];
@@ -165,33 +165,33 @@
     
     switch (indexPath.row) {
         case eSettingAccount:{
-            cell.lbName.text = @"Cài đặt tài khoản";
+            cell.lbName.text = text_setup_account;
             cell.imgType.image = [UIImage imageNamed:@"ic_setting_acc.png"];
             break;
         }
         case eManagerDomainList:{
-            cell.lbName.text = @"Quản lý tên miền";
+            cell.lbName.text = text_manage_domains;
             cell.imgType.image = [UIImage imageNamed:@"ic_manager_domain"];
             break;
         }
         case eCustomnerSupport:{
             cell.imgType.image = [UIImage imageNamed:@"ic_support"];
-            cell.lbName.text = @"Hỗ trợ khách hàng";
+            cell.lbName.text = text_customers_support;
             break;
         }
         case eBankInfo:{
             cell.imgType.image = [UIImage imageNamed:@"ic_bank_info"];
-            cell.lbName.text = @"Thông tin tài khoản ngân hàng";
+            cell.lbName.text = text_bank_info;
             break;
         }
         case eApplicationInfo:{
             cell.imgType.image = [UIImage imageNamed:@"ic_about"];
-            cell.lbName.text = @"Thông tin ứng dụng";
+            cell.lbName.text = text_app_info;
             break;
         }
         case eSignOut:{
             cell.imgType.image = [UIImage imageNamed:@"ic_signout"];
-            cell.lbName.text = @"Đăng xuất";
+            cell.lbName.text = text_log_out;
             break;
         }
             
@@ -246,9 +246,29 @@
             break;
         }
         case eSignOut:{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Bạn có muốn đăng xuất khỏi ứng dụng hay không?" delegate:self cancelButtonTitle:@"Không" otherButtonTitles:@"Đăng xuất", nil];
-            alertView.tag = 1;
-            [alertView show];
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+            
+            NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"Do you want to log out?"];
+            [attrTitle addAttribute:NSFontAttributeName value:[AppDelegate sharedInstance].fontBTN range:NSMakeRange(0, attrTitle.string.length)];
+            [alertVC setValue:attrTitle forKey:@"attributedTitle"];
+            
+            UIAlertAction *btnCancel = [UIAlertAction actionWithTitle:text_cancel style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction *action){}];
+            [btnCancel setValue:UIColor.redColor forKey:@"titleTextColor"];
+            
+            UIAlertAction *btnLogOut = [UIAlertAction actionWithTitle:text_log_out style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction *action){
+                                                                  if (![AppUtils checkNetworkAvailable]) {
+                                                                      [self logoutScreen];
+                                                                  }else{
+                                                                      [self clearTokenOfUser];
+                                                                  }
+                                                              }];
+            [btnLogOut setValue:BLUE_COLOR forKey:@"titleTextColor"];
+            
+            [alertVC addAction:btnCancel];
+            [alertVC addAction:btnLogOut];
+            [self presentViewController:alertVC animated:YES completion:nil];
             break;
         }
             
@@ -265,19 +285,6 @@
     CGPoint scrollViewOffset = scrollView.contentOffset;
     if (scrollViewOffset.y < 0) {
         [scrollView setContentOffset:CGPointMake(0, 0)];
-    }
-}
-
-#pragma mark - UIAlertview
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == 1) {
-        if (buttonIndex == 1) {
-            if (![AppUtils checkNetworkAvailable]) {
-                [self logoutScreen];
-            }else{
-                [self clearTokenOfUser];
-            }
-        }
     }
 }
 

@@ -78,6 +78,7 @@
         make.height.mas_equalTo(2*padding + 60.0 + 45.0 + 2*padding);
     }];
     
+    lbTitle.text = @"You have not found the problem yet?";
     lbTitle.textColor = TITLE_COLOR;
     lbTitle.font = [AppDelegate sharedInstance].fontBold;
     [lbTitle mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -88,11 +89,12 @@
     }];
     
     
-    NSAttributedString *msgTitle = [AppUtils generateTextWithContent:@"Gửi tin nhắn" font:[AppDelegate sharedInstance].fontRegular color:BLUE_COLOR image:[UIImage imageNamed:@"support_message"] size:22.0 imageFirst:TRUE];
+    NSAttributedString *msgTitle = [AppUtils generateTextWithContent:text_send_message font:[AppDelegate sharedInstance].fontRegular color:BLUE_COLOR image:[UIImage imageNamed:@"support_message"] size:22.0 imageFirst:TRUE];
     btnSendMsg.layer.cornerRadius = 5.0;
     [btnSendMsg setAttributedTitle:msgTitle forState:UIControlStateNormal];
     
     btnSendMsg.backgroundColor = [UIColor colorWithRed:(42/255.0) green:(122/255.0) blue:(219/255.0) alpha:0.2];
+    [btnSendMsg setTitle:text_send_message forState:UIControlStateNormal];
     [btnSendMsg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbTitle.mas_bottom);
         make.left.equalTo(self.view).offset(padding);
@@ -100,10 +102,11 @@
         make.height.mas_equalTo(45.0);
     }];
     
-    NSAttributedString *callTitle = [AppUtils generateTextWithContent:@"Gọi tổng đài" font:[AppDelegate sharedInstance].fontRegular color:BLUE_COLOR image:[UIImage imageNamed:@"support_call"] size:22.0 imageFirst:TRUE];
+    NSAttributedString *callTitle = [AppUtils generateTextWithContent:text_call_hotline font:[AppDelegate sharedInstance].fontRegular color:BLUE_COLOR image:[UIImage imageNamed:@"support_call"] size:22.0 imageFirst:TRUE];
     btnCall.layer.cornerRadius = 5.0;
     [btnCall setAttributedTitle:callTitle forState:UIControlStateNormal];
     btnCall.backgroundColor = btnSendMsg.backgroundColor;
+    [btnCall setTitle:text_call_hotline forState:UIControlStateNormal];
     [btnCall mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.btnSendMsg.mas_right).offset(padding);
         make.right.equalTo(self.view).offset(-padding);
@@ -122,7 +125,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s] email = %@, content = %@", __FUNCTION__, email, content)];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang gửi tin nhắn..." Interaction:NO];
+    [ProgressHUD show:text_sending Interaction:NO];
     
     [WebServiceUtils getInstance].delegate = self;
     [[WebServiceUtils getInstance] sendMessageWithEmail:email content:content];
@@ -142,7 +145,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     [ProgressHUD dismiss];
     
-    [[AppDelegate sharedInstance].window makeToast:@"Tin nhắn của bạn đã được gửi" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+    [[AppDelegate sharedInstance].window makeToast:@"Your message was sent succesful" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
     [self performSelector:@selector(closeSendMessageView) withObject:nil afterDelay:2.0];
 }
 

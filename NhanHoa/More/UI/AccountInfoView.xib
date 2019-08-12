@@ -38,47 +38,22 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mtF-Gl-ilI">
-                    <rect key="frame" x="9" y="80" width="134" height="60"/>
+                    <rect key="frame" x="9" y="80" width="295" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wallet.png" translatesAutoresizingMaskIntoConstraints="NO" id="Iei-v0-5f3">
                             <rect key="frame" x="0.0" y="16" width="35" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tài khoản chính" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3x-NZ-PXw">
-                            <rect key="frame" x="36" y="16" width="98" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.200.000 VNĐ" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xp2-Za-yV6">
+                            <rect key="frame" x="171" y="20" width="116" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.200.000 VNĐ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xp2-Za-yV6">
-                            <rect key="frame" x="36" y="39" width="116" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lqk-pL-aZG">
-                    <rect key="frame" x="170" y="80" width="134" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="caseback.png" translatesAutoresizingMaskIntoConstraints="NO" id="j4M-F5-tPG">
-                            <rect key="frame" x="0.0" y="16" width="35" height="36"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tiền thưởng" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYj-JO-4nU">
-                            <rect key="frame" x="36" y="16" width="98" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="200.000 VNĐ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCe-Fr-JSW">
-                            <rect key="frame" x="36" y="39" width="105" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Balance:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3x-NZ-PXw">
+                            <rect key="frame" x="43" y="20" width="109" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
@@ -92,23 +67,18 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="imgAvatar" destination="r5X-t8-aYL" id="Ehc-Ny-l3f"/>
-                <outlet property="imgReward" destination="j4M-F5-tPG" id="FyO-s9-S8H"/>
                 <outlet property="imgSepa" destination="nOZ-i9-Jdy" id="koZ-JF-spd"/>
                 <outlet property="imgWallet" destination="Iei-v0-5f3" id="uFR-9o-VD4"/>
                 <outlet property="lbEmail" destination="SsY-hX-RDr" id="cdI-US-R4Z"/>
                 <outlet property="lbMainAccount" destination="F3x-NZ-PXw" id="UD2-QD-u5x"/>
                 <outlet property="lbMainMoney" destination="Xp2-Za-yV6" id="q3b-Ch-vWj"/>
                 <outlet property="lbName" destination="R9y-6E-BUS" id="Ju2-hh-jWd"/>
-                <outlet property="lbRewardAccount" destination="EYj-JO-4nU" id="IOr-F7-EMe"/>
-                <outlet property="lbRewardMoney" destination="gCe-Fr-JSW" id="c23-jS-Zot"/>
-                <outlet property="viewReward" destination="lqk-pL-aZG" id="4AF-Nf-oV8"/>
                 <outlet property="viewWallet" destination="mtF-Gl-ilI" id="Z2N-fO-0xV"/>
             </connections>
             <point key="canvasLocation" x="76.799999999999997" y="-22.488755622188908"/>
         </view>
     </objects>
     <resources>
-        <image name="caseback.png" width="201" height="201"/>
         <image name="dashline.png" width="610" height="3"/>
         <image name="default_avatar.png" width="16.570770263671875" height="16.570770263671875"/>
         <image name="wallet.png" width="201" height="201"/>

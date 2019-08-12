@@ -149,6 +149,8 @@
 }
 
 - (void)setupUIForView {
+    float sizeIcon = 30.0;
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     hMenu = 60.0;
     self.view.backgroundColor = [UIColor colorWithRed:(246/255.0) green:(247/255.0) blue:(251/255.0) alpha:1.0];
@@ -174,19 +176,20 @@
         make.right.equalTo(self.lbSepa.mas_left);
     }];
     
-    lbAccount.font = [AppDelegate sharedInstance].fontDesc;
+    lbAccount.font = [AppDelegate sharedInstance].fontBTN;
+    lbAccount.text = text_acc_info;
     [lbAccount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.viewAccInfo);
         make.right.equalTo(self.viewAccInfo).offset(-2.0);
     }];
     
     lbNumOne.clipsToBounds = TRUE;
-    lbNumOne.layer.cornerRadius = 20.0/2;
+    lbNumOne.layer.cornerRadius = sizeIcon/2;
     lbNumOne.font = lbAccount.font;
     [lbNumOne mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.lbAccount.mas_left).offset(-3.0);
         make.centerY.equalTo(self.lbAccount.mas_centerY);
-        make.width.height.mas_equalTo(20.0);
+        make.width.height.mas_equalTo(sizeIcon);
     }];
     
     [viewProfileInfo mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -195,15 +198,16 @@
     }];
     
     lbNumTwo.clipsToBounds = TRUE;
-    lbNumTwo.layer.cornerRadius = 20.0/2;
+    lbNumTwo.layer.cornerRadius = sizeIcon/2;
     lbNumTwo.font = lbAccount.font;
     [lbNumTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.viewProfileInfo).offset(2.0);
         make.centerY.equalTo(self.viewProfileInfo.mas_centerY);
-        make.width.height.mas_equalTo(20.0);
+        make.width.height.mas_equalTo(sizeIcon);
     }];
     
     lbProfile.font = lbAccount.font;
+    lbProfile.text = text_profile_info;
     [lbProfile mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.lbNumTwo.mas_right).offset(3.0);
         make.top.bottom.equalTo(self.viewProfileInfo);
@@ -226,11 +230,11 @@
 - (void)readyToRegisterPersonalAccount:(NSDictionary *)info
 {
     if ([AppUtils isNullOrEmpty: email] || [AppUtils isNullOrEmpty: password]) {
-        [self.view makeToast:@"Thông tin không hợp lệ. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Your information is not correct. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang xử lý.\nVui lòng chờ trong giây lát..." Interaction:NO];
+    [ProgressHUD show:text_processing_pls_wait Interaction:NO];
     
     NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] initWithDictionary: info];
     [jsonDict setObject:register_account_mod forKey:@"mod"];
@@ -245,11 +249,12 @@
 
 - (void)readyToRegisterBusinessAccount:(NSDictionary *)info {
     if ([AppUtils isNullOrEmpty: email] || [AppUtils isNullOrEmpty: password]) {
-        [self.view makeToast:@"Thông tin không hợp lệ. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Your information is not correct. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang xử lý.\nVui lòng chờ trong giây lát..." Interaction:NO];
+    
+    [ProgressHUD show:text_processing_pls_wait Interaction:NO];
     
     NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] initWithDictionary: info];
     [jsonDict setObject:register_account_mod forKey:@"mod"];

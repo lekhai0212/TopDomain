@@ -54,6 +54,7 @@
         icPersonal.hidden = lbPersonal.hidden = icBusiness.hidden = lbBusiness.hidden = FALSE;
     }
     
+    lbVision.text = text_registration_purpose;
     [lbVision mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.scvPersonal);
         make.left.equalTo(self.scvPersonal).offset(self.padding);
@@ -69,6 +70,7 @@
         make.width.height.mas_equalTo(hGender);
     }];
     
+    lbPersonal.text = text_personal;
     [lbPersonal mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.icPersonal);
         make.left.equalTo(self.icPersonal.mas_right).offset(3.0);
@@ -85,6 +87,7 @@
                    action:@selector(whenTapOnBusiness)
          forControlEvents:UIControlEventTouchUpInside];
     
+    lbBusiness.text = text_business;
     [lbBusiness mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbPersonal);
         make.left.equalTo(self.icBusiness.mas_right).offset(3.0);
@@ -96,7 +99,8 @@
     [lbBusiness addGestureRecognizer: tapOnBusiness];
     
     //  Name
-    float sizeText = [AppUtils getSizeWithText:@"Họ tên" withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    float sizeText = [AppUtils getSizeWithText:text_fullname withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    lbName.text = text_fullname;
     [lbName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbBusiness.mas_bottom).offset(self.mTop);
         make.left.equalTo(self.lbVision);
@@ -120,7 +124,8 @@
     tfName.returnKeyType = UIReturnKeyNext;
     tfName.delegate = self;
     
-    //  gender and birth of day
+    //  gender and Birthday
+    lbBOD.text = text_birth_of_day;
     [lbBOD mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfName.mas_bottom).offset(self.mTop);
         make.left.equalTo(self.mas_centerX).offset(self.padding/2);
@@ -139,6 +144,7 @@
         make.top.left.right.bottom.equalTo(self.tfBOD);
     }];
     
+    lbGender.text = text_gender;
     [lbGender mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfName.mas_bottom).offset(5.0);
         make.left.equalTo(self).offset(self.padding);
@@ -165,6 +171,7 @@
     lbMale.userInteractionEnabled = TRUE;
     [lbMale addGestureRecognizer: tapOnMale];
     
+    lbMale.text = text_male;
     [lbMale mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.icMale);
         make.left.equalTo(self.icMale.mas_right).offset(5.0);
@@ -176,6 +183,7 @@
     lbFemale.userInteractionEnabled = TRUE;
     [lbFemale addGestureRecognizer: tapOnFemale];
     
+    lbFemale.text = text_female;
     [lbFemale mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.icFemale);
         make.left.equalTo(self.icFemale.mas_right).offset(5.0);
@@ -183,6 +191,7 @@
     }];
     
     //  CMND
+    lbPassport.text = text_passport;
     [lbPassport mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfBOD.mas_bottom).offset(self.mTop);
         make.left.right.equalTo(self.lbVision);
@@ -199,7 +208,9 @@
     tfPassport.delegate = self;
     
     //  Phone
-    sizeText = [AppUtils getSizeWithText:@"Số điện thoại" withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    sizeText = [AppUtils getSizeWithText:text_phonenumber withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    
+    lbPhone.text = text_phonenumber;
     [lbPhone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfPassport.mas_bottom).offset(self.mTop);
         make.left.equalTo(self.tfPassport);
@@ -224,6 +235,7 @@
     tfPhone.delegate = self;
     
     //  Email
+    lbEmail.text = text_email;
     [lbEmail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfPhone.mas_bottom).offset(self.mTop);
         make.left.right.equalTo(self.tfPhone);
@@ -241,7 +253,9 @@
     tfEmail.delegate = self;
     
     //  address
-    sizeText = [AppUtils getSizeWithText:@"Địa chỉ" withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    sizeText = [AppUtils getSizeWithText:text_address withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    
+    lbAddress.text = text_address;
     [lbAddress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfEmail.mas_bottom).offset(self.mTop);
         make.left.equalTo(self.tfEmail);
@@ -266,7 +280,8 @@
     tfAddress.delegate = self;
     
     //  country, district
-    sizeText = [AppUtils getSizeWithText:@"Quốc gia" withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    sizeText = [AppUtils getSizeWithText:text_country withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    lbCountry.text = text_country;
     [lbCountry mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfAddress.mas_bottom).offset(self.mTop);
         make.left.equalTo(self).offset(self.padding);
@@ -296,7 +311,9 @@
         make.top.left.bottom.right.equalTo(self.tfCountry);
     }];
     
-    sizeText = [AppUtils getSizeWithText:@"Tỉnh/Thành phố" withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    sizeText = [AppUtils getSizeWithText:text_city withFont:[AppDelegate sharedInstance].fontRegular].width + 5.0;
+    
+    lbCity.text = text_city;
     [lbCity mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbCountry);
         make.left.equalTo(self.mas_centerX).offset(self.padding/2);
@@ -340,6 +357,7 @@
         make.height.mas_equalTo(hViewPassport);
     }];
     
+    lbTitlePassport.text = text_passport_images;
     [lbTitlePassport mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.viewPassport).offset(self.padding + 20.0 + 10);
         make.top.right.equalTo(self.viewPassport).offset(self.mTop);
@@ -365,6 +383,7 @@
     UITapGestureRecognizer *tapOnFrontImg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(whenTapOnFrontImage)];
     [imgPassportFront addGestureRecognizer: tapOnFrontImg];
     
+    lbPassportFront.text = text_front;
     [lbPassportFront mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.imgPassportFront);
         make.top.equalTo(self.imgPassportFront.mas_bottom);
@@ -382,15 +401,16 @@
     UITapGestureRecognizer *tapOnBehindImg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(whenTapOnBehindImage)];
     [imgPassportBehind addGestureRecognizer: tapOnBehindImg];
     
+    lbPassportBehind.text = text_backside;
     [lbPassportBehind mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.imgPassportBehind);
         make.top.equalTo(self.imgPassportBehind.mas_bottom);
         make.height.equalTo(self.lbName.mas_height);
     }];
     
-    
     btnCancel.layer.cornerRadius = 45.0/2;
     btnCancel.backgroundColor = [UIColor colorWithRed:(130/255.0) green:(146/255.0) blue:(169/255.0) alpha:1.0];
+    [btnCancel setTitle:text_cancel forState:UIControlStateNormal];
     [btnCancel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.imgPassportFront);
         make.top.equalTo(self.viewPassport.mas_bottom).offset(2*self.padding);
@@ -399,16 +419,19 @@
     
     btnSave.layer.cornerRadius = btnCancel.layer.cornerRadius;
     btnSave.backgroundColor = BLUE_COLOR;
+    [btnSave setTitle:text_save_profile forState:UIControlStateNormal];
     [btnSave mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.imgPassportBehind);
         make.top.bottom.equalTo(self.btnCancel);
     }];
     
+    [btnEdit setTitle:text_update_profile forState:UIControlStateNormal];
     btnEdit.hidden = TRUE;
     btnEdit.layer.cornerRadius = btnCancel.layer.cornerRadius;
     btnEdit.backgroundColor = BLUE_COLOR;
     btnEdit.layer.borderWidth = 1.0;
     btnEdit.layer.borderColor = BLUE_COLOR.CGColor;
+    [btnEdit setTitle:text_update_profile forState:UIControlStateNormal];
     [btnEdit mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.btnCancel);
         make.right.equalTo(self.btnSave);
@@ -424,7 +447,7 @@
     
     btnCancel.titleLabel.font = btnSave.titleLabel.font = btnEdit.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     
-    lbVision.textColor = lbPersonal.textColor = lbBusiness.textColor = lbName.textColor = tfName.textColor = lbMale.textColor = lbFemale.textColor = lbBOD.textColor = tfBOD.textColor = lbPassport.textColor = tfPassport.textColor = lbPhone.textColor = tfPhone.textColor = lbEmail.textColor = tfEmail.textColor = lbAddress.textColor = tfAddress.textColor = lbCountry.textColor = tfCountry.textColor = lbCity.textColor = tfCity.textColor = lbTitlePassport.textColor = lbPassportBehind.textColor = lbPassportFront.textColor = TITLE_COLOR;
+    lbVision.textColor = lbPersonal.textColor = lbBusiness.textColor = lbName.textColor = tfName.textColor = lbGender.textColor = lbMale.textColor = lbFemale.textColor = lbBOD.textColor = tfBOD.textColor = lbPassport.textColor = tfPassport.textColor = lbPhone.textColor = tfPhone.textColor = lbEmail.textColor = tfEmail.textColor = lbAddress.textColor = tfAddress.textColor = lbCountry.textColor = tfCountry.textColor = lbCity.textColor = tfCity.textColor = lbTitlePassport.textColor = lbPassportBehind.textColor = lbPassportFront.textColor = TITLE_COLOR;
     
     //  Add datepicker
     [self addDatePickerForView];
@@ -524,42 +547,42 @@
 
 - (IBAction)btnSavePress:(UIButton *)sender {
     if ([AppUtils isNullOrEmpty: tfName.text]) {
-        [self makeToast:@"Bạn chưa nhập Họ tên!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_fullname duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: tfBOD.text]) {
-        [self makeToast:@"Bạn chưa chọn ngày sinh!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_birthofday duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: tfPassport.text]) {
-        [self makeToast:@"Bạn chưa nhập CMND!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_passport duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: tfPhone.text]) {
-        [self makeToast:@"Bạn chưa nhập địa chỉ!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_address duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: tfEmail.text]) {
-        [self makeToast:@"Bạn chưa nhập địa chỉ email!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_email duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: tfAddress.text]) {
-        [self makeToast:@"Bạn chưa nhập địa chỉ!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_address duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: cityCode]) {
-        [self makeToast:@"Bạn chưa chọn Tỉnh/thành phố!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_city duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Hồ sơ đang được cập nhật.\nVui lòng chờ trong giây lát" Interaction:NO];
+    [ProgressHUD show:@"Profile is being updated.\nPlease wait a seconds" Interaction:NO];
     
     if ([AppDelegate sharedInstance].editCMND_a != nil || [AppDelegate sharedInstance].editCMND_b != nil) {
         [self startUploadPassportPictures];
@@ -722,7 +745,7 @@
 - (void)startUploadPassportPictures
 {
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang xử lý. Vui lòng chờ trong giây lát" Interaction:NO];
+    [ProgressHUD show:text_uploading_picture Interaction:NO];
     
     if ([AppDelegate sharedInstance].editCMND_a != nil) {
         [AppDelegate sharedInstance].editCMND_a = [AppUtils resizeImage: [AppDelegate sharedInstance].editCMND_a];
@@ -879,12 +902,12 @@
 }
 
 - (void)profileWasCreatedSuccessful {
-    [self makeToast:@"Hồ sơ đã được tạo thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+    [self makeToast:text_profile_create_success duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     [self performSelector:@selector(dismissView) withObject:nil afterDelay:2.0];
 }
 
 - (void)profileWasUpdatedSuccessful {
-    [self makeToast:@"Hồ sơ đã được cập nhật thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+    [self makeToast:text_profile_update_success duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     [self performSelector:@selector(gotoListProfiles) withObject:nil afterDelay:2.0];
 }
 

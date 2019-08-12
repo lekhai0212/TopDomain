@@ -18,11 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbMainAccount;
 @property (weak, nonatomic) IBOutlet UILabel *lbMainMoney;
 
-@property (weak, nonatomic) IBOutlet UIView *viewReward;
-@property (weak, nonatomic) IBOutlet UIImageView *imgReward;
-@property (weak, nonatomic) IBOutlet UILabel *lbRewardAccount;
-@property (weak, nonatomic) IBOutlet UILabel *lbRewardMoney;
-
 - (void)setupUIForView;
 - (void)displayInformation;
 

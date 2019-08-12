@@ -75,8 +75,14 @@
         lbSetup.text = [NSString stringWithFormat:@"%@VNĐ", renewValue];
         
     }else if (renew != nil && [renew isKindOfClass:[NSString class]]) {
-        NSString *renewValue = [AppUtils convertStringToCurrencyFormat:renew];
-        lbSetup.text = [NSString stringWithFormat:@"%@VNĐ", renewValue];
+        if ([[renew lowercaseString] isEqualToString:@"miễn phí"]) {
+            lbSetup.text = text_free;
+        }else if ([renew isEqualToString:@"N/A"]){
+            lbSetup.text = renew;
+        }else{
+            NSString *renewValue = [AppUtils convertStringToCurrencyFormat:renew];
+            lbSetup.text = [NSString stringWithFormat:@"%@VNĐ", renewValue];
+        }
     }else{
         lbSetup.text = @"";
     }
@@ -87,7 +93,13 @@
         lbRenew.text = [NSString stringWithFormat:@"%@VNĐ", setupValue];
         
     }else if (setup != nil && [setup isKindOfClass:[NSString class]]) {
-        lbRenew.text = setup;
+        if ([[setup lowercaseString] isEqualToString:@"miễn phí"]) {
+            lbRenew.text = text_free;
+        }else if ([renew isEqualToString:@"N/A"]){
+            lbRenew.text = setup;
+        }else{
+            lbRenew.text = setup;
+        }
     }else{
         lbRenew.text = @"";
     }
@@ -98,7 +110,14 @@
         lbTransfer.text = [NSString stringWithFormat:@"%@VNĐ", transferValue];
         
     }else if (transfer != nil && [transfer isKindOfClass:[NSString class]]) {
-        lbTransfer.text = transfer;
+        if ([[transfer lowercaseString] isEqualToString:@"miễn phí"]) {
+            lbTransfer.text = text_free;
+        }else if ([transfer isEqualToString:@"N/A"]){
+            lbTransfer.text = transfer;
+        }else{
+            NSString *transferValue = [AppUtils convertStringToCurrencyFormat:transfer];
+            lbTransfer.text = [NSString stringWithFormat:@"%@VNĐ", transferValue];
+        }
     }else{
         lbTransfer.text = @"";
     }

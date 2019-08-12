@@ -125,7 +125,7 @@
     strMoney = [strMoney stringByReplacingOccurrencesOfString:@"," withString:@""];
     
     if (![AppUtils checkValidCurrency: strMoney]) {
-        [self.view makeToast:@"Số tiền bạn muốn nạp không đúng định dạng. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
+        [self.view makeToast:@"The amount format is incorrect. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
         return;
     }
     
@@ -134,12 +134,12 @@
     }
     
     if (topupMoney == 0) {
-        [self.view makeToast:@"Vui lòng chọn hoặc nhập số tiền bạn muốn nạp!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
+        [self.view makeToast:@"Please enter the amount you want to deposit!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
         return;
     }
     if (topupMoney < MIN_MONEY_TOPUP) {
         NSString *strMinTopup = [AppUtils convertStringToCurrencyFormat:[NSString stringWithFormat:@"%d", MIN_MONEY_TOPUP]];
-        [self.view makeToast:[NSString stringWithFormat:@"Số tiền tối thiểu để nạp là %@VNĐ", strMinTopup] duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
+        [self.view makeToast:[NSString stringWithFormat:@"The amount must be greater %@VNĐ", strMinTopup] duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
         return;
     }
     
@@ -200,6 +200,7 @@
     }];
     
     lbTitle.font = [AppDelegate sharedInstance].fontRegular;
+    lbTitle.text = @"Your balance";
     [lbTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.imgBackground.mas_centerY);
         make.left.equalTo(self.viewInfo).offset(padding);
@@ -219,6 +220,7 @@
     
     lbDesc.font = [AppDelegate sharedInstance].fontMedium;
     lbDesc.textColor = TITLE_COLOR;
+    lbDesc.text = @"Enter the amount you want to deposit";
     [lbDesc mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.viewInfo.mas_bottom).offset(padding);
         make.left.equalTo(self.view).offset(padding);
@@ -271,6 +273,7 @@
     tfMoney.keyboardType = UIKeyboardTypeNumberPad;
     tfMoney.textColor = TITLE_COLOR;
     tfMoney.font = [AppDelegate sharedInstance].fontRegular;
+    tfMoney.placeholder = @"Enter other amount";
     [tfMoney mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.btn1000K.mas_bottom).offset(padding);
         make.left.equalTo(self.view).offset(padding);
@@ -293,12 +296,12 @@
     tfMoney.rightView = lbCurrency;
     tfMoney.rightViewMode = UITextFieldViewModeAlways;
     
-    
     btnTopup.layer.cornerRadius = hItem/2;
     btnTopup.layer.borderWidth = 1.0;
     btnTopup.layer.borderColor = BLUE_COLOR.CGColor;
     btnTopup.backgroundColor = BLUE_COLOR;;
     btnTopup.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
+    [btnTopup setTitle:text_recharge forState:UIControlStateNormal];
     [btnTopup mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view).offset(-padding);
         make.left.equalTo(self.view).offset(padding);
@@ -323,7 +326,7 @@
     NSString *vpc_TxnResponseCode = [info objectForKey:@"vpc_TxnResponseCode"];
     if (![AppUtils isNullOrEmpty: vpc_TxnResponseCode]) {
         if ([vpc_TxnResponseCode isEqualToString: User_cancel_Code]) {
-            [self.view makeToast:@"Bạn đã hủy bỏ giao dịch" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+            [self.view makeToast:@"You canceled the transaction!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
             return;
         }
     }

@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Thông tin ngân hàng";
+    self.title = @"Bank account information";
     [self setupUIForView];
 }
 
@@ -74,6 +74,7 @@
         padding = 5.0;
     }
     
+    lbBankName.text = text_bank_name;
     [lbBankName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(self.view).offset(padding);
         make.right.equalTo(self.view).offset(-padding);
@@ -92,6 +93,7 @@
                    action:@selector(tfBankDidChanged:)
          forControlEvents:UIControlEventEditingChanged];
     
+    lbOwner.text = text_owner_name;
     [lbOwner mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.tfBankName);
         make.top.equalTo(self.tfBankName.mas_bottom).offset(padding);
@@ -107,6 +109,7 @@
     tfOwner.delegate = self;
     tfOwner.returnKeyType = UIReturnKeyNext;
     
+    lbAccNo.text = text_account_number;
     [lbAccNo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.tfOwner);
         make.top.equalTo(self.tfOwner.mas_bottom).offset(padding);
@@ -127,6 +130,7 @@
     btnUpdate.layer.borderColor = BLUE_COLOR.CGColor;
     btnUpdate.layer.borderWidth = 1.0;
     [btnUpdate setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [btnUpdate setTitle:text_update forState:UIControlStateNormal];
     [btnUpdate mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
         make.right.bottom.equalTo(self.view).offset(-padding);
@@ -171,13 +175,13 @@
     [btnUpdate setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     
     if ([AppUtils isNullOrEmpty: tfBankName.text] || [AppUtils isNullOrEmpty: tfOwner.text] || [AppUtils isNullOrEmpty: tfAccNo.text]) {
-        [self.view makeToast:@"Vui lòng nhập đầy đủ thông tin của bạn" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:pls_enter_full_info duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang cập nhật..." Interaction:NO];
+    [ProgressHUD show:[NSString stringWithFormat:@"%@...", text_updating] Interaction:NO];
     
     [WebServiceUtils getInstance].delegate = self;
     [[WebServiceUtils getInstance] updateBankInfoWithBankName:tfBankName.text bankaccount:tfOwner.text banknumber:tfAccNo.text];
@@ -402,7 +406,7 @@
 
 -(void)loginSucessfulWithData:(NSDictionary *)data {
     [ProgressHUD dismiss];
-    [self.view makeToast:@"Thông tin tài khoản ngân hàng đã được cập nhật thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+    [self.view makeToast:@"Your bank account information was updated successful." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
 }
 
 - (void)tryLoginToUpdateInformation

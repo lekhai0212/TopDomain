@@ -37,6 +37,7 @@
         make.width.mas_equalTo([AppDelegate sharedInstance].hNav);
     }];
     
+    lbHeader.text = @"Send your question";
     lbHeader.font = [AppDelegate sharedInstance].fontBTN;
     [lbHeader mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.icClose);
@@ -84,6 +85,7 @@
     btnReset.backgroundColor = OLD_PRICE_COLOR;
     btnReset.layer.borderColor = OLD_PRICE_COLOR.CGColor;
     btnReset.layer.borderWidth = 1.0;
+    [btnReset setTitle:text_reset forState:UIControlStateNormal];
     [btnReset mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(padding);
         make.bottom.equalTo(self).offset(-padding);
@@ -96,6 +98,7 @@
     btnSend.backgroundColor = BLUE_COLOR;
     btnSend.layer.borderColor = BLUE_COLOR.CGColor;
     btnSend.layer.borderWidth = 1.0;
+    [btnSend setTitle:text_send forState:UIControlStateNormal];
     [btnSend mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.btnReset.mas_right).offset(padding);
         make.top.bottom.equalTo(self.btnReset);

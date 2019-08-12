@@ -89,7 +89,7 @@
     }
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang cập nhật..." Interaction:NO];
+    [ProgressHUD show:[NSString stringWithFormat:@"%@...", text_updating] Interaction:NO];
     
     [self uploadBanKhaiPicture];
 }
@@ -203,7 +203,7 @@
     }
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang cập nhật. Vui lòng chờ trong giây lát" Interaction:NO];
+    [ProgressHUD show:@"Updating... Please wait a seconds" Interaction:NO];
 }
 
 - (void)uploadBanKhaiPicture {
@@ -405,7 +405,7 @@
         make.top.left.bottom.right.equalTo(self.btnCMND_b);
     }];
 
-    lbCMND_b.text = text_behind;
+    lbCMND_b.text = text_backside;
     [lbCMND_b mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.btnCMND_b.mas_bottom);
         make.left.right.equalTo(self.btnCMND_b);

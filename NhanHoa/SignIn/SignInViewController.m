@@ -131,7 +131,7 @@
     [btnSignIn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     
     if ([AppUtils isNullOrEmpty: tfAccount.text] || [AppUtils isNullOrEmpty: tfPassword.text]) {
-        [self.view makeToast:@"Vui lòng nhập đầy đủ thông tin!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
+        [self.view makeToast:pls_enter_full_info duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
         return;
     }
     
@@ -143,7 +143,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang đăng nhập..." Interaction:NO];
+    [ProgressHUD show:text_signing Interaction:NO];
     
     NSString *password = [AppUtils getMD5StringOfString:tfPassword.text];
     [[WebServiceUtils getInstance] loginWithUsername:tfAccount.text password:password];
@@ -158,7 +158,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang đăng nhập..." Interaction:NO];
+    [ProgressHUD show:text_signing Interaction:NO];
     
     [[WebServiceUtils getInstance] loginWithUsername:USERNAME password:PASSWORD];
 }
@@ -264,6 +264,7 @@
     btnSignIn.layer.borderColor = signInColor.CGColor;
     btnSignIn.layer.cornerRadius = hButton/2;
     btnSignIn.layer.borderWidth = 1.0;
+    [btnSignIn setTitle:text_sign_in forState:UIControlStateNormal];
     [btnSignIn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.scvContent).offset(self.hHeader-hButton/2-20.0);
         make.left.equalTo(self.scvContent).offset(self.padding);
@@ -273,6 +274,7 @@
     
     btnForgotPass.backgroundColor = UIColor.clearColor;
     [btnForgotPass setTitleColor:BORDER_COLOR forState:UIControlStateNormal];
+    [btnForgotPass setTitle:text_forgot_password forState:UIControlStateNormal];
     [btnForgotPass mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.btnSignIn);
         make.bottom.equalTo(self.btnSignIn.mas_top).offset(-10.0);
@@ -289,7 +291,7 @@
         make.bottom.equalTo(self.btnForgotPass.mas_top).offset(-10.0);
         make.height.mas_equalTo(hTextfield);
     }];
-    [AppUtils setPlaceholder:@"Mật khẩu" textfield:tfPassword color:[UIColor colorWithRed:(210/255.0) green:(210/255.0) blue:(210/255.0) alpha:1.0]];
+    [AppUtils setPlaceholder:text_password textfield:tfPassword color:[UIColor colorWithRed:(210/255.0) green:(210/255.0) blue:(210/255.0) alpha:1.0]];
     
     tfPassword.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10.0, hTextfield)];
     tfPassword.leftViewMode = UITextFieldViewModeAlways;
@@ -321,7 +323,7 @@
         make.bottom.equalTo(self.tfPassword.mas_top).offset(-15.0);
         make.height.mas_equalTo(hTextfield);
     }];
-    [AppUtils setPlaceholder:@"Tài khoản đăng nhập" textfield:tfAccount color:[UIColor colorWithRed:(210/255.0) green:(210/255.0) blue:(210/255.0) alpha:1.0]];
+    [AppUtils setPlaceholder:text_account textfield:tfAccount color:[UIColor colorWithRed:(210/255.0) green:(210/255.0) blue:(210/255.0) alpha:1.0]];
     
     tfAccount.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10.0, hTextfield)];
     tfAccount.leftViewMode = UITextFieldViewModeAlways;
@@ -340,8 +342,8 @@
     }];
     
     //  footer
-    CGSize sizeText = [AppUtils getSizeWithText:@"Bạn chưa có tài khoản?" withFont:[UIFont fontWithName:RobotoRegular size:17.0]];
-    CGSize sizeText2 = [AppUtils getSizeWithText:@"ĐĂNG KÝ" withFont:[UIFont fontWithName:RobotoRegular size:17.0]];
+    CGSize sizeText = [AppUtils getSizeWithText:text_have_not_acc_yet withFont:[UIFont fontWithName:RobotoRegular size:17.0]];
+    CGSize sizeText2 = [AppUtils getSizeWithText:[text_sign_up uppercaseString] withFont:[UIFont fontWithName:RobotoRegular size:17.0]];
     
     float hFooter = (SCREEN_HEIGHT - hHeader - hCurve/2);
     
@@ -350,6 +352,7 @@
     
     lbNotAccount.font = [UIFont fontWithName:RobotoRegular size:17.0];
     lbNotAccount.textColor = BORDER_COLOR;
+    lbNotAccount.text = text_have_not_acc_yet;
     [lbNotAccount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.btnSignIn.mas_bottom).offset(originY);
         make.height.mas_equalTo(30.0);
@@ -359,6 +362,7 @@
     
     btnRegister.titleLabel.font = [UIFont fontWithName:RobotoRegular size:17.0];
     [btnRegister setTitleColor:signInColor forState:UIControlStateNormal];
+    [btnRegister setTitle:[text_sign_up uppercaseString] forState:UIControlStateNormal];
     [btnRegister mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbNotAccount);
         make.left.equalTo(self.lbNotAccount.mas_right).offset(10.0);
@@ -404,7 +408,7 @@
                                                      }];
     [btnClose setValue:UIColor.redColor forKey:@"titleTextColor"];
     
-    UIAlertAction *btnGoStore = [UIAlertAction actionWithTitle:@"Cập nhật" style:UIAlertActionStyleDefault
+    UIAlertAction *btnGoStore = [UIAlertAction actionWithTitle:text_update style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction *action){
                                                            [self checkAndGotoAppStore];
                                                        }];

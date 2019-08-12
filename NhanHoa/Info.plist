@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Top Domain</string>
+	<string>TopDomain</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0</string>
+	<string>1.0.5</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Fabric</key>
@@ -42,11 +42,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Để cập nhật ảnh đại diện và chứng minh nhân dân của bạn</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Muốn truy cập microphone của bạn để thực hiện cuộc gọi</string>
+	<string>To update your avatar and your passport images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Để cập nhật ảnh đại diện và chứng minh nhân dân của bạn</string>
+	<string>To update your avatar and your passport images</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Black.ttf</string>

@@ -10,7 +10,7 @@
 #import "AccountModel.h"
 
 @implementation AccountInfoView
-@synthesize imgAvatar, lbName, lbEmail, imgSepa, viewWallet, imgWallet, lbMainAccount, lbMainMoney, viewReward, lbRewardMoney, lbRewardAccount, imgReward;
+@synthesize imgAvatar, lbName, lbEmail, imgSepa, viewWallet, imgWallet, lbMainAccount, lbMainMoney;
 
 - (void)setupUIForView {
     self.backgroundColor = UIColor.whiteColor;
@@ -58,8 +58,7 @@
     viewWallet.backgroundColor = UIColor.clearColor;
     [viewWallet mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imgSepa.mas_bottom).offset(10.0);
-        make.left.equalTo(self);
-        make.right.equalTo(self.mas_centerX).offset(-padding/2);
+        make.left.right.equalTo(self);
         make.bottom.equalTo(self).offset(-10.0);
     }];
     
@@ -72,51 +71,20 @@
     }];
     
     lbMainAccount.textColor = TITLE_COLOR;
-    lbMainAccount.font = [UIFont fontWithName:RobotoRegular size:14.0];
+    lbMainAccount.font = [AppDelegate sharedInstance].fontBTN;
+    lbMainAccount.text = [NSString stringWithFormat:@"%@:", balance_text];
     [lbMainAccount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.imgWallet.mas_right).offset(2.0);
-        make.bottom.equalTo(self.imgWallet.mas_centerY).offset(-1.0);
-        make.right.equalTo(self.viewWallet);
+        make.left.equalTo(imgWallet.mas_right).offset(5.0);
+        make.top.bottom.equalTo(imgWallet);
     }];
     
-    lbMainMoney.font = [UIFont fontWithName:RobotoMedium size:14.0];
+    lbMainMoney.font = [UIFont fontWithName:RobotoRegular size:22.0];
     lbMainMoney.textColor = ORANGE_COLOR;
     [lbMainMoney mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lbMainAccount);
-        make.top.equalTo(self.imgWallet.mas_centerY).offset(1.0);
+        make.left.equalTo(lbMainAccount.mas_right).offset(5.0);
+        make.top.bottom.equalTo(lbMainAccount);
+        make.right.equalTo(viewWallet).offset(-padding);
     }];
-    
-    //  reward wallet
-    viewReward.backgroundColor = UIColor.clearColor;
-    [viewReward mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.viewWallet);
-        make.right.equalTo(self);
-        make.left.equalTo(self.mas_centerX).offset(padding/2);
-    }];
-    
-    imgReward.layer.cornerRadius = 35.0/2;
-    imgReward.clipsToBounds = TRUE;
-    [imgReward mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.viewReward);
-        make.centerY.equalTo(self.viewReward.mas_centerY);
-        make.width.height.mas_equalTo(35.0);
-    }];
-    
-    lbRewardAccount.textColor = TITLE_COLOR;
-    lbRewardAccount.font = lbMainAccount.font;
-    [lbRewardAccount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.imgReward.mas_right).offset(2.0);
-        make.bottom.equalTo(self.imgReward.mas_centerY).offset(-1.0);
-        make.right.equalTo(self.viewReward).offset(-padding);
-    }];
-    
-    lbRewardMoney.font = lbMainMoney.font;
-    lbRewardMoney.textColor = ORANGE_COLOR;
-    [lbRewardMoney mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lbRewardAccount);
-        make.top.equalTo(self.imgReward.mas_centerY).offset(1.0);
-    }];
-    
 }
 
 - (void)displayInformation
@@ -141,14 +109,6 @@
         lbMainMoney.text = [NSString stringWithFormat:@"%@VNĐ", balance];
     }else{
         lbMainMoney.text = @"0VNĐ";
-    }
-    
-    NSString *points = [AccountModel getCusPoint];
-    if (![AppUtils isNullOrEmpty: points]) {
-        points = [AppUtils convertStringToCurrencyFormat: points];
-        lbRewardMoney.text = [NSString stringWithFormat:@"%@VNĐ", points];
-    }else{
-        lbRewardMoney.text = @"0VNĐ";
     }
     
     NSString *avatarURL = [AccountModel getCusPhoto];

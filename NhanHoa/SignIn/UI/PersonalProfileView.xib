@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -66,7 +66,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập họ tên" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1xJ-8J-ue0">
+                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter fullname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1xJ-8J-ue0">
                     <rect key="frame" x="16" y="157" width="288" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -139,7 +139,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập CMND" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bg0-mJ-nZT">
+                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter passport" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bg0-mJ-nZT">
                     <rect key="frame" x="17" y="314" width="288" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -153,7 +153,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập số điện thoại" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxf-zC-qsA">
+                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter phone number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxf-zC-qsA">
                     <rect key="frame" x="16" y="381" width="288" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -167,7 +167,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập địa chỉ thường trú" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOF-wX-3oM">
+                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOF-wX-3oM">
                     <rect key="frame" x="18" y="463" width="288" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -259,12 +259,12 @@
                 <outlet property="tfPassport" destination="bg0-mJ-nZT" id="BfY-yc-TtW"/>
                 <outlet property="tfPhone" destination="gxf-zC-qsA" id="lMr-89-x2p"/>
             </connections>
-            <point key="canvasLocation" x="-32" y="85"/>
+            <point key="canvasLocation" x="51" y="10"/>
         </view>
     </objects>
     <resources>
         <image name="arrow_down.png" width="100" height="100"/>
-        <image name="no_tick.png" width="100" height="100"/>
-        <image name="tick_orange.png" width="100" height="100"/>
+        <image name="no_tick.png" width="80" height="80"/>
+        <image name="tick_orange.png" width="7.8091106414794922" height="7.8091106414794922"/>
     </resources>
 </document>

@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Cập nhật thông tin";
+    self.title = text_update_info;
     
     scvContent.delegate = self;
     [scvContent mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,7 +90,7 @@
 
 -(void)savePersonalMyAccountInformation:(NSDictionary *)info {
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang cập nhật.." Interaction:NO];
+    [ProgressHUD show:[NSString stringWithFormat:@"%@...", text_updating] Interaction:NO];
     
     if (webService == nil) {
         webService = [[WebServices alloc] init];
@@ -139,7 +139,7 @@
 
 - (void)saveBusinessMyAccountInformation:(NSDictionary *)info {
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang cập nhật.." Interaction:NO];
+    [ProgressHUD show:[NSString stringWithFormat:@"%@...", text_updating] Interaction:NO];
     
     if (webService == nil) {
         webService = [[WebServices alloc] init];

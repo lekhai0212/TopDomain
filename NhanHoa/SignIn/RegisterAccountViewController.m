@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Thông tin tài khoản";
+    self.title = text_account_info;
     [self setupUIForView];
     
     UITapGestureRecognizer *tapOnScreen = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeKeyboard)];
@@ -40,17 +40,17 @@
 
 - (IBAction)btnContinuePress:(UIButton *)sender {
     if ([tfEmail.text isEqualToString:@""] || [tfPassword.text isEqualToString:@""] || [tfConfirmPass.text isEqualToString:@""]) {
-        [self.view makeToast:@"Vui lòng nhập đầy đủ thông tin!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:pls_enter_full_info duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if (![AppUtils validateEmailWithString: tfEmail.text]) {
-        [self.view makeToast:@"Email không đúng định dạng. Vui lòng kiểm tra lại!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Email format is incorrect. Please check again!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
 
     if (![tfPassword.text isEqualToString:tfConfirmPass.text]) {
-        [self.view makeToast:@"Xác nhận mật khẩu không chính xác!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Confirm password is incorrect!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
@@ -97,6 +97,7 @@
     float padding = 15.0;
     float hSmallLB = 30.0;
     float mTop = 10.0;
+    float sizeIcon = 30.0;
     
     self.view.backgroundColor = [UIColor colorWithRed:(246/255.0) green:(247/255.0) blue:(251/255.0) alpha:1.0];
     
@@ -122,19 +123,20 @@
         make.right.equalTo(self.lbSepa.mas_left);
     }];
     
-    lbAccount.font = [AppDelegate sharedInstance].fontDesc;
+    lbAccount.font = [AppDelegate sharedInstance].fontBTN;
+    lbAccount.text = text_acc_info;
     [lbAccount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.viewAccInfo);
         make.right.equalTo(self.viewAccInfo).offset(-2.0);
     }];
     
     lbNumOne.clipsToBounds = TRUE;
-    lbNumOne.layer.cornerRadius = 20.0/2;
+    lbNumOne.layer.cornerRadius = sizeIcon/2;
     lbNumOne.font = lbAccount.font;
     [lbNumOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.lbAccount.mas_left).offset(-3.0);
+        make.right.equalTo(self.lbAccount.mas_left).offset(-5.0);
         make.centerY.equalTo(self.lbAccount.mas_centerY);
-        make.width.height.mas_equalTo(20.0);
+        make.width.height.mas_equalTo(sizeIcon);
     }];
     
     [viewProfileInfo mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -143,15 +145,16 @@
     }];
     
     lbNumTwo.clipsToBounds = TRUE;
-    lbNumTwo.layer.cornerRadius = 20.0/2;
+    lbNumTwo.layer.cornerRadius = sizeIcon/2;
     lbNumTwo.font = lbAccount.font;
     [lbNumTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.viewProfileInfo).offset(2.0);
+        make.left.equalTo(self.viewProfileInfo).offset(5.0);
         make.centerY.equalTo(self.viewProfileInfo.mas_centerY);
-        make.width.height.mas_equalTo(20.0);
+        make.width.height.mas_equalTo(sizeIcon);
     }];
     
     lbProfile.font = lbAccount.font;
+    lbProfile.text = text_profile_info;
     [lbProfile mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.lbNumTwo.mas_right).offset(3.0);
         make.top.bottom.equalTo(self.viewProfileInfo);
@@ -165,6 +168,7 @@
     
     lbStepOne.font = [AppDelegate sharedInstance].fontBold;
     lbStepOne.textColor = [UIColor colorWithRed:(55/255.0) green:(67/255.0) blue:(83/255.0) alpha:1.0];
+    lbStepOne.text = text_account_info;
     [lbStepOne mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.scvAccInfo.mas_top);
         make.left.equalTo(self.scvAccInfo).offset(padding);
@@ -175,6 +179,7 @@
     //  Email
     lbEmail.font = [AppDelegate sharedInstance].fontMedium;
     lbEmail.textColor = lbStepOne.textColor;
+    lbEmail.text = text_email;
     [lbEmail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbStepOne.mas_bottom);
         make.left.right.equalTo(self.lbStepOne);
@@ -194,6 +199,7 @@
     }];
     
     //  Password
+    lbPassword.text = text_password;
     lbPassword.font = [AppDelegate sharedInstance].fontMedium;
     lbPassword.textColor = lbStepOne.textColor;
     [lbPassword mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -221,6 +227,7 @@
     }];
     
     //  Confirm password
+    lbConfirmPass.text = text_confirm_password;
     lbConfirmPass.font = [AppDelegate sharedInstance].fontMedium;
     lbConfirmPass.textColor = lbStepOne.textColor;
     [lbConfirmPass mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -250,12 +257,13 @@
     //  footer
     float hScv = SCREEN_HEIGHT - ([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height + hMenu + 10.0);
     
-    float widthText = [AppUtils getSizeWithText:@"Bạn đã có tài khoản?" withFont:[AppDelegate sharedInstance].fontRegular].width;
+    float widthText = [AppUtils getSizeWithText:text_have_account withFont:[AppDelegate sharedInstance].fontRegular].width;
     
-    float widthBTN = [AppUtils getSizeWithText:@"ĐĂNG NHẬP" withFont:[AppDelegate sharedInstance].fontRegular].width;
+    float widthBTN = [AppUtils getSizeWithText:[text_sign_in uppercaseString] withFont:[AppDelegate sharedInstance].fontRegular].width;
     float originX = (SCREEN_WIDTH - (widthText + 5.0 + widthBTN))/2;
     lbHaveAccount.font = [AppDelegate sharedInstance].fontRegular;
     lbHaveAccount.textColor = [UIColor colorWithRed:(55/255.0) green:(67/255.0) blue:(83/255.0) alpha:1.0];
+    lbHaveAccount.text = text_have_account;
     [lbHaveAccount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.scvAccInfo).offset(originX);
         make.top.equalTo(self.scvAccInfo).offset(hScv-60.0);
@@ -265,6 +273,7 @@
     
     btnSignIn.titleLabel.font = [AppDelegate sharedInstance].fontRegular;
     [btnSignIn setTitleColor:ORANGE_COLOR forState:UIControlStateNormal];
+    [btnSignIn setTitle:[text_sign_in uppercaseString] forState:UIControlStateNormal];
     [btnSignIn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.lbHaveAccount.mas_right).offset(5.0);
         make.top.bottom.equalTo(self.lbHaveAccount);
@@ -274,6 +283,7 @@
     btnContinue.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     btnContinue.backgroundColor = BLUE_COLOR;
     btnContinue.layer.cornerRadius = 45.0/2;
+    [btnContinue setTitle:text_continue forState:UIControlStateNormal];
     [btnContinue mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.scvAccInfo).offset(padding);
         make.bottom.equalTo(self.lbHaveAccount.mas_top);

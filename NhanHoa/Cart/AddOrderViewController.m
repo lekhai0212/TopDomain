@@ -180,7 +180,7 @@
     UIAlertAction *btnAccept = [UIAlertAction actionWithTitle:@"Xác nhận" style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction *action){
                                                          [ProgressHUD backgroundColor: ProgressHUD_BG];
-                                                         [ProgressHUD show:@"Đang xử lý..." Interaction:NO];
+                                                         [ProgressHUD show:text_processing Interaction:NO];
                                                          
                                                          self.paymentResult = [[NSMutableDictionary alloc] init];
                                                          

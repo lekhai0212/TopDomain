@@ -254,8 +254,8 @@
 
 #define text_not_support    @"Tính năng đang được phát triển"
 
-#define text_today      @"Hôm nay"
-#define text_yesterday  @"Hôm qua"
+#define text_today      @"Today"
+#define text_yesterday  @"Yesterday"
 
 #define text_signed_contract    @"The contract has been signed"
 #define text_signing_contract   @"Sign the contract"
@@ -331,7 +331,7 @@
 
 #define text_activated          @"Activated"
 #define text_cancelled          @"Cancelled"
-#define text_processing         @"Processing"
+#define text_processing         @"Processing..."
 #define text_waiting            @"Waiting"
 #define text_renewing           @"Renewing"
 #define text_waiting_for_renewal @"Waiting for renewal"
@@ -345,7 +345,7 @@
 #define text_manage_dns_records @"Manage DNS Records"
 
 #define text_front      @"Front"
-#define text_behind     @"Behind"
+#define text_backside   @"Backside"
 #define text_cancel     @"Cancel"
 #define text_update     @"Update"
 #define text_reset      @"Reset"
@@ -369,14 +369,104 @@
 #define text_profile        @"Profile"
 #define text_representative @"Representative"
 
+#define text_profile_details    @"Profile details"
+
+#define text_fullname       @"Fullname"
+#define text_birth_of_day   @"Birthday"
+#define text_gender         @"Gender"
+#define text_male           @"Male"
+#define text_female         @"Female"
+#define text_passport       @"Passport"
+#define text_phonenumber    @"Phone number"
+#define text_email          @"Email"
+#define text_address        @"Address"
+#define text_country        @"Country"
+#define text_city           @"City"
+
+#define text_passport_images    @"Passport images"
+#define text_update_profile     @"Update profile"
+#define text_save_profile       @"Save profile"
+
+#define pls_enter_fullname      @"Please enter your fullname"
+#define pls_enter_birthofday    @"Please enter your Birthday"
+#define pls_enter_passport      @"Please enter your passport"
+#define pls_enter_address       @"Please enter your address"
+#define pls_enter_email         @"Please enter your email"
+#define pls_enter_city          @"Please choose your city"
+#define pls_enter_phonenumber   @"Please enter your phone number"
+#define pls_enter_full_info     @"Please enter full your informations"
+
+#define text_profile_update_success     @"Profile was updated successful"
+#define text_profile_create_success     @"Profile was created successful"
+#define text_uploading_picture          @"Uploading your pictures.\nPlease wait..."
+
+#define text_business_info      @"Business information"
+#define text_business_name      @"Business name"
+#define text_tax_code           @"Tax code"
+#define text_business_address   @"Business address"
+#define text_business_phone     @"Business phone"
+
+#define text_registrar_info     @"Registrar information"
+#define text_registrant_name    @"Registrant name"
+#define text_position           @"Position"
+
+#define text_registration_purpose   @"Registration purpose"
+#define vietnam_domain_names        @"VietNam domain names"
+#define international_domain_names  @"International domain names"
+
+#define text_create_pforile     @"Create profile"
+
+#define text_domains            @"Domains"
+#define text_registration_fee   @"Registration fee"
+#define text_renewal_fee        @"Renewal fee"
+#define text_transfer_to        @"Transfer to"
+#define text_free               @"Free"
+
+#define text_send_message       @"Send message"
+#define text_call_hotline       @"Call hotline"
+#define text_sending            @"Sending..."
+#define text_send               @"Send"
+
+#define text_setup_account      @"Setup account"
+#define text_bank_info          @"Bank account information"
+#define text_app_info           @"Application information"
+#define text_log_out            @"Log out"
+#define text_account_info       @"Account information"
+#define text_password           @"Password"
+#define text_update_info        @"Update information"
+#define text_change_password    @"Change password"
+#define text_save               @"Save"
+#define text_current_password   @"Current password"
+#define text_new_password       @"New password"
+#define text_confirm_password   @"Confirm password"
+
+#define text_bank_name          @"Bank name"
+#define text_owner_name         @"Owner name"
+#define text_account_number     @"Account number"
+
+#define text_version            @"Version"
+#define text_check_for_update   @"Check for update"
+#define text_release_date       @"Release date"
+
+#define text_sign_in            @"Sign in"
+#define text_sign_up            @"Sign up"
+#define text_account            @"Account"
+#define text_forgot_password    @"Forgot password"
+#define text_have_not_acc_yet   @"You have not account yet?"
+#define text_have_account       @"Do you already have an account?"
+
+#define text_signing            @"Signing..."
+
+#define text_processing_pls_wait    @"Processing...\nPlease wait a seconds."
+#define text_did_not_received_code  @"Did not receive the code?"
+
+#define text_profile_info       @"Profile info"
+#define text_acc_info           @"Account info"
+
+#define text_confirm            @"Confirm"
+#define text_resend             @"Resend"
+#define text_recharge           @"Recharge"
 
 #endif /* AppString_h */
 
 
-
-/*
- IP Host / FTP: 103.57.210.79
- Username:       apitest
- Password:       Ck79QMp6
- Domain:         api.websudo.xyz
-*/

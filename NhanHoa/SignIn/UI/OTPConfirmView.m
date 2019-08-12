@@ -17,6 +17,7 @@
     
     lbTitle.textColor = TITLE_COLOR;
     lbTitle.font = [UIFont fontWithName:RobotoRegular size:22.0];
+    lbTitle.text = @"Enter confirmation code";
     [lbTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(50.0);
         make.left.right.equalTo(self);
@@ -71,6 +72,7 @@
     btnConfirm.layer.cornerRadius = 5.0;
     btnConfirm.backgroundColor = BLUE_COLOR;
     [btnConfirm setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [btnConfirm setTitle:text_confirm forState:UIControlStateNormal];
     [btnConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfChar3.mas_bottom).offset(2*padding);
         make.centerX.equalTo(self.mas_centerX);
@@ -79,12 +81,13 @@
     }];
     
     UIFont *textFont = [UIFont fontWithName:RobotoItalic size:18.0];
-    float widthText = [AppUtils getSizeWithText:@"Không nhận được mã?" withFont:textFont].width + 5;
-    float widthBTN = [AppUtils getSizeWithText:@"Gửi lại" withFont:[AppDelegate sharedInstance].fontRegular].width;
+    float widthText = [AppUtils getSizeWithText:text_did_not_received_code withFont:textFont].width + 5;
+    float widthBTN = [AppUtils getSizeWithText:text_resend withFont:[AppDelegate sharedInstance].fontRegular].width;
     float originX = (SCREEN_WIDTH - widthText - widthBTN)/2;
     
     lbNotReceived.textColor = UIColor.grayColor;
     lbNotReceived.font = textFont;
+    lbNotReceived.text = text_did_not_received_code;
     [lbNotReceived mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.btnConfirm.mas_bottom).offset(padding);
         make.left.equalTo(self).offset(originX);
@@ -94,6 +97,7 @@
     
     [btnResend setTitleColor:BLUE_COLOR forState:UIControlStateNormal];
     btnResend.titleLabel.font = [AppDelegate sharedInstance].fontRegular;
+    [btnResend setTitle:text_resend forState:UIControlStateNormal];
     [btnResend mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbNotReceived);
         make.left.equalTo(self.lbNotReceived.mas_right);
@@ -137,7 +141,7 @@
     
     if ([AppUtils isNullOrEmpty: tfChar1.text] || [AppUtils isNullOrEmpty: tfChar2.text] || [AppUtils isNullOrEmpty: tfChar3.text] || [AppUtils isNullOrEmpty: tfChar4.text])
     {
-        [self makeToast:@"Bạn chưa nhập đầy đủ mã xác nhận" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:@"Please enter your confirmation code" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     

@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setupUIForView];
-    self.title = @"Cài đặt tài khoản";
+    self.title = text_setup_account;
     self.edgesForExtendedLayout = UIRectEdgeBottom;
 }
 
@@ -65,7 +65,7 @@
     //  Show avatar if updating
     if ([AppDelegate sharedInstance].dataCrop != nil) {
         [ProgressHUD backgroundColor: ProgressHUD_BG];
-        [ProgressHUD show:@"Đang cập nhật ảnh đại diện..." Interaction:NO];
+        [ProgressHUD show:[NSString stringWithFormat:@"%@...", text_updating] Interaction:NO];
         
         [self startUpdateAvatarForUser];
         
@@ -132,16 +132,21 @@
     
     lbInfo.textColor = TITLE_COLOR;
     lbInfo.font = [UIFont fontWithName:RobotoMedium size:17.0];
+    lbInfo.text = text_account_info;
     [lbInfo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.viewInfo);
         make.left.equalTo(self.viewInfo).offset(padding);
         make.right.equalTo(self.viewInfo).offset(-padding);
     }];
     
-    float maxText = [AppUtils getSizeWithText:@"Nhân Hòa ID:" withFont:[UIFont fontWithName:RobotoRegular size:17.0]].width;
+    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    NSString *appNameID = [NSString stringWithFormat:@"%@ ID:", appName];
+    
+    float maxText = [AppUtils getSizeWithText:appNameID withFont:[UIFont fontWithName:RobotoRegular size:17.0]].width;
     //  name
     lbName.textColor = TITLE_COLOR;
     lbName.font = [UIFont fontWithName:RobotoRegular size:17.0];
+    lbName.text = text_fullname;
     [lbName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.viewInfo.mas_bottom).offset(10.0);
         make.left.equalTo(self.view).offset(padding);
@@ -158,7 +163,8 @@
 
     }];
     
-    //  Nhan Hoa ID
+    //  App ID
+    lbID.text = appNameID;
     lbID.textColor = TITLE_COLOR;
     lbID.font = lbName.font;
     [lbID mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -178,6 +184,7 @@
     //  Email
     lbEmail.textColor = TITLE_COLOR;
     lbEmail.font = lbName.font;
+    lbEmail.text = text_email;
     [lbEmail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.lbID);
         make.top.equalTo(self.lbID.mas_bottom);
@@ -200,6 +207,7 @@
     
     lbPasswordInfo.textColor = TITLE_COLOR;
     lbPasswordInfo.font = lbInfo.font;
+    lbPasswordInfo.text = @"Account security";
     [lbPasswordInfo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.viewPassword);
         make.left.equalTo(self.viewPassword).offset(padding);
@@ -209,6 +217,7 @@
     //  password
     lbPassword.textColor = TITLE_COLOR;
     lbPassword.font = lbName.font;
+    lbPassword.text = text_password;
     [lbPassword mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.lbEmail);
         make.top.equalTo(self.viewPassword.mas_bottom).offset(5.0);
@@ -222,6 +231,7 @@
         make.left.right.equalTo(self.lbEmailValue);
     }];
     
+    [btnChangePassword setTitle:text_change_password forState:UIControlStateNormal];
     [btnChangePassword mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view).offset(-padding);
         make.left.equalTo(self.view).offset(padding);
@@ -229,6 +239,7 @@
         make.height.mas_equalTo(45.0);
     }];
     
+    [btnUpdateInfo setTitle:text_update_info forState:UIControlStateNormal];
     [btnUpdateInfo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.btnChangePassword);
         make.bottom.equalTo(self.btnChangePassword.mas_top).offset(-padding);

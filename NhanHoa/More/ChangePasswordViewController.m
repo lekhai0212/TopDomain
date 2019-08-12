@@ -19,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setupUIForView];
-    self.title = @"Đổi mật khẩu";
+    self.title = text_change_password;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -44,6 +44,7 @@
     
     lbOldPass.textColor = lbNewPass.textColor = lbConfirm.textColor = TITLE_COLOR;
     
+    lbOldPass.text = text_current_password;
     [lbOldPass mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
         make.top.equalTo(self.view).offset(10.0);
@@ -62,6 +63,7 @@
     tfOldPass.delegate = self;
     
     //  New password
+    lbNewPass.text = text_new_password;
     float widthText = [AppUtils getSizeWithText:lbNewPass.text withFont:lbNewPass.font].width + 10.0;
     [lbNewPass mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfOldPass.mas_bottom).offset(10.0);
@@ -71,7 +73,7 @@
     }];
     
     lbWarning.font = [AppDelegate sharedInstance].fontItalic;
-    lbWarning.text = SFM(@"Tối thiểu %d ký tự", PASSWORD_MIN_CHARS);
+    lbWarning.text = SFM(@"at least %d characters", PASSWORD_MIN_CHARS);
     lbWarning.textColor = NEW_PRICE_COLOR;
     [lbWarning mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbNewPass);
@@ -96,6 +98,7 @@
     }];
     
     //  Confirm password
+    lbConfirm.text = text_confirm_password;
     [lbConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfNewPass.mas_bottom).offset(10.0);
         make.left.right.equalTo(self.tfNewPass);
@@ -126,6 +129,7 @@
     btnCancel.backgroundColor = OLD_PRICE_COLOR;
     btnCancel.layer.borderColor = OLD_PRICE_COLOR.CGColor;
     btnCancel.layer.borderWidth = 1.0;
+    [btnCancel setTitle:text_reset forState:UIControlStateNormal];
     [btnCancel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
         make.bottom.equalTo(self.view).offset(-2*padding);
@@ -136,6 +140,7 @@
     btnSave.backgroundColor = BLUE_COLOR;
     btnSave.layer.borderColor = BLUE_COLOR.CGColor;
     btnSave.layer.borderWidth = 1.0;
+    [btnSave setTitle:text_update forState:UIControlStateNormal];
     [btnSave mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.btnCancel);
         make.left.equalTo(self.btnCancel.mas_right).offset(padding);
@@ -165,41 +170,41 @@
     [btnSave setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     
     if ([AppUtils isNullOrEmpty: tfOldPass.text]) {
-        [self.view makeToast:@"Bạn chưa nhập mật khẩu hiện tại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Please enter current password!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: tfNewPass.text]) {
-        [self.view makeToast:@"Bạn chưa nhập mật khẩu mới!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Please enter new password!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if (tfNewPass.text.length < PASSWORD_MIN_CHARS) {
-        [self.view makeToast:[NSString stringWithFormat:@"Mật khẩu phải có độ dài tối thiểu %d kí tự", PASSWORD_MIN_CHARS] duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:[NSString stringWithFormat:@"New password must have at least %d characters", PASSWORD_MIN_CHARS] duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: tfConfirm.text]) {
-        [self.view makeToast:@"Bạn chưa nhập mật khẩu xác nhận!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Please enter confirm new password!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     
     if (![tfNewPass.text isEqualToString: tfConfirm.text]) {
-        [self.view makeToast:@"Xác nhận mật khẩu không chính xác. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Confirm password invalid. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     NSString *oldMd5Pass = [AppUtils getMD5StringOfString: tfOldPass.text];
     if (![oldMd5Pass isEqualToString: PASSWORD]) {
-        [self.view makeToast:@"Mật khẩu hiện tại bạn nhập không chính xác. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Current password invalid. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang cập nhật..." Interaction:NO];
+    [ProgressHUD show:[NSString stringWithFormat:@"%@...", text_updating] Interaction:NO];
     
     NSString *newPass = [AppUtils getMD5StringOfString: tfNewPass.text];
     
@@ -271,7 +276,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     
     [ProgressHUD dismiss];
-    [self.view makeToast:@"Mật khẩu đã được cập nhật thành công. Vui lòng đăng nhập lại với mật khẩu bạn vừa cập nhật." duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+    [self.view makeToast:@"Your password was updated succesful. Please sign in again with new password." duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     [self performSelector:@selector(startLogoutAfterUpdatePassword) withObject:nil afterDelay:3.0];
 }
 

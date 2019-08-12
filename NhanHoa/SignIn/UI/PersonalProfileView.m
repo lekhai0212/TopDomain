@@ -27,6 +27,7 @@
     [self addGestureRecognizer: tapOnScreen];
     
     //  title
+    lbTitle.text = [NSString stringWithFormat:@"2. %@", text_update_profile];
     [lbTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self);
         make.left.equalTo(self).offset(padding);
@@ -35,6 +36,7 @@
     }];
     
     //  vision
+    lbVision.text = text_registration_purpose;
     [lbVision mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbTitle.mas_bottom).offset(5.0);
         make.left.equalTo(self).offset(padding);
@@ -52,6 +54,7 @@
     
     lbPersonal.textColor = lbVision.textColor;
     lbPersonal.font = [AppDelegate sharedInstance].fontRegular;
+    lbPersonal.text = text_personal;
     [lbPersonal mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.icPersonal);
         make.left.equalTo(self.icPersonal.mas_right).offset(3.0);
@@ -67,6 +70,7 @@
     
     lbBusiness.textColor = lbVision.textColor;
     lbBusiness.font = lbPersonal.font;
+    lbBusiness.text = text_business;
     [lbBusiness mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbPersonal);
         make.left.equalTo(self.icBusiness.mas_right).offset(3.0);
@@ -77,10 +81,10 @@
     lbBusiness.userInteractionEnabled = TRUE;
     [lbBusiness addGestureRecognizer: tapOnBusiness];
     
-    
     //  name
     lbName.font = lbVision.font;
     lbName.textColor = lbVision.textColor;
+    lbName.text = text_fullname;
     [lbName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbPersonal.mas_bottom).offset(mTop);
         make.left.right.equalTo(self.lbVision);
@@ -97,9 +101,10 @@
         make.height.mas_equalTo([AppDelegate sharedInstance].hTextfield);
     }];
     
-    //  sexial and birth of day
+    //  sexial and Birthday
     lbBOD.font = lbName.font;
     lbBOD.textColor = lbName.textColor;
+    lbBOD.text = text_birth_of_day;
     [lbBOD mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfName.mas_bottom).offset(mTop);
         make.left.equalTo(self.mas_centerX);
@@ -125,6 +130,7 @@
     
     lbSex.font = lbName.font;
     lbSex.textColor = lbName.textColor;
+    lbSex.text = text_gender;
     [lbSex mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfName.mas_bottom).offset(5.0);
         make.left.equalTo(self).offset(padding);
@@ -155,6 +161,7 @@
     
     lbMale.font = lbPersonal.font;
     lbMale.textColor = lbPersonal.textColor;
+    lbMale.text = text_male;
     [lbMale mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.icMale);
         make.left.equalTo(self.icMale.mas_right).offset(5.0);
@@ -168,6 +175,7 @@
     
     lbFemale.font = lbMale.font;
     lbFemale.textColor = lbMale.textColor;
+    lbFemale.text = text_female;
     [lbFemale mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.icFemale);
         make.left.equalTo(self.icFemale.mas_right).offset(5.0);
@@ -177,6 +185,7 @@
     //  passport
     lbPassport.font = lbVision.font;
     lbPassport.textColor = lbVision.textColor;
+    lbPassport.text = text_passport;
     [lbPassport mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfBOD.mas_bottom).offset(mTop);
         make.left.right.equalTo(self.lbVision);
@@ -196,6 +205,7 @@
     //  phone
     lbPhone.font = lbVision.font;
     lbPhone.textColor = lbVision.textColor;
+    lbPhone.text = text_phonenumber;
     [lbPhone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfPassport.mas_bottom).offset(mTop);
         make.left.right.equalTo(self.lbVision);
@@ -215,6 +225,7 @@
     //  address
     lbAddress.font = lbVision.font;
     lbAddress.textColor = lbVision.textColor;
+    lbAddress.text = text_address;
     [lbAddress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfPhone.mas_bottom).offset(mTop);
         make.left.right.equalTo(self.lbVision);
@@ -234,6 +245,7 @@
     //  country, district
     lbCountry.font = lbVision.font;
     lbCountry.textColor = lbVision.textColor;
+    lbCountry.text = text_country;
     [lbCountry mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfAddress.mas_bottom).offset(mTop);
         make.left.equalTo(self).offset(padding);
@@ -254,6 +266,7 @@
     
     lbCity.font = lbVision.font;
     lbCity.textColor = lbVision.textColor;
+    lbCity.text = text_city;
     [lbCity mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbCountry);
         make.left.equalTo(self.mas_centerX).offset(padding/2);
@@ -288,6 +301,7 @@
     btnRegister.layer.borderColor = BLUE_COLOR.CGColor;
     btnRegister.layer.borderWidth = 1.0;
     btnRegister.layer.cornerRadius = 45.0/2;
+    [btnRegister setTitle:text_sign_up forState:UIControlStateNormal];
     [btnRegister mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(padding);
         make.right.equalTo(self).offset(-padding);
@@ -356,32 +370,32 @@
 - (IBAction)btnRegisterPress:(UIButton *)sender
 {
     if ([tfName.text isEqualToString:@""]) {
-        [self makeToast:@"Vui lòng nhập Họ tên" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_fullname duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([tfBOD.text isEqualToString:@""]) {
-        [self makeToast:@"Vui lòng chọn Ngày sinh" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_birthofday duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([tfPassport.text isEqualToString:@""]) {
-        [self makeToast:@"Vui lòng nhập CMND" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_passport duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([tfPhone.text isEqualToString:@""]) {
-        [self makeToast:@"Vui lòng nhập Số điện thoại" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_phonenumber duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([tfAddress.text isEqualToString:@""]) {
-        [self makeToast:@"Vui lòng nhập Địa chỉ" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_address duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([tfCity.text isEqualToString:@""]) {
-        [self makeToast:@"Vui lòng chọn Tỉnh/Thành phố" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self makeToast:pls_enter_city duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
@@ -399,39 +413,6 @@
     if ([delegate respondsToSelector:@selector(readyToRegisterPersonalAccount:)]) {
         [delegate readyToRegisterPersonalAccount: info];
     }
-    
-//  email: string (tạo mới tài khoản, email cũng chính là username)
-//  password: MD5
-//  own_type
-
-    
-    
-    
-//mod: register_account
-
-//own_type: number (cá nhân: 0 | công ty / tổ chức: 1)
-//if (own_type: 0) { // cá nhân
-
-//} elseif (own_type: 1) { // công ty / tổ chức
-//    tc_tc_name: string (tên cty / tổ chức)
-//    tc_tc_mst: string / number (mã số thuế)
-//    tc_tc_address: string (địa chỉ cty / tổ chức)
-//    tc_tc_phone: string / number (số đt cty / tổ chức)
-//    tc_tc_country: 231 (cố định: Viêt Nam [231])
-//    tc_tc_city:  number (mã tỉnh / thành theo danh sách anh đã gửi).
-//    cn_position: string (chức vụ người đại diện)
-//    cn_name: Họ và tên (string)
-//    cn_sex: number (1: nam | 0: nữ)
-//    cn_birthday: dd/mm/yyyy (ngày tháng năm sinh)
-//    cn_cmnd: string / number (Số CMND / Passport)
-//    cn_phone: string / number (Số ĐT)
-//    cn_address: string (địa chỉ)
-//    cn_country: 231 (cố định: Viêt Nam [231])
-//    cn_city: number (mã tỉnh / thành theo danh sách anh đã gửi).
-//    } else {
-//    api: error response
-//    }
-//
 }
 
 - (IBAction)btnBODPress:(UIButton *)sender {

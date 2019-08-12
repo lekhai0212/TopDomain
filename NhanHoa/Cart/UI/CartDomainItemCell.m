@@ -105,7 +105,7 @@
         make.height.mas_equalTo(60.0);
     }];
     
-    lbFree.text = @"(Miễn phí)";
+    lbFree.text = [NSString stringWithFormat:@"(%@)", text_free];
     lbFree.font = [AppDelegate sharedInstance].fontItalic;
     [lbFree mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.protectView).offset(-5.0);
