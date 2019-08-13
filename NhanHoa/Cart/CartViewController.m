@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Giỏ hàng";
+    self.title = @"Shopping cart";
     [self.navigationController setNavigationBarHidden: FALSE];
     
     [self addBackBarButtonForNavigationBar];
@@ -49,7 +49,12 @@
         viewEmpty.hidden = FALSE;
         scvContent.hidden = TRUE;
     }else{
-        lbCount.text = [NSString stringWithFormat:@"%d tên miền", [[CartModel getInstance] countItemInCart]];
+        if ([[CartModel getInstance] countItemInCart] == 1) {
+            lbCount.text = [NSString stringWithFormat:@"%d domain", [[CartModel getInstance] countItemInCart]];
+        }else{
+            lbCount.text = [NSString stringWithFormat:@"%d domains", [[CartModel getInstance] countItemInCart]];
+        }
+        
         viewEmpty.hidden = TRUE;
         scvContent.hidden = FALSE;
     }
@@ -211,7 +216,7 @@
         make.width.height.mas_equalTo(120.0);
     }];
     
-    lbEmpty.text = @"Giỏ hàng trống";
+    lbEmpty.text = @"Shopping cart empty!";
     lbEmpty.textColor = [UIColor colorWithRed:(180/255.0) green:(180/255.0)
                                          blue:(180/255.0) alpha:1.0];
     lbEmpty.font = [AppDelegate sharedInstance].fontBTN;
@@ -237,10 +242,14 @@
     }];
     
     lbInfo.font = lbCount.font = [AppDelegate sharedInstance].fontRegular;
+    lbInfo.text = @"Shopping cart information";
+    
+    float sizeText = [AppUtils getSizeWithText:lbInfo.text withFont:[AppDelegate sharedInstance].fontRegular].width + 20.0;
+    
     [lbInfo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.viewInfo).offset(padding);
         make.top.bottom.equalTo(self.viewInfo);
-        make.right.equalTo(self.viewInfo.mas_centerX);
+        make.width.mas_equalTo(sizeText);
     }];
     
     [lbCount mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -284,7 +293,7 @@
     //  price
     lbPrice.textColor = lbVAT.textColor = lbVATValue.textColor = lbTotal.textColor = TITLE_COLOR;
     lbPrice.font = lbPriceValue.font = lbVAT.font = lbVATValue.font = [UIFont fontWithName:RobotoRegular size:16.0];
-    
+    lbPrice.text = text_total;
     [lbPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.viewFooter).offset(padding);
         make.right.equalTo(self.viewFooter.mas_centerX).offset(-padding/2);
@@ -311,6 +320,7 @@
     
     //  Total price
     lbTotal.font = [UIFont fontWithName:RobotoMedium size:16.0];
+    lbTotal.text = text_total_payment;
     [lbTotal mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbVAT.mas_bottom);
         make.left.right.equalTo(self.lbVAT);
@@ -329,6 +339,7 @@
     btnContinue.layer.borderColor = BLUE_COLOR.CGColor;
     btnContinue.layer.borderWidth = 1.0;
     btnContinue.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
+    [btnContinue setTitle:text_proceed_to_register forState:UIControlStateNormal];
     [btnContinue mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbTotalValue.mas_bottom).offset(2*padding);
         make.left.equalTo(self.viewFooter).offset(padding);
@@ -341,6 +352,7 @@
     btnGoShop.layer.borderWidth = 1.0;
     btnGoShop.layer.cornerRadius = btnContinue.layer.cornerRadius;
     btnGoShop.titleLabel.font = btnContinue.titleLabel.font;
+    [btnGoShop setTitle:text_continue_shopping forState:UIControlStateNormal];
     [btnGoShop mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.btnContinue.mas_bottom).offset(padding);
         make.left.right.equalTo(self.btnContinue);
@@ -365,7 +377,11 @@
             [tbDomains reloadData];
             [self updateAllPriceForView];
             
-            lbCount.text = [NSString stringWithFormat:@"%d tên miền", [[CartModel getInstance] countItemInCart]];
+            if ([[CartModel getInstance] countItemInCart] == 1) {
+                lbCount.text = [NSString stringWithFormat:@"%d domain", [[CartModel getInstance] countItemInCart]];
+            }else{
+                lbCount.text = [NSString stringWithFormat:@"%d domains", [[CartModel getInstance] countItemInCart]];
+            }
         }else{
             viewEmpty.hidden = FALSE;
             scvContent.hidden = TRUE;
@@ -393,7 +409,7 @@
         SelectYearsCell *cell = (SelectYearsCell *)[tableView dequeueReusableCellWithIdentifier:@"SelectYearsCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.lbContent.text = [NSString stringWithFormat:@"%d năm", (int)indexPath.row + 1];
+        cell.lbContent.text = [NSString stringWithFormat:@"%d %@", (int)indexPath.row + 1, text_year];
         return cell;
         
     }else{

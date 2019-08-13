@@ -177,7 +177,7 @@
 }
 
 - (IBAction)btnInfoPress:(UIButton *)sender {
-    [[AppDelegate sharedInstance].cartWindow makeToast:@"Ẩn thông tin của quý khách khi whois tên miền." duration:3.0 position:CSToastPositionCenter];
+    [[AppDelegate sharedInstance].cartWindow makeToast:@"Hide your informations when whois domain." duration:3.0 position:CSToastPositionCenter];
 }
 
 - (void)displayDataWithInfo: (NSDictionary *)info forYear: (int)yearsForRenew {
@@ -234,7 +234,7 @@
     lbPrice.text = [NSString stringWithFormat:@"%@VNĐ", price];
     
     NSString *years = [domainInfo objectForKey:year_for_domain];
-    tfYears.text = [NSString stringWithFormat:@"%@ năm", years];
+    tfYears.text = [NSString stringWithFormat:@"%@ %@", years, text_year];
     
     NSString *whoisProtect = [domainInfo objectForKey:whois_protect];
     if ([whoisProtect isEqualToString:@"1"]) {

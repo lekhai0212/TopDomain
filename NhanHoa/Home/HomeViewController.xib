@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="btnSearch" destination="XnI-Lj-Ayg" id="Jjg-15-Ooo"/>
                 <outlet property="clvMenu" destination="FF1-FZ-bCd" id="Q9t-Dy-s7t"/>
+                <outlet property="imgBanner" destination="qrC-Ud-0Ve" id="iZm-cv-OaB"/>
                 <outlet property="imgMainWallet" destination="BpW-Tf-lSt" id="Cfu-Cg-Cx6"/>
                 <outlet property="lbMainWallet" destination="A8W-hB-5mF" id="ZmO-lH-6X1"/>
                 <outlet property="lbMoney" destination="abS-qp-7CZ" id="vIM-dZ-6d1"/>
@@ -52,6 +53,10 @@
                     </subviews>
                     <color key="backgroundColor" red="0.043137254899999998" green="0.3803921569" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qrC-Ud-0Ve">
+                    <rect key="frame" x="0.0" y="70" width="320" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sVb-4K-XE5">
                     <rect key="frame" x="0.0" y="249" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -98,7 +103,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-2622" y="-453"/>
+            <point key="canvasLocation" x="-2952" y="-532"/>
         </view>
     </objects>
     <resources>

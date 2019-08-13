@@ -304,7 +304,7 @@
         make.right.equalTo(self.scvPersonal.mas_centerX).offset(-self.padding/2);
         make.height.mas_equalTo([AppDelegate sharedInstance].hTextfield);
     }];
-    tfCountry.text = @"Việt Nam";
+    tfCountry.text = text_vietnam;
     
     [btnCountry setTitle:@"" forState:UIControlStateNormal];
     [btnCountry mas_makeConstraints:^(MASConstraintMaker *make) {

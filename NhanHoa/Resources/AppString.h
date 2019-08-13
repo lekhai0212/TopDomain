@@ -56,7 +56,7 @@
 
 #define PASSWORD_MIN_CHARS  6
 #define MAX_YEAR_FOR_RENEW  10
-#define MIN_MONEY_TOPUP     200000
+#define MIN_MONEY_TOPUP     1
 #define phone_support       @"19006680"
 
 #define type_na             2
@@ -85,6 +85,7 @@
 #define TAG_HUD             100
 #define TIME_FOR_SLIDER     6
 #define COUNTRY_CODE        @"231"
+#define text_vietnam        @"Viet Nam"
 
 #define URL_Payment         @"https://onepay.vn/onecomm-pay/vpc.op"
 #define MERCHANT_ID         @"NHANHOA"
@@ -459,13 +460,27 @@
 
 #define text_processing_pls_wait    @"Processing...\nPlease wait a seconds."
 #define text_did_not_received_code  @"Did not receive the code?"
+#define text_proceed_to_register    @"Proceed to register"
+#define text_payment_with_onepay    @"Payment with Onepay"
+#define text_payment_with_paypal    @"Payment with Paypal"
 
 #define text_profile_info       @"Profile info"
 #define text_acc_info           @"Account info"
 
 #define text_confirm            @"Confirm"
 #define text_resend             @"Resend"
-#define text_recharge           @"Recharge"
+#define text_pay_in             @"Pay In"
+#define text_continue_shopping  @"Continue shopping"
+#define text_total              @"Total"
+#define text_total_payment      @"Total payment"
+
+#define text_select_profile     @"Select profile"
+#define text_payment            @"Payment"
+#define text_finish             @"Finish"
+#define text_selected           @"Selected"
+#define pls_select_profile      @"Please select profile for all domains!"
+#define text_top_up             @"Top up"
+#define text_top_up_your_wallet @"Top up your wallet"
 
 #endif /* AppString_h */
 

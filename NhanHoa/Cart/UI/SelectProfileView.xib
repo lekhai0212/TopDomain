@@ -94,7 +94,7 @@
                 <outlet property="tfSearch" destination="Ilr-Zu-A44" id="OBc-V9-2kg"/>
                 <outlet property="viewHeader" destination="LW3-xV-tug" id="gKK-rP-0vo"/>
             </connections>
-            <point key="canvasLocation" x="-552" y="-785"/>
+            <point key="canvasLocation" x="-403" y="-906"/>
         </view>
     </objects>
     <resources>

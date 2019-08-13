@@ -56,8 +56,8 @@
     
     //  get size
     UIFont *textFont = [UIFont fontWithName:RobotoRegular size:16.0];
-    sizeType = [AppUtils getSizeWithText:@"Hồ sơ:" withFont:textFont].width + 10;
-    sizeProfile = [AppUtils getSizeWithText:@"Người đại diện:" withFont: textFont].width + 10;
+    sizeType = [AppUtils getSizeWithText:text_profile withFont:textFont].width + 10;
+    sizeProfile = [AppUtils getSizeWithText:text_representative withFont: textFont].width + 10;
     
     //  set font and color
     lbTypeName.font = lbProfileName.font = textFont;
@@ -73,6 +73,7 @@
     }];
     
     //  domain type
+    lbTypeName.text = [NSString stringWithFormat:@"%@:", text_profile];
     [lbTypeName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.lbCompanyValue);
         make.bottom.equalTo(self.lbCompanyValue.mas_top);
@@ -87,6 +88,7 @@
     }];
     
     //  profile name
+    lbProfileName.text = [NSString stringWithFormat:@"%@:", text_representative];
     [lbProfileName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.lbCompanyValue);
         make.top.equalTo(self.lbCompanyValue.mas_bottom);
@@ -114,9 +116,10 @@
     }];
     
     float hLabel = 30.0;
-    float wSmallItem = [AppUtils getSizeWithText:@"Họ tên đầy đủ:" withFont:[UIFont fontWithName:RobotoRegular size:16.0]].width + 5;
+    float wSmallItem = [AppUtils getSizeWithText:text_phonenumber withFont:[UIFont fontWithName:RobotoRegular size:16.0]].width + 5;
     lbDomainType.font = [UIFont fontWithName:RobotoRegular size:16.0];
     lbDomainType.textColor = TITLE_COLOR;
+    lbDomainType.text = [NSString stringWithFormat:@"%@:", text_profile];
     [lbDomainType mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(self.viewDetail).offset(padding);
         make.height.mas_equalTo(hLabel);
@@ -134,6 +137,7 @@
     //  fullname
     lbName.font = lbDomainType.font;
     lbName.textColor = lbDomainType.textColor;
+    lbName.text = [NSString stringWithFormat:@"%@:", text_fullname];
     [lbName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbDomainType.mas_bottom);
         make.left.right.equalTo(self.lbDomainType);
@@ -150,6 +154,7 @@
     //  BOD
     lbBOD.font = lbDomainType.font;
     lbBOD.textColor = lbDomainType.textColor;
+    lbBOD.text = [NSString stringWithFormat:@"%@:", text_birth_of_day];
     [lbBOD mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbName.mas_bottom);
         make.left.right.equalTo(self.lbName);
@@ -166,6 +171,7 @@
     //  Passport
     lbPassport.font = lbDomainType.font;
     lbPassport.textColor = lbDomainType.textColor;
+    lbPassport.text = [NSString stringWithFormat:@"%@:", text_passport];
     [lbPassport mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbBOD.mas_bottom);
         make.left.right.equalTo(self.lbBOD);
@@ -182,6 +188,7 @@
     //  Address
     lbAddress.font = lbDomainType.font;
     lbAddress.textColor = lbDomainType.textColor;
+    lbAddress.text = [NSString stringWithFormat:@"%@:", text_address];
     [lbAddress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbPassport.mas_bottom);
         make.left.right.equalTo(self.lbPassport);
@@ -199,6 +206,7 @@
     //  Phone
     lbPhone.font = lbDomainType.font;
     lbPhone.textColor = lbDomainType.textColor;
+    lbPhone.text = [NSString stringWithFormat:@"%@:", text_phonenumber];
     [lbPhone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbAddressValue.mas_bottom);
         make.left.right.equalTo(self.lbAddress);
@@ -215,6 +223,7 @@
     //  Email
     lbEmail.font = lbDomainType.font;
     lbEmail.textColor = lbDomainType.textColor;
+    lbEmail.text = [NSString stringWithFormat:@"%@:", text_email];
     [lbEmail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbPhone.mas_bottom);
         make.left.right.equalTo(self.lbPhone);
@@ -237,6 +246,7 @@
     
     lbTitlePassport.font = lbTypeName.font;
     lbTitlePassport.textColor = lbTypeName.textColor;
+    lbTitlePassport.text = text_passport_images;
     [lbTitlePassport mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.iconPassport.mas_centerY);
         make.left.equalTo(self.iconPassport.mas_right).offset(5.0);
@@ -255,6 +265,7 @@
     
     lbFront.font = lbTypeName.font;
     lbFront.textColor = lbTypeName.textColor;
+    lbFront.text = text_front;
     [lbFront mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.imgFrontPassport);
         make.top.equalTo(self.imgFrontPassport.mas_bottom);
@@ -269,6 +280,7 @@
     
     lbBehind.font = lbTypeName.font;
     lbBehind.textColor = lbTypeName.textColor;
+    lbBehind.text = text_backside;
     [lbBehind mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.imgBehindPassport);
         make.top.equalTo(self.imgBehindPassport.mas_bottom);

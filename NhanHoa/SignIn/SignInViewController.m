@@ -186,24 +186,37 @@
         make.height.mas_equalTo(self.hHeader);
     }];
     
-    float hTextfield = 44.0;
+    float hTextfield = [AppDelegate sharedInstance].hTextfield;
     float originY = (hHeader/2 - (hTextfield + 15 + hTextfield + hTextfield))/2;
     
     //
+    float wLogo = 100.0;
+    UIFont *companyFont = [UIFont fontWithName:@"StencilStd" size:30.0];
+    float paddingCompany = 15.0;
+    float paddingY = 10.0;
+    
+    if ([DeviceUtils isiPhoneXAndNewer]) {
+        wLogo = 120.0;
+        companyFont = [UIFont fontWithName:@"StencilStd" size:33.0];
+        paddingCompany = 30.0;
+        paddingY = 20.0;
+    }
+    
     float paddingTop = (hHeader/2 - (100 + 15.0 + 30.0 + 25.0))/2;
     imgLogo.layer.cornerRadius = 15.0;
     imgLogo.clipsToBounds = TRUE;
     [imgLogo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.scvContent).offset(paddingTop + 30.0);
         make.centerX.equalTo(self.scvContent.mas_centerX);
-        make.width.height.mas_equalTo(100.0);
+        make.width.height.mas_equalTo(wLogo);
     }];
     
+    lbCompany.font = companyFont;
     [lbCompany mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.imgLogo.mas_bottom).offset(15.0);
+        make.top.equalTo(self.imgLogo.mas_bottom).offset(paddingCompany);
         make.left.equalTo(self.scvContent).offset(self.padding);
         make.width.mas_equalTo(SCREEN_WIDTH-2*self.padding);
-        make.height.mas_equalTo(30.0);
+        make.height.mas_equalTo(35.0);
     }];
     
     [lbToBeTheBest mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -259,6 +272,10 @@
     
     //  sign in button
     float hButton = 48.0;
+    if ([DeviceUtils isScreen320]) {
+        hButton = 40.0;
+    }
+    
     btnSignIn.titleLabel.font = [UIFont fontWithName:RobotoRegular size:18.0];
     [btnSignIn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     btnSignIn.layer.borderColor = signInColor.CGColor;
@@ -276,8 +293,8 @@
     [btnForgotPass setTitleColor:BORDER_COLOR forState:UIControlStateNormal];
     [btnForgotPass setTitle:text_forgot_password forState:UIControlStateNormal];
     [btnForgotPass mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.btnSignIn);
-        make.bottom.equalTo(self.btnSignIn.mas_top).offset(-10.0);
+        make.left.right.equalTo(btnSignIn);
+        make.bottom.equalTo(btnSignIn.mas_top).offset(-paddingY);
         make.height.mas_equalTo(hTextfield);
     }];
     
@@ -287,8 +304,8 @@
     tfPassword.backgroundColor = [UIColor colorWithRed:(40/255.0) green:(123/255.0) blue:(229/255.0) alpha:1.0];
     tfPassword.font = [UIFont fontWithName:RobotoRegular size:17.0];
     [tfPassword mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.btnForgotPass);
-        make.bottom.equalTo(self.btnForgotPass.mas_top).offset(-10.0);
+        make.left.right.equalTo(btnForgotPass);
+        make.bottom.equalTo(btnForgotPass.mas_top).offset(-paddingY);
         make.height.mas_equalTo(hTextfield);
     }];
     [AppUtils setPlaceholder:text_password textfield:tfPassword color:[UIColor colorWithRed:(210/255.0) green:(210/255.0) blue:(210/255.0) alpha:1.0]];
@@ -319,8 +336,8 @@
     tfAccount.backgroundColor = tfPassword.backgroundColor;
     tfAccount.font = tfPassword.font;
     [tfAccount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.tfPassword);
-        make.bottom.equalTo(self.tfPassword.mas_top).offset(-15.0);
+        make.left.right.equalTo(tfPassword);
+        make.bottom.equalTo(tfPassword.mas_top).offset(-paddingY);
         make.height.mas_equalTo(hTextfield);
     }];
     [AppUtils setPlaceholder:text_account textfield:tfAccount color:[UIColor colorWithRed:(210/255.0) green:(210/255.0) blue:(210/255.0) alpha:1.0]];
@@ -368,6 +385,8 @@
         make.left.equalTo(self.lbNotAccount.mas_right).offset(10.0);
         make.width.mas_equalTo(sizeText2.width);
     }];
+    
+    safe area
 }
 
 - (void)processForLoginSuccessful {

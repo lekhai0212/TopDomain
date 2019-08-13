@@ -11,11 +11,12 @@
 #import "WhoIsViewController.h"
 #import "RenewedDomainViewController.h"
 #import "TopupViewController.h"
-#import "WithdrawalBonusAccountViewController.h"
+#import "AccountSettingViewController.h"
 #import "ProfileManagerViewController.h"
 #import "SupportViewController.h"
 #import "SearchDomainViewController.h"
 #import "PricingDomainViewController.h"
+#import "AboutViewController.h"
 #import "HomeMenuCell.h"
 #import "HomeMenuObject.h"
 #import "CartModel.h"
@@ -31,9 +32,9 @@
 
 @implementation HomeViewController
 @synthesize viewSearch, tfSearch, btnSearch;
-@synthesize viewWallet,viewMainWallet, imgMainWallet, lbMainWallet, lbMoney;
+@synthesize viewWallet,viewMainWallet, imgMainWallet, lbMainWallet, lbMoney, imgBanner;
 @synthesize clvMenu;
-@synthesize hMenu, viewBanner;
+@synthesize hMenu;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -75,44 +76,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver: self];
     
     [self.navigationController setNavigationBarHidden: NO];
-    [viewBanner.slideTimer invalidate];
-    viewBanner.slideTimer = nil;
-    [viewBanner removeFromSuperview];
-    viewBanner = nil;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)addBannerImageForView
-{
-    float paddingY = 10.0;
-    if (hMenu < 100) {
-        paddingY = 5.0;
-    }
-    
-    if (viewBanner == nil) {
-        NSArray *toplevelObject = [[NSBundle mainBundle] loadNibNamed:@"BannerSliderView" owner:nil options:nil];
-        for(id currentObject in toplevelObject){
-            if ([currentObject isKindOfClass:[BannerSliderView class]]) {
-                viewBanner = (BannerSliderView *) currentObject;
-                break;
-            }
-        }
-        [self.view addSubview: viewBanner];
-    }
-    [viewBanner mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.viewSearch.mas_bottom);
-        make.bottom.equalTo(self.viewWallet.mas_top).offset(-paddingY);
-        //  make.height.mas_equalTo(hBanner);
-    }];
-    viewBanner.clipsToBounds = TRUE;
-    viewBanner.hBanner = hBanner;
-    [viewBanner setupUIForView];
-    [viewBanner showBannersForSliderView];
 }
 
 - (void)showUserWalletView {
@@ -167,10 +135,10 @@
     cell.lbName.text = menu.menuName;
     cell.imgType.image = [UIImage imageNamed: menu.menuIcon];
     
-    if (indexPath.row == eSearchDomain || indexPath.row == ePricingDomain || indexPath.row == eCustomerSupport) {
-        cell.lbSepaRight.hidden = YES;
-    }else {
-        cell.lbSepaRight.hidden = NO;
+    if ((indexPath.row + 1) % 3 == 0) {
+        cell.lbSepaRight.hidden = TRUE;
+    }else{
+        cell.lbSepaRight.hidden = FALSE;
     }
     
     return cell;
@@ -218,12 +186,23 @@
             [self.navigationController pushViewController: pricingVC animated:YES];
             break;
         }
-        
+        case eSetupAccount:{
+            AccountSettingViewController *accSettingVC = [[AccountSettingViewController alloc] initWithNibName:@"AccountSettingViewController" bundle:nil];
+            accSettingVC.hidesBottomBarWhenPushed = TRUE;
+            [self.navigationController pushViewController:accSettingVC animated:TRUE];
+            break;
+        }
         case eCustomerSupport:{
             SupportViewController *supportVC = [[SupportViewController alloc] initWithNibName:@"SupportViewController" bundle:nil];
             supportVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController: supportVC animated:YES];
             
+            break;
+        }
+        case eAppInfo:{
+            AboutViewController *aboutVC = [[AboutViewController alloc] initWithNibName:@"AboutViewController" bundle:nil];
+            aboutVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:aboutVC animated:YES];
             break;
         }
         default:
@@ -249,7 +228,7 @@
 - (void)createDataForMenuView {
     listMenu = [[NSMutableArray alloc] init];
     
-    HomeMenuObject *cashIn = [[HomeMenuObject alloc] initWithName:text_cash_in icon:@"menu_recharge" type:eCashIn];
+    HomeMenuObject *cashIn = [[HomeMenuObject alloc] initWithName:text_top_up icon:@"menu_recharge" type:eCashIn];
     [listMenu addObject: cashIn];
     
     HomeMenuObject *regDomain = [[HomeMenuObject alloc] initWithName:text_register_domain_names icon:@"menu_domain" type:eRegisterDomain];
@@ -267,15 +246,14 @@
     HomeMenuObject *priceList = [[HomeMenuObject alloc] initWithName:text_domain_price_list icon:@"menu_reorder_domain" type:ePricingDomain];
     [listMenu addObject: priceList];
     
-    HomeMenuObject *transHistory = [[HomeMenuObject alloc] initWithName:text_trans_history icon:@"menu_trans_history" type:eTransactionHistory];
-    [listMenu addObject: transHistory];
-    
     HomeMenuObject *setupAccount = [[HomeMenuObject alloc] initWithName:text_setup_account icon:@"menu_edit_profile" type:eSetupAccount];
     [listMenu addObject: setupAccount];
     
     HomeMenuObject *support = [[HomeMenuObject alloc] initWithName:text_customers_support icon:@"menu_support" type:eCustomerSupport];
     [listMenu addObject: support];
     
+    HomeMenuObject *appInfo = [[HomeMenuObject alloc] initWithName:@"App Info" icon:@"menu_app_info" type:eAppInfo];
+    [listMenu addObject: appInfo];
 }
 
 - (void)setupUIForView {
@@ -286,6 +264,9 @@
     float hWallet = 55.0;
     if ([DeviceUtils isiPhoneXAndNewer]) {
         hWallet = 70.0;
+        
+    }else if ([DeviceUtils isScreen320]) {
+        hWallet = 45.0;
     }
     
     float hStatusBar = [UIApplication sharedApplication].statusBarFrame.size.height;
@@ -333,9 +314,11 @@
         NSString *image = [info objectForKey:@"image"];
         
         NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:image]];
-        UIImage *imgBanner = [UIImage imageWithData: imgData];
-        hBanner = SCREEN_WIDTH * imgBanner.size.height / imgBanner.size.width;
+        UIImage *banner = [UIImage imageWithData: imgData];
+        hBanner = SCREEN_WIDTH * banner.size.height / banner.size.width;
+        imgBanner.image = banner;
     }
+    
     hMenu = (SCREEN_HEIGHT - (hSearch + hBanner + paddingY + hWallet + paddingY + self.tabBarController.tabBar.frame.size.height))/3;
     if (hMenu < 100) {
         if ([DeviceUtils isScreen320]) {
@@ -348,9 +331,11 @@
         paddingY = 5.0;
         hBanner = SCREEN_HEIGHT - (self.tabBarController.tabBar.frame.size.height + 3*hMenu + hWallet + 2*paddingY + hSearch);
     }
-    [self addBannerImageForView];
-    
-    
+    [imgBanner mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(viewSearch.mas_bottom);
+        make.bottom.equalTo(viewWallet.mas_top).offset(-paddingY);
+    }];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 10.0;
@@ -380,7 +365,7 @@
     [viewMainWallet addGestureRecognizer: tapOnMainWallet];
     
     [viewMainWallet mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.viewWallet);
+        make.top.left.bottom.right.equalTo(viewWallet);
     }];
     
     [imgMainWallet mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -82,6 +82,7 @@
     
     //  content
     lbProfile.font = [UIFont fontWithName:RobotoRegular size:15.0];
+    lbProfile.text = text_profile;
     [lbProfile mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbOne.mas_bottom);
         make.centerX.equalTo(self.lbOne.mas_centerX);
@@ -90,6 +91,7 @@
     }];
     
     lbConfirm.font = lbProfile.font;
+    lbConfirm.text = text_confirm;
     [lbConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbProfile);
         make.centerX.equalTo(self.lbTwo.mas_centerX);
@@ -97,6 +99,7 @@
     }];
     
     lbPayment.font = lbProfile.font;
+    lbPayment.text = text_payment;
     [lbPayment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbProfile);
         make.centerX.equalTo(self.lbThree.mas_centerX);
@@ -104,6 +107,7 @@
     }];
     
     lbDone.font = lbProfile.font;
+    lbDone.text = text_finish;
     [lbDone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.lbProfile);
         make.centerX.equalTo(self.lbFour.mas_centerX);

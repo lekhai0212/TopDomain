@@ -94,7 +94,10 @@
         make.top.equalTo(self.viewTop.mas_bottom).offset(-hCurve);
     }];
     
-    float hButton = 48.0;
+    float hButton = 45.0;
+    if ([DeviceUtils isScreen320]) {
+        hButton = 40.0;
+    }
     signInColor = [UIColor colorWithRed:(240/255.0) green:(138/255.0) blue:(38/255.0) alpha:1.0];
     btnSignIn.layer.cornerRadius = hButton/2;
     btnSignIn.titleLabel.font = [UIFont fontWithName:RobotoRegular size:20.0];
@@ -127,7 +130,8 @@
     lbCompany.numberOfLines = 5;
     lbCompany.text = @"Copyright ® 2002 – 2019 Top Domain Software Company. All Rights Reserved.";
     [lbCompany mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.viewBottom);
+        make.left.bottom.equalTo(self.viewBottom).offset(5.0);
+        make.right.bottom.equalTo(self.viewBottom).offset(-5.0);
         make.height.mas_equalTo(38.0);
     }];
     

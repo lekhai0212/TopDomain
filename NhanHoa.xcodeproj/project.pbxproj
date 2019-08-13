@@ -246,6 +246,15 @@
 		4C8B835622F82ED2009D441A /* WindowsHostingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C8B835422F82ED2009D441A /* WindowsHostingCell.xib */; };
 		4CA8E27522F90C01000BD5E5 /* WorldpressHostingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8E27322F90C01000BD5E5 /* WorldpressHostingCell.m */; };
 		4CA8E27622F90C01000BD5E5 /* WorldpressHostingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA8E27422F90C01000BD5E5 /* WorldpressHostingCell.xib */; };
+		4CB07A0623025E3A0028246D /* menu_app_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB07A0523025E3A0028246D /* menu_app_info.png */; };
+		4CB07A0823027A670028246D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB07A0723027A670028246D /* Accelerate.framework */; };
+		4CB07A0A23027A7C0028246D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB07A0923027A7C0028246D /* CoreLocation.framework */; };
+		4CB07A0C23027A9B0028246D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB07A0B23027A9B0028246D /* MessageUI.framework */; };
+		4CB07A0E23027AB00028246D /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB07A0D23027AB00028246D /* SafariServices.framework */; };
+		4CB07A10230291C50028246D /* onepay_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB07A0F230291C50028246D /* onepay_logo.png */; };
+		4CB07A12230291CC0028246D /* paypal_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB07A11230291CC0028246D /* paypal_logo.png */; };
+		4CD024452302B89C0029060C /* new_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CD024442302B89C0029060C /* new_launch.png */; };
+		4CD024482302B9800029060C /* StencilStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4CD024472302B9800029060C /* StencilStd.otf */; };
 		4CFB0C4722F3F08400ED813D /* DNSDetailPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFB0C4622F3F08400ED813D /* DNSDetailPopupView.m */; };
 		4CFC9D4B22FE5F8F00CB8AF2 /* menu_trans_history.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CFC9D4A22FE5F8F00CB8AF2 /* menu_trans_history.png */; };
 		4CFC9D4D22FE626F00CB8AF2 /* menu_edit_profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CFC9D4C22FE626E00CB8AF2 /* menu_edit_profile.png */; };
@@ -477,13 +486,9 @@
 		849E312B228074C5003A8813 /* ContactInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849E3129228074C5003A8813 /* ContactInfoCell.xib */; };
 		84A1646D2284EA5C0001B833 /* atm.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A1646B2284EA5C0001B833 /* atm.png */; };
 		84A1646E2284EA5C0001B833 /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A1646C2284EA5C0001B833 /* visa.png */; };
-		84A63C3F22839E9100C52B8A /* BonusAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A63C3D22839E9100C52B8A /* BonusAccountViewController.m */; };
-		84A63C4022839E9100C52B8A /* BonusAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A63C3E22839E9100C52B8A /* BonusAccountViewController.xib */; };
 		84A63C452283A11400C52B8A /* BonusHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A63C432283A11400C52B8A /* BonusHistoryCell.m */; };
 		84A63C462283A11400C52B8A /* BonusHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A63C442283A11400C52B8A /* BonusHistoryCell.xib */; };
 		84A63C482283A91500C52B8A /* gift-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A63C472283A91500C52B8A /* gift-box.png */; };
-		84A63C4C2283A98B00C52B8A /* WithdrawalBonusAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A63C4A2283A98B00C52B8A /* WithdrawalBonusAccountViewController.m */; };
-		84A63C4D2283A98B00C52B8A /* WithdrawalBonusAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A63C4B2283A98B00C52B8A /* WithdrawalBonusAccountViewController.xib */; };
 		84C78F2D227B351200FCFC58 /* ic_profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C78F2B227B350F00FCFC58 /* ic_profile.png */; };
 		84DE29A72277F133005691AD /* WhoIsDomainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DE29A62277F133005691AD /* WhoIsDomainView.m */; };
 		84DE29A92277F13E005691AD /* WhoIsDomainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DE29A82277F13E005691AD /* WhoIsDomainView.xib */; };
@@ -804,6 +809,15 @@
 		4CA8E27222F90C01000BD5E5 /* WorldpressHostingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldpressHostingCell.h; sourceTree = "<group>"; };
 		4CA8E27322F90C01000BD5E5 /* WorldpressHostingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldpressHostingCell.m; sourceTree = "<group>"; };
 		4CA8E27422F90C01000BD5E5 /* WorldpressHostingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorldpressHostingCell.xib; sourceTree = "<group>"; };
+		4CB07A0523025E3A0028246D /* menu_app_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_app_info.png; sourceTree = "<group>"; };
+		4CB07A0723027A670028246D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		4CB07A0923027A7C0028246D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4CB07A0B23027A9B0028246D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		4CB07A0D23027AB00028246D /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		4CB07A0F230291C50028246D /* onepay_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onepay_logo.png; sourceTree = "<group>"; };
+		4CB07A11230291CC0028246D /* paypal_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paypal_logo.png; sourceTree = "<group>"; };
+		4CD024442302B89C0029060C /* new_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_launch.png; sourceTree = "<group>"; };
+		4CD024472302B9800029060C /* StencilStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StencilStd.otf; sourceTree = "<group>"; };
 		4CFB0C4522F3F08400ED813D /* DNSDetailPopupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNSDetailPopupView.h; sourceTree = "<group>"; };
 		4CFB0C4622F3F08400ED813D /* DNSDetailPopupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DNSDetailPopupView.m; sourceTree = "<group>"; };
 		4CFC9D4A22FE5F8F00CB8AF2 /* menu_trans_history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_trans_history.png; sourceTree = "<group>"; };
@@ -1109,16 +1123,10 @@
 		849E3129228074C5003A8813 /* ContactInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactInfoCell.xib; sourceTree = "<group>"; };
 		84A1646B2284EA5C0001B833 /* atm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atm.png; sourceTree = "<group>"; };
 		84A1646C2284EA5C0001B833 /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visa.png; sourceTree = "<group>"; };
-		84A63C3C22839E9100C52B8A /* BonusAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BonusAccountViewController.h; sourceTree = "<group>"; };
-		84A63C3D22839E9100C52B8A /* BonusAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BonusAccountViewController.m; sourceTree = "<group>"; };
-		84A63C3E22839E9100C52B8A /* BonusAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BonusAccountViewController.xib; sourceTree = "<group>"; };
 		84A63C422283A11400C52B8A /* BonusHistoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BonusHistoryCell.h; sourceTree = "<group>"; };
 		84A63C432283A11400C52B8A /* BonusHistoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BonusHistoryCell.m; sourceTree = "<group>"; };
 		84A63C442283A11400C52B8A /* BonusHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BonusHistoryCell.xib; sourceTree = "<group>"; };
 		84A63C472283A91500C52B8A /* gift-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gift-box.png"; sourceTree = "<group>"; };
-		84A63C492283A98B00C52B8A /* WithdrawalBonusAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawalBonusAccountViewController.h; sourceTree = "<group>"; };
-		84A63C4A2283A98B00C52B8A /* WithdrawalBonusAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawalBonusAccountViewController.m; sourceTree = "<group>"; };
-		84A63C4B2283A98B00C52B8A /* WithdrawalBonusAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawalBonusAccountViewController.xib; sourceTree = "<group>"; };
 		84C78F2B227B350F00FCFC58 /* ic_profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_profile.png; sourceTree = "<group>"; };
 		84DE29A52277F133005691AD /* WhoIsDomainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhoIsDomainView.h; sourceTree = "<group>"; };
 		84DE29A62277F133005691AD /* WhoIsDomainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhoIsDomainView.m; sourceTree = "<group>"; };
@@ -1134,6 +1142,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CB07A0E23027AB00028246D /* SafariServices.framework in Frameworks */,
+				4CB07A0C23027A9B0028246D /* MessageUI.framework in Frameworks */,
+				4CB07A0A23027A7C0028246D /* CoreLocation.framework in Frameworks */,
+				4CB07A0823027A670028246D /* Accelerate.framework in Frameworks */,
 				567FDFF122CD18160081616B /* libc++.tbd in Frameworks */,
 				567FDFEF22CD180D0081616B /* Security.framework in Frameworks */,
 				567FDFED22CD18030081616B /* SystemConfiguration.framework in Frameworks */,
@@ -1379,6 +1391,8 @@
 			children = (
 				5612F8AB22E6C8FD00ECBBB1 /* call-bg.png */,
 				4C1100C82301525300952225 /* app-icon.png */,
+				4CB07A0F230291C50028246D /* onepay_logo.png */,
+				4CB07A11230291CC0028246D /* paypal_logo.png */,
 				4C6580EC22FBC42E00F38087 /* email_hosting_act.png */,
 				4C6580EB22FBC42E00F38087 /* email_hosting.png */,
 				4C6580E922FBC42D00F38087 /* email_server_act.png */,
@@ -1444,6 +1458,7 @@
 				15E92AD12272A2F2004AB658 /* show_pass_def.png */,
 				1517FB44227446490044E878 /* menu_bonus.png */,
 				4CFC9D4A22FE5F8F00CB8AF2 /* menu_trans_history.png */,
+				4CB07A0523025E3A0028246D /* menu_app_info.png */,
 				1517FB492274464F0044E878 /* menu_domain.png */,
 				1517FB52227446560044E878 /* menu_list_domain.png */,
 				1517FB482274464E0044E878 /* menu_profile.png */,
@@ -1554,6 +1569,7 @@
 				56D0294D22B3F88D00280127 /* order_failed.png */,
 				56FDEB5B22B66486001A14AE /* launch.jpg */,
 				56A878A322CB504400300705 /* new_launch.jpg */,
+				4CD024442302B89C0029060C /* new_launch.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -1831,6 +1847,14 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		4CD024462302B9630029060C /* stencil-std */ = {
+			isa = PBXGroup;
+			children = (
+				4CD024472302B9800029060C /* StencilStd.otf */,
+			);
+			path = "stencil-std";
+			sourceTree = "<group>";
+		};
 		5600E8F822A5EEAD00F7DECE /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1978,6 +2002,7 @@
 		842F81A022755C7200D6DE6D /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				4CD024462302B9630029060C /* stencil-std */,
 				842F81A122755C7F00D6DE6D /* roboto */,
 			);
 			path = fonts;
@@ -2130,12 +2155,6 @@
 				8481F88A22832DA100C88EB1 /* TopupViewController.h */,
 				8481F88B22832DA100C88EB1 /* TopupViewController.m */,
 				8481F88C22832DA100C88EB1 /* TopupViewController.xib */,
-				84A63C3C22839E9100C52B8A /* BonusAccountViewController.h */,
-				84A63C3D22839E9100C52B8A /* BonusAccountViewController.m */,
-				84A63C3E22839E9100C52B8A /* BonusAccountViewController.xib */,
-				84A63C492283A98B00C52B8A /* WithdrawalBonusAccountViewController.h */,
-				84A63C4A2283A98B00C52B8A /* WithdrawalBonusAccountViewController.m */,
-				84A63C4B2283A98B00C52B8A /* WithdrawalBonusAccountViewController.xib */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -2223,6 +2242,10 @@
 		9A0A7850FCA5CEB26AD039E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CB07A0D23027AB00028246D /* SafariServices.framework */,
+				4CB07A0B23027A9B0028246D /* MessageUI.framework */,
+				4CB07A0923027A7C0028246D /* CoreLocation.framework */,
+				4CB07A0723027A670028246D /* Accelerate.framework */,
 				56FC243622CDA3F8006AE4AA /* PushKit.framework */,
 				56FC243422CDA3DD006AE4AA /* CallKit.framework */,
 				567FDFF022CD18160081616B /* libc++.tbd */,
@@ -2453,6 +2476,7 @@
 				5612F8B522E6CA6B00ECBBB1 /* speaker_normal.png in Resources */,
 				56D0294F22B3F88D00280127 /* order_failed.png in Resources */,
 				5600E8F622A5E9FD00F7DECE /* support_call.png in Resources */,
+				4CB07A12230291CC0028246D /* paypal_logo.png in Resources */,
 				1517FBAB22745D810044E878 /* tabbar_BO_act@2x.png in Resources */,
 				4C765F0422F81756002AFEC8 /* windows.png in Resources */,
 				157E2E702285380800D1ACDA /* circle_not_full_blue.png in Resources */,
@@ -2496,10 +2520,12 @@
 				849E311C2280647B003A8813 /* photo-camera.png in Resources */,
 				842F81B1227561ED00D6DE6D /* Roboto-BoldItalic.ttf in Resources */,
 				8471D259228A39DF00445A88 /* OnepayPaymentView.xib in Resources */,
+				4CB07A0623025E3A0028246D /* menu_app_info.png in Resources */,
 				4C28B92822F5983C00910F54 /* RegisterEmailViewController.xib in Resources */,
 				4C041EB822E843C600DA7405 /* numpad_five_default.png in Resources */,
 				15CD147922B9E2E9009CBE86 /* push.php in Resources */,
 				842F81B8227561ED00D6DE6D /* Roboto-Italic.ttf in Resources */,
+				4CD024452302B89C0029060C /* new_launch.png in Resources */,
 				56FC243D22CDBCE8006AE4AA /* chirtmas.mp3 in Resources */,
 				8460F642227A644300A185B0 /* CartViewController.xib in Resources */,
 				56FCA44822CC8F88005C173E /* SupportListViewController.xib in Resources */,
@@ -2541,16 +2567,15 @@
 				4C041EB622E843C600DA7405 /* numpad_four_default.png in Resources */,
 				1517FBAD22745D810044E878 /* tabbar_history_act@3x.png in Resources */,
 				4C041EB922E843C600DA7405 /* numpad_five_hover.png in Resources */,
+				4CB07A10230291C50028246D /* onepay_logo.png in Resources */,
 				5612F8BF22E6CAC900ECBBB1 /* mute_enable.png in Resources */,
 				849E312B228074C5003A8813 /* ContactInfoCell.xib in Resources */,
 				1517FB5C2274465B0044E878 /* menu_search_domain.png in Resources */,
 				4C65811922FC28F300F38087 /* HostingUpgradeViewController.xib in Resources */,
-				84A63C4022839E9100C52B8A /* BonusAccountViewController.xib in Resources */,
 				4C28B92222F597C000910F54 /* RegisterSSLViewController.xib in Resources */,
 				15E92AD32272A2F3004AB658 /* graphic.png in Resources */,
 				842F81B3227561ED00D6DE6D /* Roboto-Black.ttf in Resources */,
 				8428FC0222786F49006BF4DB /* WhoIsNoResult.xib in Resources */,
-				84A63C4D2283A98B00C52B8A /* WithdrawalBonusAccountViewController.xib in Resources */,
 				1517FBAA22745D810044E878 /* tabbar_home_def@3x.png in Resources */,
 				4C00B3FE22F2E75F0087479C /* DNSRecordManagerView.xib in Resources */,
 				841966932276077400C14516 /* comvn.png in Resources */,
@@ -2564,6 +2589,7 @@
 				4C00790922F144E800C19492 /* dns_del.png in Resources */,
 				4C28B90622F58CF700910F54 /* mene_order_list.png in Resources */,
 				1517FB9C22745D810044E878 /* tabbar_history_def@3x.png in Resources */,
+				4CD024482302B9800029060C /* StencilStd.otf in Resources */,
 				8490A5B32279B05E00B921B7 /* RenewDomainDetailViewController.xib in Resources */,
 				4C041EB722E843C600DA7405 /* numpad_four_hover.png in Resources */,
 				5612F8C022E6CAC900ECBBB1 /* mute_dis.png in Resources */,
@@ -2712,7 +2738,6 @@
 				8446F4B02277C16B008F4EE9 /* WhoIsCell.m in Sources */,
 				841E7C602284E2E80074DDF5 /* PaymentMethodCell.m in Sources */,
 				840F5DFA2277328B005BFC57 /* WhoIsViewController.m in Sources */,
-				84A63C3F22839E9100C52B8A /* BonusAccountViewController.m in Sources */,
 				56FC5DCE22CEF0D700254F25 /* CustomSwitchButton.m in Sources */,
 				845D32CE227967750047B196 /* BusinessProfileView.m in Sources */,
 				842F81CA2275BD4600D6DE6D /* CustomTextAttachment.m in Sources */,
@@ -2821,7 +2846,6 @@
 				156B8C18226ECB060020EDCB /* RegisteredDomainViewController.m in Sources */,
 				159F7D97227AC92B00A64586 /* PaymentStepView.m in Sources */,
 				4C00790522F143B300C19492 /* DNSDetailCell.m in Sources */,
-				84A63C4C2283A98B00C52B8A /* WithdrawalBonusAccountViewController.m in Sources */,
 				560B16EA22B2AAFE0004DD29 /* AddOrderViewController.m in Sources */,
 				56CB516E22A72E8700D6D68A /* UpdateBusinessProfile.m in Sources */,
 				157F0C1B2282E80400DCB7D4 /* SelectYearsCell.m in Sources */,
@@ -3022,6 +3046,76 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"CardIO\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"FirebaseCore\"",
+					"-l\"FirebaseInstanceID\"",
+					"-l\"FirebaseMessaging\"",
+					"-l\"GoogleUtilities\"",
+					"-l\"Masonry\"",
+					"-l\"PayPalMobile\"",
+					"-l\"ProgressHUD\"",
+					"-l\"Protobuf\"",
+					"-l\"SDWebImage\"",
+					"-l\"Toast\"",
+					"-l\"c++\"",
+					"-l\"nanopb\"",
+					"-l\"opencv_core\"",
+					"-l\"opencv_imgproc\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+					"-lc++",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nhanhoa.topdomain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "90e49281-7d3c-4017-b2f5-dd2508962544";
@@ -3065,9 +3159,79 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"CardIO\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"FirebaseCore\"",
+					"-l\"FirebaseInstanceID\"",
+					"-l\"FirebaseMessaging\"",
+					"-l\"GoogleUtilities\"",
+					"-l\"Masonry\"",
+					"-l\"PayPalMobile\"",
+					"-l\"ProgressHUD\"",
+					"-l\"Protobuf\"",
+					"-l\"SDWebImage\"",
+					"-l\"Toast\"",
+					"-l\"c++\"",
+					"-l\"nanopb\"",
+					"-l\"opencv_core\"",
+					"-l\"opencv_imgproc\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+					"-lc++",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nhanhoa.topdomain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NhanHoa_NewRelease;
+				PROVISIONING_PROFILE_SPECIFIER = "TopDomain Distribution";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};

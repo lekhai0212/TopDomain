@@ -82,7 +82,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1a-mK-X5c">
                     <rect key="frame" x="9" y="180" width="94" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="500.000 VNĐ"/>
+                    <state key="normal" title="$5"/>
                     <connections>
                         <action selector="btn500KPress:" destination="-1" eventType="touchUpInside" id="mWJ-uu-8ru"/>
                     </connections>
@@ -90,7 +90,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNh-2x-Pza">
                     <rect key="frame" x="102" y="180" width="104" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="1.000.000 VNĐ"/>
+                    <state key="normal" title="$10"/>
                     <connections>
                         <action selector="btn1000KPress:" destination="-1" eventType="touchUpInside" id="st8-qu-Bcd"/>
                     </connections>
@@ -98,7 +98,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4v-DL-vYJ">
                     <rect key="frame" x="212" y="180" width="104" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="1.500.000 VNĐ"/>
+                    <state key="normal" title="$50"/>
                     <connections>
                         <action selector="btn1500kPress:" destination="-1" eventType="touchUpInside" id="mOD-ur-L78"/>
                     </connections>

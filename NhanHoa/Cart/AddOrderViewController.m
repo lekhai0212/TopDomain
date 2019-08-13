@@ -74,6 +74,7 @@
     btnPayment.layer.borderColor = BLUE_COLOR.CGColor;
     btnPayment.backgroundColor = BLUE_COLOR;
     btnPayment.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
+    [btnPayment setTitle:text_continue forState:UIControlStateNormal];
     [btnPayment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.viewContent).offset(self.padding);
         make.bottom.right.equalTo(self.viewContent).offset(-self.padding);
@@ -140,7 +141,7 @@
     footerView.backgroundColor = UIColor.whiteColor;
     
     UIButton *btnConfirm = [[UIButton alloc] initWithFrame:CGRectMake(padding, footerView.frame.size.height-padding-45.0, footerView.frame.size.width-2*padding, 45.0)];
-    [btnConfirm setTitle:@"Thông tin đúng, thanh toán ngay" forState:UIControlStateNormal];
+    [btnConfirm setTitle:@"Right information, pay now" forState:UIControlStateNormal];
     btnConfirm.backgroundColor = BLUE_COLOR;
     [btnConfirm setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     btnConfirm.layer.cornerRadius = 45.0/2;
@@ -396,12 +397,12 @@
         
         NSDictionary *profile = [domainInfo objectForKey:profile_cart];
         if (profile == nil) {
-            [cell.btnChooseProfile setTitle:@"Chọn hồ sơ" forState:UIControlStateNormal];
+            [cell.btnChooseProfile setTitle:text_select_profile forState:UIControlStateNormal];
             cell.btnChooseProfile.backgroundColor = BLUE_COLOR;
             
             [cell showProfileView:FALSE withBusiness:FALSE];
         }else{
-            [cell.btnChooseProfile setTitle:@"Đã chọn" forState:UIControlStateNormal];
+            [cell.btnChooseProfile setTitle:text_selected forState:UIControlStateNormal];
             cell.btnChooseProfile.backgroundColor = ORANGE_COLOR;
             
             NSString *type = [profile objectForKey:@"cus_own_type"];
@@ -477,7 +478,7 @@
     
     BOOL ready = [[CartModel getInstance] checkAllProfileForCart];
     if (!ready) {
-        [self.view makeToast:@"Vui lòng chọn đầy đủ hồ sơ cho tên miền!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:pls_select_profile duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     [viewMenu updateUIForStep: ePaymentConfirm];
@@ -526,7 +527,7 @@
         //  check all domains had profile in cart
         BOOL ready = [[CartModel getInstance] checkAllProfileForCart];
         if (!ready) {
-            [self.view makeToast:@"Vui lòng chọn đầy đủ hồ sơ cho tên miền!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+            [self.view makeToast:pls_select_profile duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         }else{
             [viewMenu updateUIForStep: ePaymentConfirm];
             viewContent.hidden = TRUE;

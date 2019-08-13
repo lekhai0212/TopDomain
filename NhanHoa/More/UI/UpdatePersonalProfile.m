@@ -176,7 +176,7 @@
         make.left.right.equalTo(self.lbCountry);
         make.height.mas_equalTo([AppDelegate sharedInstance].hTextfield);
     }];
-    tfCountry.text = @"Việt Nam";
+    tfCountry.text = text_vietnam;
     
     lbCity.text = text_city;
     [lbCity mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -43,6 +43,14 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>To update your avatar and your passport images</string>
+	<key>NSExceptionDomains</key>
+	<dict>
+		<key>auto.qa.paydiant.com</key>
+		<dict>
+			<key>NSExceptionRequiresForwardSecrecy</key>
+			<false/>
+		</dict>
+	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To update your avatar and your passport images</string>
 	<key>UIAppFonts</key>
@@ -58,6 +66,7 @@
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Thin.ttf</string>
 		<string>Roboto-ThinItalic.ttf</string>
+		<string>StencilStd.otf</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>

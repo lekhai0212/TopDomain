@@ -18,6 +18,7 @@ target 'NhanHoa' do
     pod 'FirebaseInstanceID'
     pod 'Fabric'
     pod 'Crashlytics'
+    pod 'PayPal-iOS-SDK'
     
 #    pod 'MBProgressHUD', '~> 1.1.0'
 end

@@ -22,28 +22,30 @@
     }
     
     imgAvatar.clipsToBounds = TRUE;
-    imgAvatar.layer.cornerRadius = 60.0/2;
+    imgAvatar.layer.cornerRadius = 50.0/2;
     imgAvatar.layer.borderColor = BLUE_COLOR.CGColor;
     imgAvatar.layer.borderWidth = 1.0;
     [imgAvatar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(padding);
-        make.top.equalTo(self).offset(10.0);
-        make.width.height.mas_equalTo(60.0);
+        make.top.equalTo(self).offset(5.0);
+        make.width.height.mas_equalTo(50.0);
     }];
     
     lbName.font = [UIFont fontWithName:RobotoMedium size:18.0];
     lbName.textColor = TITLE_COLOR;
     [lbName mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(imgAvatar);
         make.left.equalTo(self.imgAvatar.mas_right).offset(5.0);
         make.right.equalTo(self).offset(-padding);
-        make.bottom.equalTo(self.imgAvatar.mas_centerY).offset(-2.5);
+        make.height.mas_equalTo(30.0);
     }];
     
     lbEmail.font = [UIFont fontWithName:RobotoRegular size:16.0];
     lbEmail.textColor = TITLE_COLOR;
     [lbEmail mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lbName);
-        make.top.equalTo(self.imgAvatar.mas_centerY).offset(2.5);
+        make.left.right.equalTo(lbName);
+        make.top.equalTo(lbName.mas_bottom);
+        make.height.mas_equalTo(20.0);
     }];
     
     imgSepa.backgroundColor = BORDER_COLOR;
@@ -62,12 +64,12 @@
         make.bottom.equalTo(self).offset(-10.0);
     }];
     
-    imgWallet.layer.cornerRadius = 35.0/2;
+    imgWallet.layer.cornerRadius = 30.0/2;
     imgWallet.clipsToBounds = TRUE;
     [imgWallet mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.viewWallet).offset(padding);
         make.centerY.equalTo(self.viewWallet.mas_centerY);
-        make.width.height.mas_equalTo(35.0);
+        make.width.height.mas_equalTo(30.0);
     }];
     
     lbMainAccount.textColor = TITLE_COLOR;

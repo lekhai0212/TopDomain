@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = text_cash_in;
+    self.title = text_top_up;
     [self setupUIForView];
 }
 
@@ -139,7 +139,7 @@
     }
     if (topupMoney < MIN_MONEY_TOPUP) {
         NSString *strMinTopup = [AppUtils convertStringToCurrencyFormat:[NSString stringWithFormat:@"%d", MIN_MONEY_TOPUP]];
-        [self.view makeToast:[NSString stringWithFormat:@"The amount must be greater %@VNĐ", strMinTopup] duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
+        [self.view makeToast:[NSString stringWithFormat:@"The amount must be greater $%@", strMinTopup] duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
         return;
     }
     
@@ -287,7 +287,7 @@
     UILabel *lbCurrency = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, hItem)];
     lbCurrency.clipsToBounds = TRUE;
     lbCurrency.backgroundColor = unselectedColor;
-    lbCurrency.text = @"VNĐ";
+    lbCurrency.text = @"USD";
     lbCurrency.textAlignment = NSTextAlignmentCenter;
     lbCurrency.font = [UIFont fontWithName:RobotoMedium size:14.0];
     lbCurrency.textColor = TITLE_COLOR;
@@ -299,9 +299,9 @@
     btnTopup.layer.cornerRadius = hItem/2;
     btnTopup.layer.borderWidth = 1.0;
     btnTopup.layer.borderColor = BLUE_COLOR.CGColor;
-    btnTopup.backgroundColor = BLUE_COLOR;;
+    btnTopup.backgroundColor = BLUE_COLOR;
     btnTopup.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
-    [btnTopup setTitle:text_recharge forState:UIControlStateNormal];
+    [btnTopup setTitle:text_top_up forState:UIControlStateNormal];
     [btnTopup mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view).offset(-padding);
         make.left.equalTo(self.view).offset(padding);

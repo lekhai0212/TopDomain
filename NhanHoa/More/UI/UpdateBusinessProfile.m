@@ -124,7 +124,7 @@
     [AppUtils setBorderForTextfield:tfCountry borderColor:BORDER_COLOR];
     tfCountry.backgroundColor = LIGHT_GRAY_COLOR;
     tfCountry.enabled = FALSE;
-    tfCountry.text = @"Việt nam";
+    tfCountry.text = text_vietnam;
     [tfCountry mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lbCountry.mas_bottom);
         make.left.right.equalTo(self.lbCountry);

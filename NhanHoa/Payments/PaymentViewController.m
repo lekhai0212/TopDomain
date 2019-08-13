@@ -8,8 +8,9 @@
 
 #import "PaymentViewController.h"
 #import "PaymentMethodCell.h"
+#import <PayPalConfiguration.h>
 
-@interface PaymentViewController ()<UITableViewDelegate, UITableViewDataSource, OnepayPaymentViewDelegate> {
+@interface PaymentViewController ()<UITableViewDelegate, UITableViewDataSource, OnepayPaymentViewDelegate, PayPalPaymentDelegate> {
     
 }
 @end
@@ -20,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Nạp tiền vào ví";
+    self.title = text_top_up_your_wallet;
     [self setupUIForView];
 }
 
@@ -28,7 +29,7 @@
     [super viewWillAppear: animated];
     [WriteLogsUtils writeForGoToScreen:@"PaymentViewController"];
     
-    typePaymentMethod = ePaymentWithATM;
+    typePaymentMethod = ePaymentWithPaypal;
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -44,8 +45,11 @@
     
     btnContinue.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     btnContinue.layer.cornerRadius = 45.0/2;
+    btnContinue.layer.borderWidth = 1.0;
+    btnContinue.layer.borderColor = BLUE_COLOR.CGColor;
     btnContinue.backgroundColor = BLUE_COLOR;
     [btnContinue setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    [btnContinue setTitle:text_continue forState:UIControlStateNormal];
     [btnContinue mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
         make.bottom.right.equalTo(self.view).offset(-padding);
@@ -76,13 +80,13 @@
     PaymentMethodCell *cell = (PaymentMethodCell *)[tableView dequeueReusableCellWithIdentifier:@"PaymentMethodCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row == 0) {
-        cell.imgType.image = [UIImage imageNamed:@"atm.png"];
-        cell.lbTitle.text = @"Thẻ ATM nội địa và Internet Banking";
+        cell.imgType.image = [UIImage imageNamed:@"paypal_logo.png"];
+        cell.lbTitle.text = text_payment_with_paypal;
         cell.lbSepa.hidden = FALSE;
         
     }else{
-        cell.imgType.image = [UIImage imageNamed:@"master-card.png"];
-        cell.lbTitle.text = @"Thẻ Visa / Master";
+        cell.imgType.image = [UIImage imageNamed:@"onepay_logo.png"];
+        cell.lbTitle.text = text_payment_with_onepay;
         cell.lbSepa.hidden = TRUE;
     }
     
@@ -124,14 +128,19 @@
     btnContinue.backgroundColor = BLUE_COLOR;
     [btnContinue setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     
-    [self addOnepayPaymentViewIfNeed];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        self.paymentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    }completion:^(BOOL finished) {
-        self.paymentView.typePaymentMethod = self.typePaymentMethod;
-        [self.paymentView showPaymentContentViewWithMoney: self.money];
-    }];
+    if (typePaymentMethod == ePaymentWithPaypal) {
+        [self startPaymentWithPaypal];
+        
+    }else if (typePaymentMethod == ePaymentWithOnepay) {
+        [self addOnepayPaymentViewIfNeed];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.paymentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        }completion:^(BOOL finished) {
+            self.paymentView.typePaymentMethod = self.typePaymentMethod;
+            [self.paymentView showPaymentContentViewWithMoney: self.money];
+        }];
+    }
 }
 
 - (void)addOnepayPaymentViewIfNeed {
@@ -150,6 +159,57 @@
     [paymentView setupUIForView];
     paymentView.delegate = self;
     paymentView.backgroundColor = UIColor.whiteColor;
+}
+
+- (void)startPaymentWithPaypal {
+    PayPalConfiguration *payPalConfig = [[PayPalConfiguration alloc] init];
+
+    payPalConfig.acceptCreditCards = TRUE;
+    payPalConfig.merchantName = @"Nhan Hoa - Top Domain";
+    payPalConfig.merchantPrivacyPolicyURL = [NSURL URLWithString:@"https://nhanhoa.com/trang/quy-dinh-su-dung-ten-mien.html"];
+    payPalConfig.merchantUserAgreementURL = [NSURL URLWithString:@"https://nhanhoa.com/trang/quy-dinh-su-dung-ten-mien.html"];
+    payPalConfig.languageOrLocale = [NSLocale preferredLanguages][0];
+    payPalConfig.payPalShippingAddressOption = PayPalShippingAddressOptionProvided;
+    
+    NSLog(@"Pay Pal SDK: %@", [PayPalMobile libraryVersion]);
+    
+    //  create list items
+    PayPalItem *item1 = [PayPalItem itemWithName:@"Top up money to app" withQuantity:1 withPrice:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%ld", money]] withCurrency:@"USD" withSku:@"SKU-TOPUP-MONEY-APP"];
+    
+    NSArray *items = @[item1];
+    NSDecimalNumber *subtotal = [PayPalItem totalPriceForItems: items];
+    
+    NSDecimalNumber *shipping = [[NSDecimalNumber alloc] initWithString:@"0"];
+    NSDecimalNumber *tax = [[NSDecimalNumber alloc] initWithString:@"0"];
+    
+    PayPalPaymentDetails *paymentDetails = [PayPalPaymentDetails paymentDetailsWithSubtotal:subtotal withShipping:shipping withTax:tax];
+    NSDecimalNumber *total = [[subtotal decimalNumberByAdding: shipping] decimalNumberByAdding:tax];
+    
+    PayPalPayment *payment = [[PayPalPayment alloc] init];
+    payment.amount = total;
+    payment.currencyCode = @"USD";
+    payment.shortDescription = text_top_up_your_wallet;
+    payment.items = items;
+    payment.paymentDetails = paymentDetails;
+    
+    if (!payment.processable) {
+        NSLog(@"Can not payment with paypal");
+    }
+    
+    [self enableSizeForBarButtonItem: TRUE];
+    PayPalPaymentViewController *paymentVC = [[PayPalPaymentViewController alloc] initWithPayment:payment configuration:payPalConfig delegate:self];
+    
+    [self presentViewController:paymentVC animated:TRUE completion:nil];
+}
+
+- (void)enableSizeForBarButtonItem: (BOOL)enable {
+    float fontSize = 0.1;
+    if (enable) {
+        fontSize = 18.0;
+    }
+    NSDictionary *titleInfo = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:RobotoRegular size:fontSize], NSFontAttributeName, BLUE_COLOR, NSForegroundColorAttributeName, nil];
+    [UIBarButtonItem.appearance setTitleTextAttributes:titleInfo forState:UIControlStateNormal];
+    [UIBarButtonItem.appearance setTitleTextAttributes:titleInfo forState:UIControlStateHighlighted];
 }
 
 
@@ -186,6 +246,21 @@
 
 - (void)dismissView {
     [self.navigationController popViewControllerAnimated: TRUE];
+}
+
+#pragma mark - Paypal Delegate
+-(void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
+    NSLog(@"payPalPaymentDidCancel");
+    [self dismissViewControllerAnimated:TRUE completion:^{
+        [[AppDelegate sharedInstance] enableSizeForBarButtonItem: FALSE];
+    }];
+}
+
+-(void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController didCompletePayment:(PayPalPayment *)completedPayment {
+    NSLog(@"%@", completedPayment);
+    [self dismissViewControllerAnimated:TRUE completion:^{
+        [[AppDelegate sharedInstance] enableSizeForBarButtonItem: FALSE];
+    }];
 }
 
 @end

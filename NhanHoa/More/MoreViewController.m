@@ -64,7 +64,7 @@
 }
 
 - (void)setupUIForView {
-    hAccount = 135; //  10 + 30 + 30 + 10 + 10 + 40.0 + 10;
+    hAccount = 110; //  5 + 30 + 20 + 5 + 10 + 30.0 + 10;
     padding = 15.0;
     if ([DeviceUtils isScreen320]) {
         padding = 5.0;
@@ -83,6 +83,7 @@
     [tbContent registerNib:[UINib nibWithNibName:@"SettingMenuCell" bundle:nil] forCellReuseIdentifier:@"SettingMenuCell"];
     tbContent.backgroundColor = UIColor.clearColor;
     tbContent.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tbContent.showsVerticalScrollIndicator = FALSE;
     tbContent.delegate = self;
     tbContent.dataSource = self;
     tbContent.separatorStyle = UITableViewCellSeparatorStyleNone;

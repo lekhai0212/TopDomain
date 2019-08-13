@@ -25,14 +25,14 @@ typedef enum TypeHomeMenu{
     eManagerDomain,
     eProfile,
     ePricingDomain,
-    eTransactionHistory,
     eSetupAccount,
     eCustomerSupport,
+    eAppInfo,
 }TypeHomeMenu;
 
 typedef enum PaymentMethod{
-    ePaymentWithATM,
-    ePaymentWithVisaMaster,
+    ePaymentWithPaypal,
+    ePaymentWithOnepay,
 }PaymentMethod;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WebServiceUtilsDelegate, UNUserNotificationCenterDelegate>

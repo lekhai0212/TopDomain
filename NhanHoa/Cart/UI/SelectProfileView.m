@@ -50,6 +50,8 @@
         make.width.equalTo(self.icClose.mas_width);
     }];
     
+    lbTitle.font = [AppDelegate sharedInstance].fontBTN;
+    lbTitle.text = text_profile_list;
     [lbTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.icClose);
         make.left.equalTo(self.icClose.mas_right).offset(5.0);

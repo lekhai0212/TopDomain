@@ -233,6 +233,7 @@ typedef enum TypeSelectDomain{
     tbDomain.delegate = self;
     tbDomain.dataSource = self;
     [tbDomain registerNib:[UINib nibWithNibName:@"ExpireDomainCell" bundle:nil] forCellReuseIdentifier:@"ExpireDomainCell"];
+    tbDomain.showsVerticalScrollIndicator = FALSE;
     [tbDomain mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
         make.top.equalTo(self.tfSearch.mas_bottom).offset(padding);

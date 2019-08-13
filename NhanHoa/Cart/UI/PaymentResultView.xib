@@ -45,8 +45,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NẠP TIỀN VÀO VÍ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6z-t6-6Eb">
-                                    <rect key="frame" x="102" y="8" width="118" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TOP UP YOUR WALLET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6z-t6-6Eb">
+                                    <rect key="frame" x="81" y="8" width="161" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="textColor"/>
@@ -159,7 +159,7 @@
                 <outlet property="viewHeader" destination="YX6-fh-w23" id="pwP-5f-occ"/>
                 <outlet property="viewTop" destination="a17-m4-U7g" id="sDZ-Zr-HXF"/>
             </connections>
-            <point key="canvasLocation" x="100.8" y="-242.87856071964021"/>
+            <point key="canvasLocation" x="160" y="-385"/>
         </view>
     </objects>
     <resources>
