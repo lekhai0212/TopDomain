@@ -12,12 +12,13 @@
 
 @interface WhoIsViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>{
     NSMutableArray *listDomain;
+    float padding;
 }
 
 @end
 
 @implementation WhoIsViewController
-@synthesize tbContent, btnSearch, padding;
+@synthesize tbContent, btnSearch;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,7 +98,7 @@
 - (void)keyboardDidHide: (NSNotification *) notif{
     [tbContent mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.btnSearch).offset(-self.padding);
+        make.bottom.equalTo(btnSearch).offset(-padding);
     }];
 }
 
@@ -108,8 +109,16 @@
     [self.view addGestureRecognizer: tapOnScreen];
     
     float hBTN = 45.0;
-    
     padding = 15.0;
+    
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
+    
     btnSearch.layer.cornerRadius = hBTN/2;
     btnSearch.backgroundColor = BLUE_COLOR;
     btnSearch.layer.borderColor = BLUE_COLOR.CGColor;
@@ -117,8 +126,9 @@
     [btnSearch setTitle:text_search forState:UIControlStateNormal];
     btnSearch.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     [btnSearch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(self.padding);
-        make.bottom.right.equalTo(self.view).offset(-self.padding);
+        make.left.equalTo(self.view).offset(padding);
+        make.right.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.height.mas_equalTo(hBTN);
     }];
     
@@ -128,7 +138,7 @@
     tbContent.dataSource = self;
     [tbContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.btnSearch.mas_top).offset(-self.padding);
+        make.bottom.equalTo(btnSearch.mas_top).offset(-padding);
     }];
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50.0)];
@@ -164,7 +174,7 @@
 - (void)addNewRowForDomain {
     if (listDomain.count == 5 || listDomain.count > 5) {
         self.view.clipsToBounds = NO;
-        [self.view makeToast:@"Vượt quá số lượng tìm kiếm" duration:2.0 position:CSToastPositionTop style:[AppDelegate sharedInstance].warningStyle];
+        [self.view makeToast:@"Sorry. You can not add more!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].warningStyle];
     }else{
         [listDomain addObject:@""];
         [tbContent reloadData];

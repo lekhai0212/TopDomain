@@ -125,6 +125,14 @@
     tfAccNo.delegate = self;
     tfAccNo.returnKeyType = UIReturnKeyDone;
     
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
+    
     btnUpdate.layer.cornerRadius = 45.0/2;
     btnUpdate.backgroundColor = BLUE_COLOR;
     btnUpdate.layer.borderColor = BLUE_COLOR.CGColor;
@@ -133,7 +141,8 @@
     [btnUpdate setTitle:text_update forState:UIControlStateNormal];
     [btnUpdate mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
-        make.right.bottom.equalTo(self.view).offset(-padding);
+        make.right.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.height.mas_equalTo(45.0);
     }];
     

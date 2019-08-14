@@ -42,16 +42,13 @@
 }
 
 - (void)setupUIForView {
-    float padding = 15.0;
-    if ([DeviceUtils isScreen320] || [DeviceUtils isScreen375]) {
-        padding = 5.0;
-    }
+    float padding = 5.0;
     
     //  view menu
     float hMenu = 40.0;
     viewHeader.layer.cornerRadius = hMenu/2;
     [viewHeader mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(padding);
+        make.top.equalTo(self.view).offset(10.0);
         make.left.equalTo(self.view).offset(padding);
         make.right.equalTo(self.view).offset(-padding);
         make.height.mas_equalTo(hMenu);
@@ -59,7 +56,7 @@
     
     eTypePrice = eTypePriceVN;
     [btnVietnam setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-    btnVietnam.titleLabel.font = btnQT.titleLabel.font = [AppDelegate sharedInstance].fontDesc;
+    btnVietnam.titleLabel.font = btnQT.titleLabel.font = [AppDelegate sharedInstance].fontNormal;
     btnVietnam.backgroundColor = BLUE_COLOR;
     btnVietnam.layer.cornerRadius = hMenu/2;
     [btnVietnam setTitle:vietnam_domain_names forState:UIControlStateNormal];
@@ -78,24 +75,26 @@
     }];
     
     //  table content
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    
     tbContent.delegate = self;
     tbContent.dataSource = self;
     tbContent.showsVerticalScrollIndicator = FALSE;
     [tbContent registerNib:[UINib nibWithNibName:@"PriceDomainInfoCell" bundle:nil] forCellReuseIdentifier:@"PriceDomainInfoCell"];
     tbContent.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tbContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.viewHeader.mas_bottom).offset(padding);
-        make.left.bottom.right.equalTo(self.view);
+        make.top.equalTo(self.viewHeader.mas_bottom).offset(10.0);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
     }];
     [self createHeaderViewForTableView];
 }
 
 - (void)createHeaderViewForTableView {
-    float padding = 15.0;
-    if ([DeviceUtils isScreen320]) {
-        padding = 5.0;
-    }
-    
+    float padding = 5.0;
     float sizeItem = (SCREEN_WIDTH - 2*padding - 3*10.0)/4;
     
     UIView *tbHeader = [[UIView alloc] init];
@@ -189,7 +188,7 @@
 -(void)failedGetPricingListWithError:(NSString *)error {
     [WriteLogsUtils writeLogContent:SFM(@"[%s] error = %@", __FUNCTION__, @[error])];
     [ProgressHUD dismiss];
-    [self.view makeToast:@"Không thể lấy bảng giá tên miền" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+    [self.view makeToast:@"Can not get domains pricing list. Please try again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
 }
 
 -(void)getPricingListSuccessfulWithData:(NSDictionary *)data {

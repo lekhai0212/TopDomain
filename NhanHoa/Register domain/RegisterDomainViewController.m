@@ -112,16 +112,25 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     hCell = 90.0;
     
-    scvContent.delegate = self;
-    [scvContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.view);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-    }];
-    
     padding = 15.0;
     if ([DeviceUtils isScreen320]) {
         padding = 5.0;
     }
+    
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
+    
+    scvContent.delegate = self;
+    [scvContent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+    }];
     
     [self getHeightBannerForView];
     [self addBannerImageForView];

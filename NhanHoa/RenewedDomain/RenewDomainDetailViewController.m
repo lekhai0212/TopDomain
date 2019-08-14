@@ -84,7 +84,7 @@
         renewCartVC.ord_id = ordId;
         [self.navigationController pushViewController:renewCartVC animated:TRUE];
     }else{
-        [self.view makeToast:@"Tên miền không tồn tại. Vui lòng kiểm tra lại" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Domain name not exists. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
     }
 }
 
@@ -164,7 +164,7 @@
         [self.navigationController pushViewController:domainDNSVC animated:TRUE];
         
     }else{
-        [self.view makeToast:@"Tên miền không tồn tại. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Domain name not exists. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
     }
 }
 
@@ -181,7 +181,7 @@
         updateDNSVC.domain = lbTopDomain.text;
         [self.navigationController pushViewController:updateDNSVC animated:TRUE];
     }else{
-        [self.view makeToast:@"Tên miền không tồn tại. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Domain name not exists. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
     }
 }
 
@@ -522,39 +522,47 @@
     btnChangeDNS.layer.borderColor = btnUpdatePassport.layer.borderColor = btnSigning.layer.borderColor = btnRenewDomain.layer.borderColor = btnManagerDNS.layer.borderColor = BLUE_COLOR.CGColor;
     btnChangeDNS.layer.borderWidth = btnUpdatePassport.layer.borderWidth = btnSigning.layer.borderWidth = btnRenewDomain.layer.borderWidth = btnManagerDNS.layer.borderWidth = 1.0;
 
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
+    
     [btnManagerDNS setTitle:text_manage_dns_records forState:UIControlStateNormal];
     [btnManagerDNS mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
         make.right.equalTo(self.view).offset(-padding);
-        make.bottom.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.height.mas_equalTo(hBTN);
     }];
     
     [btnChangeDNS setTitle:text_change_name_server forState:UIControlStateNormal];
     [btnChangeDNS mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.btnManagerDNS);
-        make.bottom.equalTo(self.btnManagerDNS.mas_top).offset(-padding);
-        make.height.equalTo(self.btnManagerDNS.mas_height);
+        make.left.right.equalTo(btnManagerDNS);
+        make.bottom.equalTo(btnManagerDNS.mas_top).offset(-padding);
+        make.height.equalTo(btnManagerDNS.mas_height);
     }];
     
     [btnUpdatePassport setTitle:text_update_passport forState:UIControlStateNormal];
     [btnUpdatePassport mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.btnChangeDNS);
-        make.bottom.equalTo(self.btnChangeDNS.mas_top).offset(-padding);
-        make.height.equalTo(self.btnChangeDNS.mas_height);
+        make.left.right.equalTo(btnChangeDNS);
+        make.bottom.equalTo(btnChangeDNS.mas_top).offset(-padding);
+        make.height.equalTo(btnChangeDNS.mas_height);
     }];
     
     [btnSigning mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.btnUpdatePassport);
-        make.bottom.equalTo(self.btnUpdatePassport.mas_top).offset(-padding);
-        make.height.equalTo(self.btnUpdatePassport.mas_height);
+        make.left.right.equalTo(btnUpdatePassport);
+        make.bottom.equalTo(btnUpdatePassport.mas_top).offset(-padding);
+        make.height.equalTo(btnUpdatePassport.mas_height);
     }];
     
     [btnRenewDomain setTitle:text_renew_domain forState:UIControlStateNormal];
     [btnRenewDomain mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.btnSigning);
-        make.bottom.equalTo(self.btnSigning.mas_top).offset(-padding);
-        make.height.equalTo(self.btnSigning.mas_height);
+        make.left.right.equalTo(btnSigning);
+        make.bottom.equalTo(btnSigning.mas_top).offset(-padding);
+        make.height.equalTo(btnSigning.mas_height);
     }];
     
     lbNoData.hidden = TRUE;
@@ -598,7 +606,7 @@
     if (![AppUtils isNullOrEmpty: message]) {
         [self.view makeToast:message duration:1.5 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     }else{
-        [self.view makeToast:@"Cập nhật thành công" duration:1.5 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+        [self.view makeToast:@"Updated sucessful" duration:1.5 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     }
     swWhoisProtect.enabled = TRUE;
 }

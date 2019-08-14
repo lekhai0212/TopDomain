@@ -385,8 +385,6 @@
         make.left.equalTo(self.lbNotAccount.mas_right).offset(10.0);
         make.width.mas_equalTo(sizeText2.width);
     }];
-    
-    safe area
 }
 
 - (void)processForLoginSuccessful {

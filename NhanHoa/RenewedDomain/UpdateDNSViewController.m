@@ -79,7 +79,7 @@
     [btnSave setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     
     if ([AppUtils isNullOrEmpty: tfDNS1.text] && [AppUtils isNullOrEmpty: tfDNS2.text] && [AppUtils isNullOrEmpty: tfDNS3.text] && [AppUtils isNullOrEmpty: tfDNS4.text]){
-        [self.view makeToast:@"Vui lòng nhập giá trị để cập nhật!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Please enter value to update!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
@@ -125,49 +125,57 @@
     
     [AppUtils setBorderForTextfield:tfDNS1 borderColor:BORDER_COLOR];
     [tfDNS1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.lbDNS1);
-        make.left.equalTo(self.lbDNS1.mas_right).offset(padding);
+        make.top.bottom.equalTo(lbDNS1);
+        make.left.equalTo(lbDNS1.mas_right).offset(padding);
         make.right.equalTo(self.view).offset(-padding);
     }];
     
     //  DNS2
     [lbDNS2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lbDNS1);
-        make.top.equalTo(self.lbDNS1.mas_bottom).offset(padding);
+        make.left.right.equalTo(lbDNS1);
+        make.top.equalTo(lbDNS1.mas_bottom).offset(padding);
         make.height.mas_equalTo([AppDelegate sharedInstance].hTextfield);
     }];
     
     [AppUtils setBorderForTextfield:tfDNS2 borderColor:BORDER_COLOR];
     [tfDNS2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.lbDNS2);
-        make.left.right.equalTo(self.tfDNS1);
+        make.top.bottom.equalTo(lbDNS2);
+        make.left.right.equalTo(tfDNS1);
     }];
     
     //  DNS3
     [lbDNS3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lbDNS2);
-        make.top.equalTo(self.lbDNS2.mas_bottom).offset(padding);
+        make.left.right.equalTo(lbDNS2);
+        make.top.equalTo(lbDNS2.mas_bottom).offset(padding);
         make.height.mas_equalTo([AppDelegate sharedInstance].hTextfield);
     }];
     
     [AppUtils setBorderForTextfield:tfDNS3 borderColor:BORDER_COLOR];
     [tfDNS3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.lbDNS3);
-        make.left.right.equalTo(self.tfDNS2);
+        make.top.bottom.equalTo(lbDNS3);
+        make.left.right.equalTo(tfDNS2);
     }];
     
     //  DNS4
     [lbDNS4 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lbDNS3);
-        make.top.equalTo(self.lbDNS3.mas_bottom).offset(padding);
+        make.left.right.equalTo(lbDNS3);
+        make.top.equalTo(lbDNS3.mas_bottom).offset(padding);
         make.height.mas_equalTo([AppDelegate sharedInstance].hTextfield);
     }];
     
     [AppUtils setBorderForTextfield:tfDNS4 borderColor:BORDER_COLOR];
     [tfDNS4 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.lbDNS4);
-        make.left.right.equalTo(self.tfDNS3);
+        make.top.bottom.equalTo(lbDNS4);
+        make.left.right.equalTo(tfDNS3);
     }];
+    
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
     
     btnCancel.backgroundColor = OLD_PRICE_COLOR;
     btnCancel.layer.borderColor = OLD_PRICE_COLOR.CGColor;
@@ -176,7 +184,7 @@
     [btnCancel setTitle:text_reset forState:UIControlStateNormal];
     [btnCancel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
-        make.bottom.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.right.equalTo(self.view.mas_centerX).offset(-padding/2);
         make.height.mas_equalTo(45.0);
     }];
@@ -187,8 +195,8 @@
     [btnSave setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [btnSave setTitle:text_update forState:UIControlStateNormal];
     [btnSave mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.btnCancel.mas_right).offset(padding);
-        make.top.bottom.equalTo(self.btnCancel);
+        make.left.equalTo(btnCancel.mas_right).offset(padding);
+        make.top.bottom.equalTo(btnCancel);
         make.right.equalTo(self.view).offset(-padding);
     }];
     
@@ -206,7 +214,7 @@
         dictDNS = [[NSMutableDictionary alloc] initWithDictionary: data];
         [self showDNSContent];
     }else{
-        [self.view makeToast:@"Không lấy được giá trị DNS của tên miền!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Can not get DNS value!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
     }
 }
 
@@ -244,7 +252,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s] error = %@", __FUNCTION__, @[error])];
     
     [ProgressHUD dismiss];
-    [self.view makeToast:@"Không lấy được giá trị DNS của tên miền!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+    [self.view makeToast:@"Failed. Please try later!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
 }
 
 -(void)getDNSForDomainSuccessfulWithData:(NSDictionary *)data {
@@ -272,7 +280,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     [ProgressHUD dismiss];
     
-    [self.view makeToast:@"Cập nhật DNS thành công" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+    [self.view makeToast:@"Updated successful." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     [self performSelector:@selector(dismissView) withObject:nil afterDelay:2.0];
 }
 

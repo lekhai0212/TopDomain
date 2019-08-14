@@ -135,14 +135,20 @@
         make.width.mas_equalTo([AppDelegate sharedInstance].hTextfield-6.0);
     }];
     
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
     
+    tbProfiles.showsVerticalScrollIndicator = FALSE;
     [tbProfiles registerNib:[UINib nibWithNibName:@"ProfileManagerCell" bundle:nil] forCellReuseIdentifier:@"ProfileManagerCell"];
     tbProfiles.separatorStyle = UITableViewCellSeparatorStyleNone;
     tbProfiles.delegate = self;
     tbProfiles.dataSource = self;
     [tbProfiles mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfSearch.mas_bottom).offset(padding);
-        make.left.bottom.right.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
     }];
     
     lbNoData.hidden = TRUE;

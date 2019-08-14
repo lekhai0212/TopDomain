@@ -231,9 +231,18 @@
         make.left.right.equalTo(self.lbEmailValue);
     }];
     
+    //  table content
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
+    
     [btnChangePassword setTitle:text_change_password forState:UIControlStateNormal];
     [btnChangePassword mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.left.equalTo(self.view).offset(padding);
         make.right.equalTo(self.view).offset(-padding);
         make.height.mas_equalTo(45.0);

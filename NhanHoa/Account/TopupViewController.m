@@ -296,6 +296,16 @@
     tfMoney.rightView = lbCurrency;
     tfMoney.rightViewMode = UITextFieldViewModeAlways;
     
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        //  CGFloat topPadding = window.safeAreaInsets.top;
+        bottomPadding = window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
+    
     btnTopup.layer.cornerRadius = hItem/2;
     btnTopup.layer.borderWidth = 1.0;
     btnTopup.layer.borderColor = BLUE_COLOR.CGColor;
@@ -303,7 +313,7 @@
     btnTopup.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     [btnTopup setTitle:text_top_up forState:UIControlStateNormal];
     [btnTopup mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.left.equalTo(self.view).offset(padding);
         make.right.equalTo(self.view).offset(-padding);
         make.height.mas_equalTo(hItem);

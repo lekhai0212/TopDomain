@@ -69,6 +69,11 @@
 }
 
 - (void)addUpdatePersonalProfileView {
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    
     if (editPersonalView == nil) {
         NSArray *toplevelObject = [[NSBundle mainBundle] loadNibNamed:@"UpdatePersonalProfile" owner:nil options:nil];
         for(id currentObject in toplevelObject){
@@ -83,7 +88,7 @@
     [editPersonalView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.scvContent);
         make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(SCREEN_HEIGHT-[AppDelegate sharedInstance].hNav-[AppDelegate sharedInstance].hStatusBar);
+        make.height.mas_equalTo(SCREEN_HEIGHT-[AppDelegate sharedInstance].hNav-[AppDelegate sharedInstance].hStatusBar - bottomPadding);
     }];
     [editPersonalView setupUIForView];
 }

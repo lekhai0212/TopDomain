@@ -43,6 +43,14 @@
         padding = 5.0;
     }
     
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
+    
     btnContinue.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     btnContinue.layer.cornerRadius = 45.0/2;
     btnContinue.layer.borderWidth = 1.0;
@@ -52,7 +60,8 @@
     [btnContinue setTitle:text_continue forState:UIControlStateNormal];
     [btnContinue mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
-        make.bottom.right.equalTo(self.view).offset(-padding);
+        make.right.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.height.mas_equalTo(45.0);
     }];
     

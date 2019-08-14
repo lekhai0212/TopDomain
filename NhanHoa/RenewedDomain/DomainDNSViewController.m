@@ -103,7 +103,8 @@
     lbInfo.font = [AppDelegate sharedInstance].fontBTN;
     lbInfo.textAlignment = NSTextAlignmentCenter;
     lbInfo.textColor = TITLE_COLOR;
-    lbInfo.text = @"Tên miền của bạn đang sử dụng name server không thuộc hệ thống Nhân Hòa, bạn cần đổi name server theo thông tin bên dưới sau đó vào lại mục này.\n\nns1.zonedns.vn\nns2.zonedns.vn\nns3.zonedns.vn\nns4.zonedns.vn";
+    lbInfo.text = @"Your domains which you are using not belong to our system, you need change name server with under informations and back this folder again.\n\nns1.zonedns.vn\nns2.zonedns.vn\nns3.zonedns.vn\nns4.zonedns.vn";
+    
     [lbInfo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(viewNotSupport.mas_centerY).offset(-10.0);
         make.left.equalTo(viewNotSupport).offset(5.0);
@@ -776,7 +777,7 @@
         updateDNSVC.domain = domainName;
         [self.navigationController pushViewController:updateDNSVC animated:TRUE];
     }else{
-        [self.view makeToast:@"Tên miền không tồn tại. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Domain name not exists. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
     }
 }
 @end

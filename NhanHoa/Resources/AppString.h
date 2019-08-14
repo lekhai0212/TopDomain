@@ -412,8 +412,8 @@
 #define text_position           @"Position"
 
 #define text_registration_purpose   @"Registration purpose"
-#define vietnam_domain_names        @"VietNam domain names"
-#define international_domain_names  @"International domain names"
+#define vietnam_domain_names        @"VietNam domains"
+#define international_domain_names  @"International domains"
 
 #define text_create_pforile     @"Create profile"
 
@@ -463,6 +463,7 @@
 #define text_proceed_to_register    @"Proceed to register"
 #define text_payment_with_onepay    @"Payment with Onepay"
 #define text_payment_with_paypal    @"Payment with Paypal"
+#define text_proceed_to_renew       @"Proceed to renew"
 
 #define text_profile_info       @"Profile info"
 #define text_acc_info           @"Account info"
@@ -481,6 +482,10 @@
 #define pls_select_profile      @"Please select profile for all domains!"
 #define text_top_up             @"Top up"
 #define text_top_up_your_wallet @"Top up your wallet"
+
+#define text_getting_info       @"Getting info..."
+#define text_renew              @"Renew"
+#define text_later              @"Later"
 
 #endif /* AppString_h */
 

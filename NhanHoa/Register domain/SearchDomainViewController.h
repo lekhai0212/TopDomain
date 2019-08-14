@@ -36,12 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *lbRelationDomain;
 @property (weak, nonatomic) IBOutlet UITableView *tbDomains;
 
-@property (nonatomic, assign) float padding;
 @property (nonatomic, strong) NSString *strSearch;
 
 @property (nonatomic, strong) NSMutableArray *listDomains;
-@property (nonatomic, assign) float hTableView;
-@property (nonatomic, assign) float hSearch;
 @property (weak, nonatomic) IBOutlet UIButton *btnContinue;
 
 - (IBAction)icCartClick:(UIButton *)sender;

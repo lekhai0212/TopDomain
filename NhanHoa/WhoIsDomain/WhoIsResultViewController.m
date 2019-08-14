@@ -76,6 +76,13 @@
 }
 
 - (void)setupUIForView {
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
     
     [self checkToEnableContinueButton];
     btnContinue.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
@@ -85,7 +92,7 @@
     [btnContinue mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
         make.width.mas_equalTo(SCREEN_WIDTH-2*padding);
-        make.bottom.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.height.mas_equalTo(45.0);
     }];
     
@@ -94,7 +101,7 @@
     scvContent.delegate = self;
     [scvContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.view);
-        make.bottom.equalTo(self.btnContinue.mas_top).offset(-padding);
+        make.bottom.equalTo(btnContinue.mas_top).offset(-padding);
         make.width.mas_equalTo(SCREEN_WIDTH);
     }];
 }

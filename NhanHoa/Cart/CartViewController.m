@@ -228,8 +228,14 @@
     }];
     
     //  scroll view content
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    
     [scvContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.equalTo(self.view);
+        make.top.left.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.width.mas_equalTo(SCREEN_WIDTH);
     }];
     
@@ -259,6 +265,7 @@
     }];
     
     float hTableView = [self getHeightForTableView];
+    tbDomains.showsVerticalScrollIndicator = FALSE;
     tbDomains.separatorStyle = UITableViewCellSelectionStyleNone;
     [tbDomains registerNib:[UINib nibWithNibName:@"CartDomainItemCell" bundle:nil] forCellReuseIdentifier:@"CartDomainItemCell"];
     tbDomains.delegate = self;
@@ -273,7 +280,7 @@
     
     //  footer view
     float hFooter = padding + 3*30 + 2*padding + 45.0 + padding + 45.0 + padding;
-    float maxHeightScroll = SCREEN_HEIGHT - ([AppDelegate sharedInstance].hStatusBar + [AppDelegate sharedInstance].hNav);
+    float maxHeightScroll = SCREEN_HEIGHT - ([AppDelegate sharedInstance].hStatusBar + [AppDelegate sharedInstance].hNav + bottomPadding);
     if (self.hInfo + hTableView + hFooter > maxHeightScroll) {
         [viewFooter mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.scvContent);

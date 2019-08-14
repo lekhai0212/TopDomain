@@ -229,13 +229,19 @@ typedef enum TypeSelectDomain{
 //    [refreshControl addTarget:self action:@selector(refreshDomainsList:) forControlEvents:UIControlEventValueChanged];
 //    [tbDomain addSubview:refreshControl];
     
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    
     tbDomain.separatorStyle = UITableViewCellSelectionStyleNone;
     tbDomain.delegate = self;
     tbDomain.dataSource = self;
     [tbDomain registerNib:[UINib nibWithNibName:@"ExpireDomainCell" bundle:nil] forCellReuseIdentifier:@"ExpireDomainCell"];
     tbDomain.showsVerticalScrollIndicator = FALSE;
     [tbDomain mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.top.equalTo(self.tfSearch.mas_bottom).offset(padding);
     }];
     

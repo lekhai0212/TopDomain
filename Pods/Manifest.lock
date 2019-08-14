@@ -1,4 +1,5 @@
 PODS:
+  - CardIO (5.4.1)
   - CocoaLumberjack (3.5.3):
     - CocoaLumberjack/Core (= 3.5.3)
   - CocoaLumberjack/Core (3.5.3)
@@ -71,6 +72,12 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - PayPal-iOS-SDK (2.18.1):
+    - PayPal-iOS-SDK/CardIO (= 2.18.1)
+    - PayPal-iOS-SDK/Core (= 2.18.1)
+  - PayPal-iOS-SDK/CardIO (2.18.1):
+    - CardIO (~> 5.4.1)
+  - PayPal-iOS-SDK/Core (2.18.1)
   - ProgressHUD (2.51)
   - Protobuf (3.7.0)
   - SDWebImage (5.0.3):
@@ -88,12 +95,14 @@ DEPENDENCIES:
   - FirebaseInstanceID
   - FirebaseMessaging
   - Masonry
+  - PayPal-iOS-SDK
   - ProgressHUD
   - SDWebImage
   - Toast
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - CardIO
     - CocoaLumberjack
     - Crashlytics
     - Fabric
@@ -107,12 +116,14 @@ SPEC REPOS:
     - GoogleUtilities
     - Masonry
     - nanopb
+    - PayPal-iOS-SDK
     - ProgressHUD
     - Protobuf
     - SDWebImage
     - Toast
 
 SPEC CHECKSUMS:
+  CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
@@ -126,11 +137,12 @@ SPEC CHECKSUMS:
   GoogleUtilities: 84df567c76ca84f67b7bb40e769fdd4acc746a10
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  PayPal-iOS-SDK: 10654cd111e911a9807bddb96fae81aacb8e9915
   ProgressHUD: 54b4c2fa202bf3da7dddc1c698ae4e6376333bd9
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   SDWebImage: d4f87d7d36c8a4d9f9459dc282e0caa057fdf935
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 6320f5ebcfe3ad6682eb9af1c9e4692b21b55770
+PODFILE CHECKSUM: 92915f99d02111a923e89169f5eb5dd8443161b1
 
 COCOAPODS: 1.7.5

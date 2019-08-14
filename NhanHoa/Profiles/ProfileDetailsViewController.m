@@ -52,6 +52,11 @@
 }
 
 - (void)addUpdatePersonalProfileViewIfNeed {
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    
     if (personalProfileView == nil) {
         NSArray *toplevelObject = [[NSBundle mainBundle] loadNibNamed:@"NewProfileView" owner:nil options:nil];
         for(id currentObject in toplevelObject){
@@ -64,12 +69,18 @@
     }
     personalProfileView.delegate = self;
     [personalProfileView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.view);
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
     }];
     [personalProfileView setupForAddProfileUIForAddNew: FALSE isUpdate: TRUE];
 }
 
 - (void)addUpdateBusinessProfileViewIfNeed {
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    
     if (businessProfileView == nil) {
         NSArray *toplevelObject = [[NSBundle mainBundle] loadNibNamed:@"NewBusinessProfileView" owner:nil options:nil];
         for(id currentObject in toplevelObject){
@@ -82,7 +93,8 @@
     }
     businessProfileView.delegate = self;
     [businessProfileView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.view);
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
     }];
     [businessProfileView setupUIForViewForAddProfile:FALSE update:TRUE];
 }

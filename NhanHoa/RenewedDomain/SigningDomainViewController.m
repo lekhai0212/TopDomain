@@ -40,12 +40,20 @@
         [wvContent loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: domain_signing_url]]];
         
     }else{
-        [self.view makeToast:@"Dữ liệu không hợp lệ. Vui lòng kiểm tra lại." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Data is incorrect. Please check again." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
     }
     
 }
 
 - (void)setupUIForView {
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = 5.0;
+    }
+    
     wvContent.keyboardDisplayRequiresUserAction = FALSE;
     //  wvContent.usesGUIFixes = YES;
     wvContent.opaque = NO;
@@ -55,7 +63,7 @@
     [wvContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view).offset(5.0);
-        make.bottom.equalTo(self.view).offset(-5.0);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
     }];
     
     icWaiting.hidden = TRUE;

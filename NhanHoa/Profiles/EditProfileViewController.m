@@ -77,6 +77,11 @@
 }
 
 - (void)addUpdatePersonalProfileViewIfNeed {
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    
     if (personalProfileView == nil) {
         NSArray *toplevelObject = [[NSBundle mainBundle] loadNibNamed:@"NewProfileView" owner:nil options:nil];
         for(id currentObject in toplevelObject){
@@ -91,7 +96,8 @@
     personalProfileView.tfName.backgroundColor = LIGHT_GRAY_COLOR;
     
     [personalProfileView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.view);
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
     }];
     personalProfileView.delegate = self;
     [personalProfileView setupForAddProfileUIForAddNew: FALSE isUpdate: TRUE];
@@ -99,6 +105,11 @@
 }
 
 - (void)addUpdateBusinessProfileViewIfNeed {
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    
     if (businessProfileView == nil) {
         NSArray *toplevelObject = [[NSBundle mainBundle] loadNibNamed:@"NewBusinessProfileView" owner:nil options:nil];
         for(id currentObject in toplevelObject){
@@ -113,7 +124,8 @@
     businessProfileView.tfBusinessName.backgroundColor = LIGHT_GRAY_COLOR;
     
     [businessProfileView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.view);
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
     }];
     businessProfileView.delegate = self;
     [businessProfileView setupUIForViewForAddProfile:FALSE update:TRUE];

@@ -21,7 +21,7 @@
 @end
 
 @implementation UpdatePassportViewController
-@synthesize btnBanKhai, imgWaitBanKhai, lbBanKhai, btnCMND_a,imgWaitCMND_a, lbCMND_a, btnCMND_b, imgWaitCMND_b, lbCMND_b, btnSave, btnCancel;
+@synthesize btnBanKhai, imgWaitBanKhai, lbBanKhai, btnCMND_a,imgWaitCMND_a, lbCMND_a, btnCMND_b, imgWaitCMND_b, lbCMND_b;
 @synthesize linkCMND_a, linkCMND_b, cusId, curCMND_a, curCMND_b, linkBanKhai, curBanKhai, domain, domainId, domainType;
 
 - (void)viewDidLoad {
@@ -79,12 +79,12 @@
 
 - (void)saveInfo {
     if ([AppDelegate sharedInstance].editCMND_a == nil && [AppDelegate sharedInstance].editCMND_b == nil && [AppDelegate sharedInstance].editBanKhai == nil) {
-        [self.view makeToast:@"Vui lòng chọn hình ảnh để cập nhật!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Please select photos to update!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
     if ([AppUtils isNullOrEmpty: cusId]) {
-        [self.view makeToast:@"Không thể lấy được cusId. Vui lòng thử lại sau!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Can not found cusId. Please try later!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     
@@ -185,25 +185,6 @@
     }else{
         [self showActionSheetChooseWithRemove: TRUE];
     }
-}
-
-- (IBAction)btnCancelPress:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated: TRUE];
-}
-
-- (IBAction)btnSavePress:(UIButton *)sender {
-    if ([AppDelegate sharedInstance].editCMND_a == nil && [AppDelegate sharedInstance].editCMND_b == nil) {
-        [self.view makeToast:@"Bạn chưa chọn CMND để cập nhật!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
-        return;
-    }
-    
-    if ([AppUtils isNullOrEmpty: cusId]) {
-        [self.view makeToast:@"Không thể lấy được cusId. Vui lòng thử lại sau!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
-        return;
-    }
-    
-    [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Updating... Please wait a seconds" Interaction:NO];
 }
 
 - (void)uploadBanKhaiPicture {
@@ -316,7 +297,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     
     if ([AppUtils isNullOrEmpty: linkCMND_a] && [AppUtils isNullOrEmpty: linkCMND_b] && [AppUtils isNullOrEmpty: linkBanKhai]) {
-        [self.view makeToast:@"CMND của bạn chưa được tải thành công. Vui lòng thử lại!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Can not upload your photo. Please try later!" duration:3.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         return;
     }
     [WebServiceUtils getInstance].delegate = self;
@@ -337,11 +318,14 @@
 - (void)setupUIForView {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    
     float padding = 15.0;
-    float hFooterBTN = 45.0;
     float hLabel = 25.0;
-    float hBTN = (SCREEN_HEIGHT - ([AppDelegate sharedInstance].hNav + 3*2*padding + 2*hLabel + hFooterBTN + 10.0))/2;
-    hBTN = (SCREEN_HEIGHT - ([AppDelegate sharedInstance].hNav + [AppDelegate sharedInstance].hStatusBar + 4*padding + 3*hLabel))/3;
+    float hBTN = (SCREEN_HEIGHT - ([AppDelegate sharedInstance].hNav + [AppDelegate sharedInstance].hStatusBar + 4*padding + 3*hLabel + bottomPadding))/3;
     
     imgWaitBanKhai.backgroundColor = imgWaitCMND_a.backgroundColor = imgWaitCMND_b.backgroundColor = UIColor.whiteColor;
     imgWaitBanKhai.alpha = imgWaitCMND_a.alpha = imgWaitCMND_b.alpha = 0.5;
@@ -366,8 +350,8 @@
     
     lbBanKhai.text = @"Birth certificate";
     [lbBanKhai mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.btnBanKhai.mas_bottom);
-        make.left.right.equalTo(self.btnBanKhai);
+        make.top.equalTo(btnBanKhai.mas_bottom);
+        make.left.right.equalTo(btnBanKhai);
         make.height.mas_equalTo(hLabel);
     }];
     
@@ -375,19 +359,19 @@
     btnCMND_a.imageEdgeInsets = UIEdgeInsetsMake(7.5, 20, 7.5, 20);
     [btnCMND_a.imageView setContentMode: UIViewContentModeScaleAspectFit];
     [btnCMND_a mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lbBanKhai.mas_bottom).offset(padding);
-        make.left.right.equalTo(self.btnBanKhai);
+        make.top.equalTo(lbBanKhai.mas_bottom).offset(padding);
+        make.left.right.equalTo(btnBanKhai);
         make.height.mas_equalTo(hBTN);
     }];
 
     [imgWaitCMND_a mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.btnCMND_a);
+        make.top.left.bottom.right.equalTo(btnCMND_a);
     }];
     
     lbCMND_a.text = text_front;
     [lbCMND_a mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.btnCMND_a.mas_bottom);
-        make.left.right.equalTo(self.btnCMND_a);
+        make.top.equalTo(btnCMND_a.mas_bottom);
+        make.left.right.equalTo(btnCMND_a);
         make.height.mas_equalTo(hLabel);
     }];
 
@@ -396,43 +380,23 @@
 
     [btnCMND_b.imageView setContentMode: UIViewContentModeScaleAspectFit];
     [btnCMND_b mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lbCMND_a.mas_bottom).offset(padding);
-        make.left.right.equalTo(self.lbCMND_a);
+        make.top.equalTo(lbCMND_a.mas_bottom).offset(padding);
+        make.left.right.equalTo(lbCMND_a);
         make.height.mas_equalTo(hBTN);
     }];
 
     [imgWaitCMND_b mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.btnCMND_b);
+        make.top.left.bottom.right.equalTo(btnCMND_b);
     }];
 
     lbCMND_b.text = text_backside;
     [lbCMND_b mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.btnCMND_b.mas_bottom);
-        make.left.right.equalTo(self.btnCMND_b);
+        make.top.equalTo(btnCMND_b.mas_bottom);
+        make.left.right.equalTo(btnCMND_b);
         make.height.mas_equalTo(hLabel);
     }];
 
-    [btnCancel setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-    btnCancel.backgroundColor = OLD_PRICE_COLOR;
-    btnCancel.layer.cornerRadius = hFooterBTN/2;
-    [btnCancel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(padding);
-        make.bottom.equalTo(self.view).offset(-padding);
-        make.right.equalTo(self.view.mas_centerX).offset(-padding/2);
-        make.height.mas_equalTo(hFooterBTN);
-    }];
-
-    [btnSave setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-    btnSave.backgroundColor = BLUE_COLOR;
-    btnSave.layer.cornerRadius = btnCancel.layer.cornerRadius;
-    [btnSave mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.btnCancel);
-        make.left.equalTo(self.btnCancel.mas_right).offset(padding);
-        make.right.equalTo(self.view).offset(-padding);
-    }];
-
-    btnCancel.hidden = btnSave.hidden = TRUE;
-    btnCancel.titleLabel.font = btnSave.titleLabel.font = lbCMND_a.font = lbCMND_b.font = [AppDelegate sharedInstance].fontBTN;
+    lbCMND_a.font = lbCMND_b.font = [AppDelegate sharedInstance].fontBTN;
     lbBanKhai.textColor = lbCMND_a.textColor = lbCMND_b.textColor = TITLE_COLOR;
 }
 
@@ -591,7 +555,7 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s]", __FUNCTION__)];
     
     [ProgressHUD dismiss];
-    [self.view makeToast:@"CMND đã được cập nhật thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+    [self.view makeToast:@"Your passport photos was updated successful." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     [self performSelector:@selector(popupToPreviousView) withObject:nil afterDelay:2.0];
 }
 

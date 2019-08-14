@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Gia hạn tên miền";
+    self.title = text_renew_domain;
     [self setupUIForView];
 }
 
@@ -42,11 +42,10 @@
     priceForRenew = 0;
     
     [self addTableViewForSelectYears];
-    
     [self updateAllPriceForView];
     
     [ProgressHUD backgroundColor: ProgressHUD_BG];
-    [ProgressHUD show:@"Đang lấy thông tin..." Interaction:NO];
+    [ProgressHUD show:text_getting_info Interaction:NO];
     [tbDomain reloadData];
     
     [WebServiceUtils getInstance].delegate = self;
@@ -72,22 +71,22 @@
             {
                 [self confirmRenewOrderView];
             }else{
-                [self.view makeToast:@"Dữ liệu không hợp lệ. Vui lòng thử lại sau!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+                [self.view makeToast:@"We can not get enough information to renew. Please try again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
             }
         }else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Số tiền hiện tại trong ví của bạn không đủ để thanh toán.\nBạn có muốn nạp tiền ngay?" delegate:self cancelButtonTitle:@"Để sau" otherButtonTitles:topup_now, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Your balance can not enough to pay.\nDo you want to top up into wallet now?" delegate:self cancelButtonTitle:text_later otherButtonTitles:topup_now, nil];
             alert.tag = 2;
             [alert show];
         }
     }else{
-        [self.view makeToast:@"Dữ liệu không hợp lệ. Vui lòng kiểm tra lại!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Data is incorrect. Please check again!" duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
     }
 }
 
 - (void)confirmRenewOrderView {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
     
-    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"Bạn chắc chắn muốn gia hạn tên miền này?"];
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:@"Do you want to renew this domain?"];
     [attrTitle addAttribute:NSFontAttributeName value:[UIFont fontWithName:RobotoRegular size:16.0] range:NSMakeRange(0, attrTitle.string.length)];
     [alertVC setValue:attrTitle forKey:@"attributedTitle"];
     
@@ -97,7 +96,7 @@
                                                      }];
     [btnClose setValue:UIColor.redColor forKey:@"titleTextColor"];
     
-    UIAlertAction *btnRenew = [UIAlertAction actionWithTitle:@"Gia hạn" style:UIAlertActionStyleDefault
+    UIAlertAction *btnRenew = [UIAlertAction actionWithTitle:text_renew style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction *action){
                                                          [ProgressHUD backgroundColor: ProgressHUD_BG];
                                                          [ProgressHUD show:text_processing Interaction:NO];
@@ -135,12 +134,22 @@
     }];
     
     //  continue button
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
+    
     btnContinue.layer.cornerRadius = 45.0/2;
     btnContinue.backgroundColor = BLUE_COLOR;
     btnContinue.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
+    [btnContinue setTitle:text_proceed_to_renew forState:UIControlStateNormal];
     [btnContinue mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
-        make.right.bottom.equalTo(self.view).offset(-padding);
+        make.right.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.height.mas_equalTo(45.0);
     }];
     
@@ -148,60 +157,54 @@
     float hFooter = padding + 4*30 + padding;
     [viewFooter mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
-        make.top.equalTo(self.lbSepa.mas_bottom);
+        make.top.equalTo(lbSepa.mas_bottom);
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(hFooter);
     }];
     
     //  price
-    lbDomainPrice.textColor = TITLE_COLOR;
-    lbDomainPrice.font = [UIFont fontWithName:RobotoRegular size:16.0];
+    lbDomainPrice.text = text_total;
     [lbDomainPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(self.viewFooter).offset(padding);
-        make.right.equalTo(self.viewFooter.mas_centerX).offset(-padding/2);
+        make.top.left.equalTo(viewFooter).offset(padding);
+        make.right.equalTo(viewFooter.mas_centerX).offset(-padding/2);
         make.height.mas_equalTo(30.0);
     }];
     
-    lbDomainPriceValue.textColor = lbDomainPrice.textColor;
-    lbDomainPriceValue.font = lbDomainPrice.font;
     [lbDomainPriceValue mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.viewFooter.mas_centerX).offset(padding/2);
-        make.top.bottom.equalTo(self.lbDomainPrice);
-        make.right.equalTo(self.viewFooter).offset(-padding);
+        make.left.equalTo(viewFooter.mas_centerX).offset(padding/2);
+        make.top.bottom.equalTo(lbDomainPrice);
+        make.right.equalTo(viewFooter).offset(-padding);
     }];
     
     //  VAT
-    lbVAT.textColor = TITLE_COLOR;
-    lbVAT.font = [UIFont fontWithName:RobotoRegular size:16.0];
     [lbVAT mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lbDomainPrice.mas_bottom);
-        make.left.right.equalTo(self.lbDomainPrice);
-        make.height.equalTo(self.lbDomainPrice.mas_height);
+        make.top.equalTo(lbDomainPrice.mas_bottom);
+        make.left.right.equalTo(lbDomainPrice);
+        make.height.equalTo(lbDomainPrice.mas_height);
     }];
     
-    lbVATValue.textColor = lbDomainPrice.textColor;
-    lbVATValue.font = lbDomainPrice.font;
     [lbVATValue mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lbDomainPriceValue);
-        make.top.bottom.equalTo(self.lbVAT);
+        make.left.right.equalTo(lbDomainPriceValue);
+        make.top.bottom.equalTo(lbVAT);
     }];
-    
     
     //  Total price
-    lbTotalPrice.textColor = TITLE_COLOR;
-    lbTotalPrice.font = [UIFont fontWithName:RobotoMedium size:16.0];
+    lbTotalPrice.text = text_total_payment;
     [lbTotalPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lbVAT.mas_bottom);
-        make.left.right.equalTo(self.lbVAT);
-        make.height.equalTo(self.lbVAT.mas_height);
+        make.top.equalTo(lbVAT.mas_bottom);
+        make.left.right.equalTo(lbVAT);
+        make.height.equalTo(lbVAT.mas_height);
     }];
     
-    lbTotalPriceValue.textColor = NEW_PRICE_COLOR;
-    lbTotalPriceValue.font = [UIFont fontWithName:RobotoMedium size:16.0];
     [lbTotalPriceValue mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lbVATValue);
-        make.top.bottom.equalTo(self.lbTotalPrice);
+        make.left.right.equalTo(lbVATValue);
+        make.top.bottom.equalTo(lbTotalPrice);
     }];
+    
+    lbDomainPrice.textColor = lbDomainPriceValue.textColor = lbVAT.textColor = lbVATValue.textColor = lbTotalPrice.textColor = TITLE_COLOR;
+    lbTotalPriceValue.textColor = NEW_PRICE_COLOR;
+    lbDomainPriceValue.font = lbVATValue.font = lbTotalPriceValue.font = [AppDelegate sharedInstance].fontRegular;
+    lbDomainPrice.font = lbVAT.font = lbTotalPrice.font = [AppDelegate sharedInstance].fontMedium;
 }
 
 - (void)updateAllPriceForView {
@@ -251,7 +254,7 @@
         SelectYearsCell *cell = (SelectYearsCell *)[tableView dequeueReusableCellWithIdentifier:@"SelectYearsCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.lbContent.text = [NSString stringWithFormat:@"%d năm", (int)indexPath.row + 1];
+        cell.lbContent.text = [NSString stringWithFormat:@"%d %@", (int)indexPath.row + 1, text_year];
         return cell;
         
     }else{
@@ -262,7 +265,7 @@
         
         cell.lbNum.text = [NSString stringWithFormat:@"%d.", (int)indexPath.row + 1];
         cell.lbName.text = domainName;
-        cell.tfYears.text = [NSString stringWithFormat:@"%d năm", yearsForRenew];
+        cell.tfYears.text = [NSString stringWithFormat:@"%d %@", yearsForRenew, text_year];
         
         [cell displayDataWithInfo: domainInfo forYear: yearsForRenew];
         
@@ -272,6 +275,8 @@
         [cell.btnYears addTarget:self
                           action:@selector(selectYearsForDomain:)
                 forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.protectView.hidden = TRUE;
         
         return cell;
     }
@@ -284,7 +289,7 @@
         [tbDomain reloadData];
         
         [UIView animateWithDuration:0.15 animations:^{
-            self.tbSelectYear.frame = CGRectMake(self.tbSelectYear.frame.origin.x, self.tbSelectYear.frame.origin.y, self.tbSelectYear.frame.size.width, 0);
+            tbSelectYear.frame = CGRectMake(tbSelectYear.frame.origin.x, tbSelectYear.frame.origin.y, tbSelectYear.frame.size.width, 0);
         }];
     }
 }
@@ -312,14 +317,14 @@
         
         tbSelectYear.hidden = FALSE;
         [UIView animateWithDuration:0.15 animations:^{
-            self.tbSelectYear.frame = CGRectMake(sender.frame.origin.x, newYFrame, sender.frame.size.width, hTbView);
+            tbSelectYear.frame = CGRectMake(sender.frame.origin.x, newYFrame, sender.frame.size.width, hTbView);
         }];
     }else{
         tbSelectYear.frame = CGRectMake(sender.frame.origin.x, newYFrame, sender.frame.size.width, 0);
         
         float hTbView = 6*sender.frame.size.height;
         [UIView animateWithDuration:0.15 animations:^{
-            self.tbSelectYear.frame = CGRectMake(sender.frame.origin.x, newYFrame, sender.frame.size.width, hTbView);
+            tbSelectYear.frame = CGRectMake(sender.frame.origin.x, newYFrame, sender.frame.size.width, hTbView);
         }];
     }
 }
@@ -382,7 +387,7 @@
 
 -(void)loginSucessfulWithData:(NSDictionary *)data {
     [ProgressHUD dismiss];
-    [self.view makeToast:@"Tên miền đã được gia hạn thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
+    [self.view makeToast:@"Your domain was renewed successful.." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     [self performSelector:@selector(dismissView) withObject:nil afterDelay:2.0];
 }
 
@@ -390,7 +395,6 @@
     [WriteLogsUtils writeLogContent:SFM(@"[%s] error = %@", __FUNCTION__, @[error])];
     
     [ProgressHUD dismiss];
-    [self.view makeToast:@"Tên miền đã được gia hạn thành công." duration:2.0 position:CSToastPositionCenter style:[AppDelegate sharedInstance].successStyle];
     [self performSelector:@selector(dismissView) withObject:nil afterDelay:2.0];
 }
 
@@ -404,7 +408,7 @@
         }
         [tbDomain reloadData];
     }else{
-        [self.view makeToast:@"Lấy thông tin gia hạn thất bại. Vui lòng thử lại sau." duration:2.5 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
+        [self.view makeToast:@"Can not get information to renew. Please check later!" duration:2.5 position:CSToastPositionCenter style:[AppDelegate sharedInstance].errorStyle];
         [self performSelector:@selector(dismissView) withObject:nil afterDelay:2.5];
     }
     //  get price for renew domain

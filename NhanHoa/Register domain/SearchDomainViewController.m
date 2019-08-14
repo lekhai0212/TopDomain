@@ -19,6 +19,10 @@
     NSDictionary *firstDomainInfo;
     float hCell;
     float hSmallCell;
+    
+    float padding;
+    float hTableView;
+    float hSearch;
 }
 
 @end
@@ -28,7 +32,7 @@
 @synthesize viewHeader, icBack, lbTitle;
 @synthesize scvContent, lbTop, lbWWW, tfSearch, icSearch, viewResult, imgEmoji, lbSearchContent, viewDomain, lbDomainName, lbPrice, lbOldPrice, lbSepa, btnChoose, btnContinue;
 @synthesize lbSepaView, lbRelationDomain, tbDomains;
-@synthesize padding, strSearch, listDomains, hTableView, hSearch;
+@synthesize strSearch, listDomains;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -129,7 +133,7 @@
         sizeText = 60.0;
     }
     [btnChoose mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.viewDomain).offset(-self.padding);
+        make.right.equalTo(self.viewDomain).offset(-padding);
         make.centerY.equalTo(self.viewDomain.mas_centerY);
         make.height.mas_equalTo(36.0);
         make.width.mas_equalTo(sizeText);
@@ -149,8 +153,8 @@
     }
     
     [viewResult mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.scvContent);
-        make.top.equalTo(self.tfSearch.mas_bottom).offset(30.0);
+        make.left.equalTo(scvContent);
+        make.top.equalTo(tfSearch.mas_bottom).offset(30.0);
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(hResult);
     }];
@@ -161,14 +165,14 @@
     //  get height of tableview
     hTableView = [self getHeightTableView];
     [tbDomains mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lbSepaView.mas_bottom).offset(self.padding);
-        make.left.equalTo(self.scvContent);
+        make.top.equalTo(lbSepaView.mas_bottom).offset(padding);
+        make.left.equalTo(scvContent);
         make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(self.hTableView);
+        make.height.mas_equalTo(hTableView);
     }];
     
     float contentHeight = hSearch + 30.0 + hResult + padding + 1.0 + padding + hTableView + padding;
-    self.scvContent.contentSize = CGSizeMake(SCREEN_WIDTH, hSearch + contentHeight);
+    scvContent.contentSize = CGSizeMake(SCREEN_WIDTH, hSearch + contentHeight);
 }
 
 - (void)registerObservers {
@@ -200,18 +204,26 @@
     lbTitle.text = text_search_result;
     lbTitle.font = [AppDelegate sharedInstance].fontBTN;
     [lbTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.viewHeader.mas_centerX);
-        make.top.equalTo(self.viewHeader).offset([UIApplication sharedApplication].statusBarFrame.size.height);
-        make.bottom.equalTo(self.viewHeader);
+        make.centerX.equalTo(viewHeader.mas_centerX);
+        make.top.equalTo(viewHeader).offset([UIApplication sharedApplication].statusBarFrame.size.height);
+        make.bottom.equalTo(viewHeader);
         make.width.mas_equalTo(200.0);
     }];
     
     icBack.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     [icBack mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.viewHeader).offset(-5.0);
-        make.centerY.equalTo(self.lbTitle.mas_centerY);
+        make.left.equalTo(viewHeader).offset(-5.0);
+        make.centerY.equalTo(lbTitle.mas_centerY);
         make.width.height.mas_equalTo(40.0);
     }];
+    
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
     
     [self checkToEnableContinueButton];
     [btnContinue setTitle:text_continue forState:UIControlStateNormal];
@@ -219,8 +231,9 @@
     btnContinue.layer.cornerRadius = 45.0/2;
     [btnContinue setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [btnContinue mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(self.padding);
-        make.right.bottom.equalTo(self.view).offset(-self.padding);
+        make.left.equalTo(self.view).offset(padding);
+        make.right.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.height.mas_equalTo(45.0);
     }];
     
@@ -228,8 +241,8 @@
     scvContent.delegate = self;
     [scvContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
-        make.bottom.equalTo(self.btnContinue.mas_top).offset(-self.padding);
-        make.top.equalTo(self.viewHeader.mas_bottom);
+        make.bottom.equalTo(btnContinue.mas_top).offset(-padding);
+        make.top.equalTo(viewHeader.mas_bottom);
         make.width.mas_equalTo(SCREEN_WIDTH);
     }];
     
@@ -237,22 +250,22 @@
     
     lbTop.backgroundColor = viewHeader.backgroundColor;
     [lbTop mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self.scvContent);
+        make.left.top.equalTo(scvContent);
         make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(self.hSearch/2);
+        make.height.mas_equalTo(hSearch/2);
     }];
     
     tfSearch.font = [AppDelegate sharedInstance].fontMedium;
     tfSearch.textColor = TITLE_COLOR;
     tfSearch.backgroundColor = UIColor.whiteColor;
-    tfSearch.layer.cornerRadius = self.hSearch/2;
+    tfSearch.layer.cornerRadius = hSearch/2;
     tfSearch.layer.borderColor = [UIColor colorWithRed:(86/255.0) green:(149/255.0) blue:(228/255.0) alpha:1.0].CGColor;
     tfSearch.layer.borderWidth = 1.5;
     [tfSearch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.scvContent).offset(self.padding);
-        make.width.mas_equalTo(SCREEN_WIDTH-2*self.padding);
-        make.top.equalTo(self.scvContent);
-        make.height.mas_equalTo(self.hSearch);
+        make.left.equalTo(scvContent).offset(padding);
+        make.width.mas_equalTo(SCREEN_WIDTH-2*padding);
+        make.top.equalTo(scvContent);
+        make.height.mas_equalTo(hSearch);
     }];
     tfSearch.returnKeyType = UIReturnKeyDone;
     tfSearch.delegate = self;
@@ -263,15 +276,15 @@
     icSearch.layer.cornerRadius = hSearch/2;
     icSearch.imageEdgeInsets = UIEdgeInsetsMake(7, 7, 7, 7);
     [icSearch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.bottom.equalTo(self.tfSearch);
-        make.width.mas_equalTo(self.hSearch);
+        make.top.right.bottom.equalTo(tfSearch);
+        make.width.mas_equalTo(hSearch);
     }];
     
     icSearch.layer.cornerRadius = hSearch/2;
     icSearch.imageEdgeInsets = UIEdgeInsetsMake(3, 3, 3, 3);
     [icSearch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.bottom.equalTo(self.tfSearch);
-        make.width.mas_equalTo(self.hSearch);
+        make.top.right.bottom.equalTo(tfSearch);
+        make.width.mas_equalTo(hSearch);
     }];
     
     lbWWW.backgroundColor = UIColor.clearColor;
@@ -280,22 +293,22 @@
     float fontSize = [AppDelegate sharedInstance].fontMedium.pointSize;
     lbWWW.font = [UIFont fontWithName:RobotoMedium size:fontSize-3];
     [lbWWW mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.tfSearch);
+        make.left.top.bottom.equalTo(tfSearch);
         make.width.mas_equalTo(50);
     }];
     
     //  search result view
     viewResult.backgroundColor = UIColor.clearColor;
     [viewResult mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.scvContent);
-        make.top.equalTo(self.tfSearch.mas_bottom).offset(30.0);
+        make.left.equalTo(scvContent);
+        make.top.equalTo(tfSearch.mas_bottom).offset(30.0);
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(200.0);
     }];
     
     [imgEmoji mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.viewResult);
-        make.centerX.equalTo(self.viewResult.mas_centerX);
+        make.top.equalTo(viewResult);
+        make.centerX.equalTo(viewResult.mas_centerX);
         make.width.height.mas_equalTo(45.0);
     }];
     
@@ -303,18 +316,18 @@
     lbSearchContent.font = [AppDelegate sharedInstance].fontRegular;
     lbSearchContent.textColor = TITLE_COLOR;
     [lbSearchContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.viewResult).offset(self.padding);
-        make.top.equalTo(self.imgEmoji.mas_bottom).offset(5.0);
-        make.width.mas_equalTo(SCREEN_WIDTH - 2*self.padding);
+        make.left.equalTo(viewResult).offset(padding);
+        make.top.equalTo(imgEmoji.mas_bottom).offset(5.0);
+        make.width.mas_equalTo(SCREEN_WIDTH - 2*padding);
     }];
     
     viewDomain.layer.cornerRadius = 7.0;
     viewDomain.layer.borderWidth = 2.0;
     viewDomain.layer.borderColor = [UIColor colorWithRed:(250/255.0) green:(157/255.0) blue:(26/255.0) alpha:1.0].CGColor;
     [viewDomain mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lbSearchContent.mas_bottom).offset(self.padding);
-        make.left.equalTo(self.viewResult).offset(self.padding);
-        make.right.equalTo(self.viewResult).offset(-self.padding);
+        make.top.equalTo(lbSearchContent.mas_bottom).offset(padding);
+        make.left.equalTo(viewResult).offset(padding);
+        make.right.equalTo(viewResult).offset(-padding);
         make.height.mas_equalTo(65.0);
     }];
     
@@ -322,8 +335,8 @@
     btnChoose.backgroundColor = BLUE_COLOR;
     btnChoose.layer.cornerRadius = 36.0/2;
     [btnChoose mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.viewDomain).offset(-self.padding);
-        make.centerY.equalTo(self.viewDomain.mas_centerY);
+        make.right.equalTo(viewDomain).offset(-padding);
+        make.centerY.equalTo(viewDomain.mas_centerY);
         make.height.mas_equalTo(36.0);
         make.width.mas_equalTo(60.0);
     }];
@@ -332,46 +345,46 @@
     lbDomainName.font = [AppDelegate sharedInstance].fontBold;
     lbDomainName.textColor = BLUE_COLOR;
     [lbDomainName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.viewDomain).offset(self.padding);
-        make.bottom.equalTo(self.viewDomain.mas_centerY).offset(-2.0);
-        make.right.equalTo(self.btnChoose.mas_left).offset(-self.padding);
+        make.left.equalTo(viewDomain).offset(padding);
+        make.bottom.equalTo(viewDomain.mas_centerY).offset(-2.0);
+        make.right.equalTo(btnChoose.mas_left).offset(-padding);
     }];
     
     lbPrice.text = @"";
     lbPrice.font = [AppDelegate sharedInstance].fontMedium;
     lbPrice.textColor = NEW_PRICE_COLOR;
     [lbPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.lbDomainName);
-        make.top.equalTo(self.viewDomain.mas_centerY).offset(2.0);
+        make.left.equalTo(lbDomainName);
+        make.top.equalTo(viewDomain.mas_centerY).offset(2.0);
     }];
     
     lbOldPrice.text = @"";
     lbOldPrice.font = [AppDelegate sharedInstance].fontMedium;
     lbOldPrice.textColor = OLD_PRICE_COLOR;
     [lbOldPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.lbPrice.mas_right).offset(5.0);
-        make.top.equalTo(self.lbPrice);
+        make.left.equalTo(lbPrice.mas_right).offset(5.0);
+        make.top.equalTo(lbPrice);
     }];
     
     [lbSepa mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lbOldPrice);
-        make.centerY.equalTo(self.lbOldPrice.mas_centerY);
+        make.left.right.equalTo(lbOldPrice);
+        make.centerY.equalTo(lbOldPrice.mas_centerY);
         make.height.mas_equalTo(1.0);
     }];
     
     lbSepaView.backgroundColor = BORDER_COLOR;
     [lbSepaView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.viewResult.mas_bottom).offset(self.padding);
-        make.left.equalTo(self.scvContent).offset(self.padding);
-        make.width.mas_equalTo(SCREEN_WIDTH-2*self.padding);
+        make.top.equalTo(viewResult.mas_bottom).offset(padding);
+        make.left.equalTo(scvContent).offset(padding);
+        make.width.mas_equalTo(SCREEN_WIDTH-2*padding);
         make.height.mas_equalTo(1.0);
     }];
     
     lbRelationDomain.font = [UIFont fontWithName:RobotoMedium size:17.0];
     [lbRelationDomain mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lbSepaView.mas_bottom).offset(self.padding);
-        make.left.equalTo(self.scvContent).offset(self.padding);
-        make.width.mas_equalTo(SCREEN_WIDTH-2*self.padding);
+        make.top.equalTo(lbSepaView.mas_bottom).offset(padding);
+        make.left.equalTo(scvContent).offset(padding);
+        make.width.mas_equalTo(SCREEN_WIDTH-2*padding);
         make.height.mas_equalTo(40.0);
     }];
     
@@ -382,8 +395,8 @@
     tbDomains.delegate = self;
     tbDomains.dataSource = self;
     [tbDomains mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lbSepaView.mas_bottom).offset(self.padding);
-        make.left.bottom.equalTo(self.scvContent);
+        make.top.equalTo(lbSepaView.mas_bottom).offset(padding);
+        make.left.bottom.equalTo(scvContent);
         make.width.mas_equalTo(SCREEN_WIDTH);
     }];
 }

@@ -164,10 +164,21 @@
         make.height.mas_equalTo(45.0);
     }];
     
+    float padding = 15.0;
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
+    
     lbCompany.font = [AppDelegate sharedInstance].fontRegular;
     lbCompany.textColor = BLUE_COLOR;
     [lbCompany mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
+        make.left.equalTo(self.view).offset(padding);
+        make.right.equalTo(self.view).offset(-padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.height.mas_equalTo(60.0);
     }];
 }

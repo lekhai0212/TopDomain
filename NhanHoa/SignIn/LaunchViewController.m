@@ -126,12 +126,20 @@
         make.height.mas_equalTo(hButton);
     }];
     
+    float bottomPadding = 5.0;
+    if (@available(iOS 11.0, *)) {
+        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        //  CGFloat topPadding = window.safeAreaInsets.top;
+        bottomPadding += window.safeAreaInsets.bottom;
+    }
+    
     lbCompany.font = [UIFont fontWithName:RobotoRegular size:15.0];
     lbCompany.numberOfLines = 5;
     lbCompany.text = @"Copyright ® 2002 – 2019 Top Domain Software Company. All Rights Reserved.";
     [lbCompany mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.equalTo(self.viewBottom).offset(5.0);
-        make.right.bottom.equalTo(self.viewBottom).offset(-5.0);
+        make.left.equalTo(self.viewBottom).offset(5.0);
+        make.right.equalTo(self.viewBottom).offset(-5.0);
+        make.bottom.equalTo(viewBottom).offset(-bottomPadding);
         make.height.mas_equalTo(38.0);
     }];
     

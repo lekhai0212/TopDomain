@@ -263,7 +263,7 @@
     float padding = 20.0;
     float hWallet = 55.0;
     if ([DeviceUtils isiPhoneXAndNewer]) {
-        hWallet = 70.0;
+        hWallet = 60.0;
         
     }else if ([DeviceUtils isScreen320]) {
         hWallet = 45.0;

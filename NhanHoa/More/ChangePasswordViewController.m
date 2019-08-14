@@ -122,6 +122,13 @@
     }];
     
     //  footer button
+    float bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomPadding = [AppDelegate sharedInstance].window.safeAreaInsets.bottom;
+    }
+    if (bottomPadding == 0) {
+        bottomPadding = padding;
+    }
     float hBTN = 45.0;
     btnCancel.titleLabel.font = btnSave.titleLabel.font = [AppDelegate sharedInstance].fontBTN;
     btnCancel.layer.cornerRadius = btnSave.layer.cornerRadius = hBTN/2;
@@ -132,7 +139,7 @@
     [btnCancel setTitle:text_reset forState:UIControlStateNormal];
     [btnCancel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(padding);
-        make.bottom.equalTo(self.view).offset(-2*padding);
+        make.bottom.equalTo(self.view).offset(-bottomPadding);
         make.right.equalTo(self.view.mas_centerX).offset(-padding/2);
         make.height.mas_equalTo(hBTN);
     }];
